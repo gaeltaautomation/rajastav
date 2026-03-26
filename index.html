@@ -96,12 +96,12 @@
       background: rgba(247,246,243,.90);
       backdrop-filter: blur(28px); -webkit-backdrop-filter: blur(28px);
       border: 1px solid var(--border); border-radius: 100px;
-      padding: 7px 7px 7px 24px; box-shadow: var(--shadow-md);
+      padding: 7px 7px 7px 16px; box-shadow: var(--shadow-md);
       transition: box-shadow .3s, border-color .3s, background .3s;
     }
     .nav-pill.scrolled { background: rgba(247,246,243,.97); border-color: rgba(184,146,42,.28); box-shadow: 0 20px 60px rgba(15,14,12,.14); }
-    .nav-logo { display: flex; align-items: center; gap: 10px; flex-shrink: 0; padding: 4px 0; }
-    .nav-logo-text { font-size: 16px; font-weight: 800; letter-spacing: .07em; color: var(--text); }
+    .nav-logo { display: flex; align-items: center; gap: 10px; flex-shrink: 0; padding: 2px 0; }
+    .nav-logo img { height: 36px; width: auto; display: block; }
     .nav-links { display: flex; align-items: center; gap: 2px; flex: 1; justify-content: center; }
     .nav-links a { font-size: 14px; font-weight: 500; color: var(--text-muted); padding: 7px 16px; border-radius: 100px; transition: color .2s, background .2s; position: relative; }
     .nav-links a:hover, .nav-links a:focus-visible { color: var(--text); background: rgba(15,14,12,.06); outline: none; }
@@ -150,112 +150,36 @@
     .section-title { font-size: clamp(32px,4vw,52px); font-weight: 800; letter-spacing: -.022em; line-height: 1.05; margin-bottom: 14px; color: var(--text); }
     .section-subtitle { font-size: 16px; color: var(--text-muted); max-width: 520px; line-height: 1.75; }
 
-    /* ═══════════════════════════════════
-       SERVICES — nový dizajn
-    ═══════════════════════════════════ */
+    /* SERVICES */
     #sluzby { background: var(--bg-2); overflow: hidden; }
-
-    .srv-layout {
-      display: grid;
-      grid-template-columns: 1.1fr 1fr;
-      gap: 56px;
-      align-items: start;
-    }
-
-    /* Ľavý stĺpec — 3 hero karty */
+    .srv-layout { display: grid; grid-template-columns: 1.1fr 1fr; gap: 56px; align-items: start; }
     .srv-hero-cards { display: flex; flex-direction: column; gap: 16px; }
-
-    .srv-hero-card {
-      position: relative; overflow: hidden;
-      padding: 36px 36px 32px;
-      transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
-      cursor: default;
-    }
-    .srv-hero-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-lg);
-      border-color: var(--gold-border-h);
-    }
-    .srv-hero-card::before {
-      content: "";
-      position: absolute; top: 0; left: 0; right: 0; height: 3px;
-      background: linear-gradient(90deg, var(--gold) 0%, transparent 100%);
-      opacity: 0; transition: opacity .3s;
-    }
+    .srv-hero-card { position: relative; overflow: hidden; padding: 36px 36px 32px; transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease; cursor: default; }
+    .srv-hero-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: var(--gold-border-h); }
+    .srv-hero-card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--gold) 0%, transparent 100%); opacity: 0; transition: opacity .3s; }
     .srv-hero-card:hover::before { opacity: 1; }
-
-    .srv-card-num {
-      font-size: 11px; font-weight: 700; letter-spacing: .22em;
-      text-transform: uppercase; color: var(--gold);
-      margin-bottom: 20px; display: flex; align-items: center; gap: 10px;
-    }
+    .srv-card-num { font-size: 11px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
     .srv-card-num::after { content: ""; flex: 1; height: 1px; background: var(--gold-border); }
-
-    .srv-card-title {
-      font-size: clamp(20px, 2vw, 26px); font-weight: 800;
-      letter-spacing: -.02em; line-height: 1.1; margin-bottom: 10px; color: var(--text);
-    }
-    .srv-card-desc {
-      font-size: 14px; color: var(--text-muted); line-height: 1.7; margin-bottom: 20px;
-    }
+    .srv-card-title { font-size: clamp(20px, 2vw, 26px); font-weight: 800; letter-spacing: -.02em; line-height: 1.1; margin-bottom: 10px; color: var(--text); }
+    .srv-card-desc { font-size: 14px; color: var(--text-muted); line-height: 1.7; margin-bottom: 20px; }
     .srv-card-tags { display: flex; flex-wrap: wrap; gap: 8px; }
-    .srv-tag {
-      font-size: 11px; font-weight: 600; letter-spacing: .06em;
-      background: var(--gold-bg); border: 1px solid var(--gold-border);
-      color: var(--gold); padding: 5px 12px; border-radius: 100px;
-    }
-    .srv-hero-card .srv-bg-icon {
-      position: absolute; bottom: -16px; right: -12px;
-      opacity: .04; pointer-events: none;
-    }
-
-    /* Pravý stĺpec — sticky header + číslovaný list */
+    .srv-tag { font-size: 11px; font-weight: 600; letter-spacing: .06em; background: var(--gold-bg); border: 1px solid var(--gold-border); color: var(--gold); padding: 5px 12px; border-radius: 100px; }
+    .srv-hero-card .srv-bg-icon { position: absolute; bottom: -16px; right: -12px; opacity: .04; pointer-events: none; }
     .srv-right { position: sticky; top: 120px; }
-
-    .srv-right-head {
-      margin-bottom: 36px;
-      padding-bottom: 28px;
-      border-bottom: 1px solid var(--border);
-    }
+    .srv-right-head { margin-bottom: 36px; padding-bottom: 28px; border-bottom: 1px solid var(--border); }
     .srv-right-head .section-tag { margin-bottom: 14px; }
-    .srv-right-title {
-      font-size: clamp(28px, 3.2vw, 42px); font-weight: 800;
-      letter-spacing: -.022em; line-height: 1.06; margin-bottom: 12px;
-    }
-    .srv-right-sub {
-      font-size: 15px; color: var(--text-muted); line-height: 1.75; margin-bottom: 24px;
-    }
-
+    .srv-right-title { font-size: clamp(28px, 3.2vw, 42px); font-weight: 800; letter-spacing: -.022em; line-height: 1.06; margin-bottom: 12px; }
+    .srv-right-sub { font-size: 15px; color: var(--text-muted); line-height: 1.75; margin-bottom: 24px; }
     .srv-list { display: flex; flex-direction: column; gap: 0; }
-    .srv-list-item {
-      display: flex; align-items: center; gap: 18px;
-      padding: 16px 0;
-      border-bottom: 1px solid var(--border);
-      transition: color .2s;
-      cursor: default;
-    }
+    .srv-list-item { display: flex; align-items: center; gap: 18px; padding: 16px 0; border-bottom: 1px solid var(--border); transition: color .2s; cursor: default; }
     .srv-list-item:last-child { border-bottom: none; }
     .srv-list-item:hover .srv-list-name { color: var(--gold); }
     .srv-list-item:hover .srv-list-num { opacity: 1; color: var(--gold); }
-
-    .srv-list-num {
-      font-size: 11px; font-weight: 700; color: var(--text-dim);
-      letter-spacing: .1em; min-width: 28px; opacity: .55;
-      transition: color .2s, opacity .2s;
-    }
-    .srv-list-icon {
-      width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0;
-      background: var(--gold-bg); border: 1px solid var(--gold-border);
-      display: flex; align-items: center; justify-content: center; color: var(--gold);
-      transition: background .2s, border-color .2s;
-    }
+    .srv-list-num { font-size: 11px; font-weight: 700; color: var(--text-dim); letter-spacing: .1em; min-width: 28px; opacity: .55; transition: color .2s, opacity .2s; }
+    .srv-list-icon { width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0; background: var(--gold-bg); border: 1px solid var(--gold-border); display: flex; align-items: center; justify-content: center; color: var(--gold); transition: background .2s, border-color .2s; }
     .srv-list-item:hover .srv-list-icon { background: rgba(184,146,42,.15); border-color: var(--gold-border-h); }
     .srv-list-name { font-size: 15px; font-weight: 600; color: var(--text); flex: 1; transition: color .2s; }
-    .srv-list-arrow {
-      color: var(--text-dim); opacity: 0;
-      transform: translateX(-6px);
-      transition: opacity .2s, transform .2s;
-    }
+    .srv-list-arrow { color: var(--text-dim); opacity: 0; transform: translateX(-6px); transition: opacity .2s, transform .2s; }
     .srv-list-item:hover .srv-list-arrow { opacity: 1; transform: translateX(0); }
 
     /* ABOUT */
@@ -309,8 +233,7 @@
     footer { background: var(--text); color: rgba(255,255,255,.80); padding: 52px 0 32px; position: relative; z-index: 1; }
     .footer-top { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px; margin-bottom: 36px; }
     .footer-logo { display: flex; align-items: center; gap: 12px; }
-    .footer-logo-name { font-size: 18px; font-weight: 800; letter-spacing: .07em; color: #fff; }
-    .footer-tagline { font-size: 10px; color: rgba(255,255,255,.42); letter-spacing: .15em; text-transform: uppercase; margin-top: 3px; }
+    .footer-logo img { height: 52px; width: auto; filter: brightness(0) invert(1); opacity: .9; }
     .footer-links { display: flex; gap: 28px; flex-wrap: wrap; }
     .footer-links a { font-size: 14px; color: rgba(255,255,255,.62); transition: color .2s; }
     .footer-links a:hover { color: #DFC06A; }
@@ -321,9 +244,7 @@
     .footer-made a:hover { color: #DFC06A; }
 
     /* RESPONSIVE */
-    @media (max-width: 1280px) {
-      :root { --px: 40px; }
-    }
+    @media (max-width: 1280px) { :root { --px: 40px; } }
     @media (max-width: 1100px) {
       :root { --nav-max-w: calc(100% - 80px); }
       .srv-layout { grid-template-columns: 1fr; gap: 48px; }
@@ -396,11 +317,7 @@
   <nav id="navbar" aria-label="Hlavná navigácia">
     <div class="nav-pill" id="navPill">
       <a href="#" class="nav-logo" aria-label="RAJASTAV — domovská stránka">
-        <svg width="28" height="28" viewBox="0 0 36 36" fill="none" aria-hidden="true" focusable="false">
-          <path d="M18 2L34 13V30C34 32.2 32.2 34 30 34H6C3.8 34 2 32.2 2 30V13L18 2Z" stroke="#B8922A" stroke-width="1.8" fill="none"/>
-          <path d="M12 26V14H19C21.8 14 24 16 24 18.5S21.8 23 19 23H16L22 26" stroke="#B8922A" stroke-width="1.8" stroke-linecap="round" fill="none"/>
-        </svg>
-        <span class="nav-logo-text">RAJASTAV</span>
+        <img src="rajastav vertical black.png" alt="RAJASTAV logo" width="auto" height="36">
       </a>
       <ul class="nav-links" id="navLinks">
         <li><a href="#sluzby"  data-section="sluzby">Služby</a></li>
@@ -466,7 +383,6 @@
     <div class="container">
       <div class="srv-layout">
 
-        <!-- Ľavý stĺpec: 3 hero karty -->
         <div class="srv-hero-cards">
 
           <div class="glass srv-hero-card reveal">
@@ -509,7 +425,6 @@
 
         </div>
 
-        <!-- Pravý stĺpec: sticky header + list -->
         <div class="srv-right reveal d1">
           <div class="srv-right-head">
             <p class="section-tag" aria-hidden="true">Naše služby</p>
@@ -522,78 +437,18 @@
           </div>
 
           <ul class="srv-list" aria-label="Zoznam všetkých služieb">
-            <li class="srv-list-item">
-              <span class="srv-list-num">01</span>
-              <span class="srv-list-icon" aria-hidden="true"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
-              <span class="srv-list-name">Domy na kľúč</span>
-              <svg class="srv-list-arrow" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </li>
-            <li class="srv-list-item">
-              <span class="srv-list-num">02</span>
-              <span class="srv-list-icon" aria-hidden="true"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></span>
-              <span class="srv-list-name">Novostavba</span>
-              <svg class="srv-list-arrow" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </li>
-            <li class="srv-list-item">
-              <span class="srv-list-num">03</span>
-              <span class="srv-list-icon" aria-hidden="true"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></span>
-              <span class="srv-list-name">Nízkoenergetické domy</span>
-              <svg class="srv-list-arrow" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </li>
-            <li class="srv-list-item">
-              <span class="srv-list-num">04</span>
-              <span class="srv-list-icon" aria-hidden="true"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M2 22h20M6 18V10M10 18V4M14 18V10M18 18V4"/></svg></span>
-              <span class="srv-list-name">Zemné a výkopové práce</span>
-              <svg class="srv-list-arrow" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </li>
-            <li class="srv-list-item">
-              <span class="srv-list-num">05</span>
-              <span class="srv-list-icon" aria-hidden="true"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="14" width="20" height="6" rx="1"/><path d="M6 14V10M12 14V8M18 14V10"/></svg></span>
-              <span class="srv-list-name">Základová doska a základy</span>
-              <svg class="srv-list-arrow" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </li>
-            <li class="srv-list-item">
-              <span class="srv-list-num">06</span>
-              <span class="srv-list-icon" aria-hidden="true"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
-              <span class="srv-list-name">Hydroizolácia základov</span>
-              <svg class="srv-list-arrow" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </li>
-            <li class="srv-list-item">
-              <span class="srv-list-num">07</span>
-              <span class="srv-list-icon" aria-hidden="true"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="10" width="18" height="10" rx="1"/><path d="M8 10V7a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v3"/></svg></span>
-              <span class="srv-list-name">Betónovanie</span>
-              <svg class="srv-list-arrow" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </li>
-            <li class="srv-list-item">
-              <span class="srv-list-num">08</span>
-              <span class="srv-list-icon" aria-hidden="true"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="6" height="6" rx="1"/><rect x="9" y="2" width="6" height="6" rx="1"/><rect x="16" y="2" width="6" height="6" rx="1"/><rect x="2" y="9" width="6" height="6" rx="1"/><rect x="9" y="9" width="6" height="6" rx="1"/><rect x="16" y="9" width="6" height="6" rx="1"/><rect x="2" y="16" width="6" height="6" rx="1"/><rect x="9" y="16" width="6" height="6" rx="1"/><rect x="16" y="16" width="6" height="6" rx="1"/></svg></span>
-              <span class="srv-list-name">Zámková dlažba</span>
-              <svg class="srv-list-arrow" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </li>
-            <li class="srv-list-item">
-              <span class="srv-list-num">09</span>
-              <span class="srv-list-icon" aria-hidden="true"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/></svg></span>
-              <span class="srv-list-name">Búracie práce</span>
-              <svg class="srv-list-arrow" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </li>
-            <li class="srv-list-item">
-              <span class="srv-list-num">10</span>
-              <span class="srv-list-icon" aria-hidden="true"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="2"/><path d="M2 8h20M8 2v20"/></svg></span>
-              <span class="srv-list-name">Fasáda a zateplenie</span>
-              <svg class="srv-list-arrow" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </li>
-            <li class="srv-list-item">
-              <span class="srv-list-num">11</span>
-              <span class="srv-list-icon" aria-hidden="true"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
-              <span class="srv-list-name">Dokončovacie práce</span>
-              <svg class="srv-list-arrow" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </li>
-            <li class="srv-list-item">
-              <span class="srv-list-num">12</span>
-              <span class="srv-list-icon" aria-hidden="true"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="14" width="20" height="6" rx="3"/><circle cx="7" cy="14" r="4"/><circle cx="17" cy="14" r="4"/><path d="M8 10V6h6l4 4"/></svg></span>
-              <span class="srv-list-name">Doprava a odvoz sutín</span>
-              <svg class="srv-list-arrow" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </li>
+            <li class="srv-list-item"><span class="srv-list-num">01</span><span class="srv-list-icon" aria-hidden="true"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span><span class="srv-list-name">Domy na kľúč</span><svg class="srv-list-arrow" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></li>
+            <li class="srv-list-item"><span class="srv-list-num">02</span><span class="srv-list-icon" aria-hidden="true"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></span><span class="srv-list-name">Novostavba</span><svg class="srv-list-arrow" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></li>
+            <li class="srv-list-item"><span class="srv-list-num">03</span><span class="srv-list-icon" aria-hidden="true"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></span><span class="srv-list-name">Nízkoenergetické domy</span><svg class="srv-list-arrow" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></li>
+            <li class="srv-list-item"><span class="srv-list-num">04</span><span class="srv-list-icon" aria-hidden="true"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M2 22h20M6 18V10M10 18V4M14 18V10M18 18V4"/></svg></span><span class="srv-list-name">Zemné a výkopové práce</span><svg class="srv-list-arrow" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></li>
+            <li class="srv-list-item"><span class="srv-list-num">05</span><span class="srv-list-icon" aria-hidden="true"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="14" width="20" height="6" rx="1"/><path d="M6 14V10M12 14V8M18 14V10"/></svg></span><span class="srv-list-name">Základová doska a základy</span><svg class="srv-list-arrow" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></li>
+            <li class="srv-list-item"><span class="srv-list-num">06</span><span class="srv-list-icon" aria-hidden="true"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span><span class="srv-list-name">Hydroizolácia základov</span><svg class="srv-list-arrow" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></li>
+            <li class="srv-list-item"><span class="srv-list-num">07</span><span class="srv-list-icon" aria-hidden="true"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="10" width="18" height="10" rx="1"/><path d="M8 10V7a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v3"/></svg></span><span class="srv-list-name">Betónovanie</span><svg class="srv-list-arrow" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></li>
+            <li class="srv-list-item"><span class="srv-list-num">08</span><span class="srv-list-icon" aria-hidden="true"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="6" height="6" rx="1"/><rect x="9" y="2" width="6" height="6" rx="1"/><rect x="16" y="2" width="6" height="6" rx="1"/><rect x="2" y="9" width="6" height="6" rx="1"/><rect x="9" y="9" width="6" height="6" rx="1"/><rect x="16" y="9" width="6" height="6" rx="1"/><rect x="2" y="16" width="6" height="6" rx="1"/><rect x="9" y="16" width="6" height="6" rx="1"/><rect x="16" y="16" width="6" height="6" rx="1"/></svg></span><span class="srv-list-name">Zámková dlažba</span><svg class="srv-list-arrow" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></li>
+            <li class="srv-list-item"><span class="srv-list-num">09</span><span class="srv-list-icon" aria-hidden="true"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/></svg></span><span class="srv-list-name">Búracie práce</span><svg class="srv-list-arrow" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></li>
+            <li class="srv-list-item"><span class="srv-list-num">10</span><span class="srv-list-icon" aria-hidden="true"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="2"/><path d="M2 8h20M8 2v20"/></svg></span><span class="srv-list-name">Fasáda a zateplenie</span><svg class="srv-list-arrow" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></li>
+            <li class="srv-list-item"><span class="srv-list-num">11</span><span class="srv-list-icon" aria-hidden="true"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span><span class="srv-list-name">Dokončovacie práce</span><svg class="srv-list-arrow" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></li>
+            <li class="srv-list-item"><span class="srv-list-num">12</span><span class="srv-list-icon" aria-hidden="true"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="14" width="20" height="6" rx="3"/><circle cx="7" cy="14" r="4"/><circle cx="17" cy="14" r="4"/><path d="M8 10V6h6l4 4"/></svg></span><span class="srv-list-name">Doprava a odvoz sutín</span><svg class="srv-list-arrow" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></li>
           </ul>
         </div>
 
@@ -695,11 +550,7 @@
   <div class="container">
     <div class="footer-top">
       <div class="footer-logo">
-        <svg width="32" height="32" viewBox="0 0 36 36" fill="none" aria-hidden="true"><path d="M18 2L34 13V30C34 32.2 32.2 34 30 34H6C3.8 34 2 32.2 2 30V13L18 2Z" stroke="#DFC06A" stroke-width="1.8" fill="none"/><path d="M12 26V14H19C21.8 14 24 16 24 18.5S21.8 23 19 23H16L22 26" stroke="#DFC06A" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>
-        <div>
-          <div class="footer-logo-name">RAJASTAV</div>
-          <div class="footer-tagline">Staviame na kvalite</div>
-        </div>
+        <img src="rajastav vertical black.png" alt="RAJASTAV — Staviame na kvalite" height="52">
       </div>
       <nav aria-label="Päticková navigácia">
         <ul class="footer-links">
