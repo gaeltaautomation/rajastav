@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="RAJASTAV s.r.o. — Stavby na kľúč, zemné práce, zámková dlažba. Trnava a Trnavský kraj.">
-  <title>RAJASTAV — Staviame na kvalite</title>
+  <meta name="description" content="RAJASTAV s.r.o. &#8212; Stavby na k&#318;&#250;&#269;, zemn&#233; pr&#225;ce, z&#225;mkov&#225; dl&#225;&#382;ba. Trnava a Trnavsk&#253; kraj.">
+  <title>RAJASTAV &#8212; Staviame na kvalite</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -22,6 +22,8 @@
       --text-dim: rgba(255,255,255,0.22);
       --radius: 30px;
       --font: "Lexend Deca", sans-serif;
+      --max-w: 1320px;
+      --px: 60px;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -31,20 +33,24 @@
     img { max-width: 100%; display: block; }
 
     .bg-orbs { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
-    .bg-orb { position: absolute; border-radius: 50%; filter: blur(100px); }
-    .bg-orb-1 { width: 800px; height: 800px; background: radial-gradient(circle, rgba(201,168,76,0.10) 0%, transparent 70%); top: -200px; right: -200px; }
-    .bg-orb-2 { width: 600px; height: 600px; background: radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%); bottom: 10%; left: -150px; }
-    .bg-orb-3 { width: 400px; height: 400px; background: radial-gradient(circle, rgba(80,60,160,0.06) 0%, transparent 70%); top: 45%; right: 25%; }
+    .bg-orb { position: absolute; border-radius: 50%; filter: blur(120px); }
+    .bg-orb-1 { width: 900px; height: 900px; background: radial-gradient(circle, rgba(201,168,76,0.09) 0%, transparent 70%); top: -250px; right: -250px; }
+    .bg-orb-2 { width: 700px; height: 700px; background: radial-gradient(circle, rgba(201,168,76,0.05) 0%, transparent 70%); bottom: 5%; left: -200px; }
+    .bg-orb-3 { width: 500px; height: 500px; background: radial-gradient(circle, rgba(80,60,160,0.05) 0%, transparent 70%); top: 50%; right: 20%; }
 
     .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.7s ease, transform 0.7s ease; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
-    .d1 { transition-delay: 0.1s; }
-    .d2 { transition-delay: 0.2s; }
-    .d3 { transition-delay: 0.3s; }
-    .d4 { transition-delay: 0.4s; }
-    .d5 { transition-delay: 0.5s; }
+    .d1 { transition-delay: 0.1s; } .d2 { transition-delay: 0.2s; }
+    .d3 { transition-delay: 0.3s; } .d4 { transition-delay: 0.4s; }
 
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 28px; }
+    /* CONTAINER — single source of truth */
+    .container {
+      width: 100%;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 var(--px);
+    }
+
     .gold { color: var(--gold); }
     .glass {
       background: var(--glass);
@@ -62,29 +68,30 @@
 
     .btn {
       display: inline-flex; align-items: center; gap: 8px;
-      padding: 14px 28px; border-radius: var(--radius);
+      padding: 14px 30px; border-radius: var(--radius);
       font-family: var(--font); font-size: 14px; font-weight: 600;
-      cursor: pointer; border: none; transition: all 0.3s ease; letter-spacing: 0.01em;
-      white-space: nowrap;
+      cursor: pointer; border: none; transition: all 0.3s ease;
+      letter-spacing: 0.01em; white-space: nowrap;
     }
     .btn-gold { background: var(--gold); color: #000; }
-    .btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 10px 36px rgba(201,168,76,0.28); }
+    .btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 10px 40px rgba(201,168,76,0.3); }
     .btn-ghost { background: transparent; color: var(--text); border: 1px solid rgba(255,255,255,0.18); }
     .btn-ghost:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
 
+    /* NAVBAR */
     #navbar {
       position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-      padding: 20px 0; transition: all 0.4s ease;
+      padding: 22px 0; transition: all 0.4s ease;
     }
     #navbar.scrolled {
-      background: rgba(8,8,16,0.90);
+      background: rgba(8,8,16,0.92);
       backdrop-filter: blur(28px); -webkit-backdrop-filter: blur(28px);
-      border-bottom: 1px solid var(--glass-border); padding: 13px 0;
+      border-bottom: 1px solid var(--glass-border); padding: 14px 0;
     }
-    .nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
-    .nav-logo { display: flex; align-items: center; gap: 11px; flex-shrink: 0; }
-    .nav-logo-text { font-size: 19px; font-weight: 800; letter-spacing: 0.07em; }
-    .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .nav-logo { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+    .nav-logo-text { font-size: 20px; font-weight: 800; letter-spacing: 0.07em; }
+    .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
     .nav-links a { font-size: 14px; font-weight: 400; color: var(--text-muted); transition: color 0.25s; position: relative; }
     .nav-links a::after { content: ""; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: var(--gold); transition: width 0.3s; }
     .nav-links a:hover { color: var(--text); }
@@ -93,6 +100,7 @@
     .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; background: none; border: none; }
     .hamburger span { display: block; width: 22px; height: 2px; background: var(--text); border-radius: 2px; }
 
+    /* MOBILE MENU */
     .mobile-menu {
       display: none; position: fixed; inset: 0;
       background: rgba(8,8,16,0.97); backdrop-filter: blur(32px);
@@ -104,10 +112,11 @@
     .mobile-menu a:hover { color: var(--gold); }
     .mobile-close { position: absolute; top: 24px; right: 28px; background: none; border: none; color: var(--text-muted); font-size: 28px; cursor: pointer; line-height: 1; }
 
+    /* HERO */
     #hero {
       position: relative; min-height: 100svh;
       display: flex; flex-direction: column; justify-content: flex-end;
-      padding-bottom: 80px; overflow: hidden;
+      padding-bottom: 90px; overflow: hidden;
     }
     .hero-bg {
       position: absolute; inset: 0;
@@ -118,127 +127,151 @@
     .hero-bg.loaded { transform: scale(1); }
     .hero-overlay {
       position: absolute; inset: 0;
-      background: linear-gradient(to bottom, rgba(8,8,16,0.20) 0%, rgba(8,8,16,0.45) 40%, rgba(8,8,16,0.85) 72%, rgba(8,8,16,1) 100%);
+      background: linear-gradient(to bottom,
+        rgba(8,8,16,0.15) 0%,
+        rgba(8,8,16,0.40) 38%,
+        rgba(8,8,16,0.82) 70%,
+        rgba(8,8,16,1) 100%);
     }
-    .hero-content { position: relative; z-index: 2; max-width: 800px; }
+
+    /* Hero inner — flex row: content left, stats right */
+    .hero-inner {
+      position: relative; z-index: 2;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 40px;
+    }
+    .hero-content { flex: 1; max-width: 720px; }
     .hero-eyebrow {
       display: inline-flex; align-items: center; gap: 10px;
       background: rgba(201,168,76,0.10); border: 1px solid rgba(201,168,76,0.22);
-      border-radius: 100px; padding: 8px 16px;
+      border-radius: 100px; padding: 8px 18px;
       font-size: 12px; font-weight: 500; color: var(--gold);
       letter-spacing: 0.08em; margin-bottom: 28px;
     }
     .hero-eyebrow::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); animation: pulse-dot 2s infinite; flex-shrink: 0; }
-    @keyframes pulse-dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
-    .hero-title { font-size: clamp(44px, 8vw, 90px); font-weight: 800; line-height: 0.97; letter-spacing: -0.025em; margin-bottom: 24px; }
+    @keyframes pulse-dot { 0%,100%{opacity:1}50%{opacity:.2} }
+    .hero-title { font-size: clamp(46px, 6.5vw, 88px); font-weight: 800; line-height: 0.96; letter-spacing: -0.025em; margin-bottom: 24px; }
     .hero-title .gold-line { color: var(--gold); display: block; }
-    .hero-subtitle { font-size: clamp(15px, 2vw, 18px); font-weight: 300; color: var(--text-muted); max-width: 500px; margin-bottom: 40px; line-height: 1.8; }
-    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 56px; }
+    .hero-subtitle { font-size: clamp(15px, 1.6vw, 18px); font-weight: 300; color: var(--text-muted); max-width: 520px; margin-bottom: 40px; line-height: 1.8; }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 52px; }
     .hero-trust { display: flex; align-items: center; flex-wrap: wrap; row-gap: 10px; }
-    .hero-trust-item { display: flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 400; color: var(--text-muted); padding-right: 20px; margin-right: 20px; border-right: 1px solid rgba(255,255,255,0.1); }
+    .hero-trust-item { display: flex; align-items: center; gap: 7px; font-size: 13px; color: var(--text-muted); padding-right: 20px; margin-right: 20px; border-right: 1px solid rgba(255,255,255,0.1); }
     .hero-trust-item:last-child { border-right: none; padding-right: 0; margin-right: 0; }
     .hero-trust-item svg { color: var(--gold); flex-shrink: 0; }
 
-    .hero-stats { position: absolute; right: 0; bottom: 80px; z-index: 2; display: flex; flex-direction: column; gap: 12px; }
-    .stat-card { padding: 20px 28px; text-align: right; min-width: 190px; }
-    .stat-number { font-size: 38px; font-weight: 800; color: var(--gold); line-height: 1; margin-bottom: 4px; }
+    /* Stats — inline in hero-inner, right side */
+    .hero-stats { display: flex; flex-direction: column; gap: 12px; flex-shrink: 0; }
+    .stat-card { padding: 22px 30px; text-align: right; min-width: 200px; }
+    .stat-number { font-size: 40px; font-weight: 800; color: var(--gold); line-height: 1; margin-bottom: 4px; }
     .stat-label { font-size: 12px; font-weight: 400; color: var(--text-muted); }
 
-    .scroll-ind { position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%); z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 8px; opacity: 0.35; animation: scroll-bob 2.5s ease-in-out infinite; }
+    .scroll-ind { position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%); z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 8px; opacity: 0.3; animation: scroll-bob 2.5s ease-in-out infinite; }
     .scroll-ind span { font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--text-muted); }
-    @keyframes scroll-bob { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(7px); } }
+    @keyframes scroll-bob { 0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(7px)} }
 
-    section { padding: 110px 0; position: relative; z-index: 1; }
-    .section-header { margin-bottom: 60px; }
-    .section-title { font-size: clamp(30px, 4.5vw, 52px); font-weight: 800; letter-spacing: -0.022em; line-height: 1.05; margin-bottom: 14px; }
-    .section-subtitle { font-size: 15px; font-weight: 300; color: var(--text-muted); max-width: 480px; line-height: 1.8; }
+    /* SECTIONS */
+    section { padding: 120px 0; position: relative; z-index: 1; }
+    .section-header { margin-bottom: 64px; }
+    .section-title { font-size: clamp(32px, 4vw, 54px); font-weight: 800; letter-spacing: -0.022em; line-height: 1.04; margin-bottom: 14px; }
+    .section-subtitle { font-size: 16px; font-weight: 300; color: var(--text-muted); max-width: 520px; line-height: 1.8; }
 
+    /* SERVICES */
     #sluzby { background: var(--bg-2); }
-    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .services-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
     .service-card { padding: 30px 26px; transition: all 0.35s ease; cursor: default; }
     .service-card:hover { border-color: var(--glass-border-hover); background: rgba(255,255,255,0.065); transform: translateY(-6px); box-shadow: 0 24px 60px rgba(0,0,0,0.4); }
     .service-icon { width: 42px; height: 42px; margin-bottom: 18px; color: var(--gold); }
     .service-title { font-size: 14px; font-weight: 600; margin-bottom: 8px; }
     .service-desc { font-size: 13px; font-weight: 300; color: var(--text-muted); line-height: 1.6; }
 
+    /* ABOUT */
     #o-nas { background: var(--bg); }
-    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 80px; align-items: center; }
     .about-img-wrap { position: relative; }
-    .about-img { width: 100%; height: 520px; object-fit: cover; border-radius: var(--radius); }
-    .about-badge { position: absolute; bottom: -20px; left: -16px; padding: 20px 26px; }
-    .badge-num { font-size: 44px; font-weight: 800; color: var(--gold); line-height: 1; }
+    .about-img { width: 100%; height: 560px; object-fit: cover; border-radius: var(--radius); }
+    .about-badge { position: absolute; bottom: -20px; left: -16px; padding: 22px 28px; }
+    .badge-num { font-size: 46px; font-weight: 800; color: var(--gold); line-height: 1; }
     .badge-txt { font-size: 12px; font-weight: 400; color: var(--text-muted); margin-top: 4px; }
-    .about-title { font-size: clamp(26px, 3.8vw, 44px); font-weight: 800; letter-spacing: -0.02em; line-height: 1.08; margin-bottom: 20px; }
-    .about-body { font-size: 15px; font-weight: 300; color: var(--text-muted); line-height: 1.85; margin-bottom: 40px; }
+    .about-title { font-size: clamp(28px, 3.5vw, 46px); font-weight: 800; letter-spacing: -0.02em; line-height: 1.06; margin-bottom: 20px; }
+    .about-body { font-size: 16px; font-weight: 300; color: var(--text-muted); line-height: 1.85; margin-bottom: 40px; }
     .pillars { display: flex; flex-direction: column; gap: 12px; }
     .pillar { display: flex; gap: 16px; align-items: flex-start; padding: 18px 20px; }
-    .pillar-icon { width: 38px; height: 38px; border-radius: 12px; flex-shrink: 0; background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.18); display: flex; align-items: center; justify-content: center; color: var(--gold); }
+    .pillar-icon { width: 40px; height: 40px; border-radius: 12px; flex-shrink: 0; background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.18); display: flex; align-items: center; justify-content: center; color: var(--gold); }
     .pillar-title { font-size: 14px; font-weight: 600; margin-bottom: 3px; }
     .pillar-text { font-size: 13px; font-weight: 300; color: var(--text-muted); line-height: 1.55; }
 
+    /* CONTACT */
     #kontakt { background: var(--bg-2); }
-    .contact-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 60px; align-items: start; }
-    .contact-title { font-size: clamp(26px, 3.8vw, 44px); font-weight: 800; letter-spacing: -0.02em; line-height: 1.05; margin-bottom: 14px; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1.6fr; gap: 72px; align-items: start; }
+    .contact-title { font-size: clamp(28px, 3.5vw, 46px); font-weight: 800; letter-spacing: -0.02em; line-height: 1.04; margin-bottom: 14px; }
     .contact-subtitle { font-size: 15px; font-weight: 300; color: var(--text-muted); line-height: 1.75; margin-bottom: 40px; }
     .contact-items { display: flex; flex-direction: column; gap: 12px; }
     .c-item { display: flex; align-items: center; gap: 14px; padding: 16px 18px; }
-    .c-icon { width: 38px; height: 38px; border-radius: 12px; flex-shrink: 0; background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.18); display: flex; align-items: center; justify-content: center; color: var(--gold); }
+    .c-icon { width: 40px; height: 40px; border-radius: 12px; flex-shrink: 0; background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.18); display: flex; align-items: center; justify-content: center; color: var(--gold); }
     .c-label { font-size: 10px; font-weight: 500; color: var(--text-dim); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 2px; }
     .c-val { font-size: 14px; font-weight: 500; }
-    .form-wrap { padding: 36px; }
+    .form-wrap { padding: 40px; }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
     .form-group { margin-bottom: 16px; }
     .form-label { display: block; font-size: 11px; font-weight: 500; color: var(--text-muted); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 7px; }
-    .form-ctrl { width: 100%; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 12px 16px; font-family: var(--font); font-size: 14px; font-weight: 400; color: var(--text); outline: none; transition: border-color 0.3s, box-shadow 0.3s; -webkit-appearance: none; appearance: none; }
+    .form-ctrl { width: 100%; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 13px 18px; font-family: var(--font); font-size: 14px; color: var(--text); outline: none; transition: border-color 0.3s, box-shadow 0.3s; -webkit-appearance: none; appearance: none; }
     .form-ctrl:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,168,76,0.10); }
     .form-ctrl::placeholder { color: var(--text-dim); }
-    textarea.form-ctrl { min-height: 110px; resize: vertical; }
-    .btn-submit { width: 100%; padding: 15px; justify-content: center; font-size: 14px; margin-top: 4px; }
+    textarea.form-ctrl { min-height: 114px; resize: vertical; }
+    .btn-submit { width: 100%; padding: 16px; justify-content: center; font-size: 15px; margin-top: 4px; }
 
-    footer { background: var(--bg); border-top: 1px solid var(--glass-border); padding: 44px 0 28px; position: relative; z-index: 1; }
+    /* FOOTER */
+    footer { background: var(--bg); border-top: 1px solid var(--glass-border); padding: 48px 0 30px; position: relative; z-index: 1; }
     .footer-top { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px; margin-bottom: 32px; }
     .footer-logo { display: flex; align-items: center; gap: 12px; }
-    .footer-logo-name { font-size: 17px; font-weight: 800; letter-spacing: 0.07em; }
+    .footer-logo-name { font-size: 18px; font-weight: 800; letter-spacing: 0.07em; }
     .footer-tagline { font-size: 10px; color: var(--text-dim); letter-spacing: 0.15em; text-transform: uppercase; margin-top: 3px; }
-    .footer-links { display: flex; gap: 24px; list-style: none; flex-wrap: wrap; }
+    .footer-links { display: flex; gap: 28px; list-style: none; flex-wrap: wrap; }
     .footer-links a { font-size: 13px; color: var(--text-muted); transition: color 0.2s; }
     .footer-links a:hover { color: var(--gold); }
-    .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.05); flex-wrap: wrap; gap: 8px; }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 22px; border-top: 1px solid rgba(255,255,255,0.05); flex-wrap: wrap; gap: 8px; }
     .footer-copy { font-size: 12px; color: var(--text-dim); }
 
+    /* RESPONSIVE */
+    @media (max-width: 1280px) {
+      :root { --px: 40px; }
+      .services-grid { grid-template-columns: repeat(3, 1fr); }
+    }
     @media (max-width: 1024px) {
-      .services-grid { grid-template-columns: repeat(2, 1fr); }
-      .about-grid { grid-template-columns: 1fr; gap: 48px; }
-      .about-img { height: 400px; }
-      .about-badge { left: 16px; bottom: -12px; }
+      :root { --px: 32px; }
       .hero-stats { display: none; }
-      .contact-grid { grid-template-columns: 1fr; gap: 44px; }
+      .about-grid { grid-template-columns: 1fr; gap: 52px; }
+      .about-img { height: 420px; }
+      .about-badge { left: 16px; bottom: -12px; }
+      .contact-grid { grid-template-columns: 1fr; gap: 48px; }
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 768px) {
-      section { padding: 72px 0; }
-      .container { padding: 0 20px; }
+      :root { --px: 20px; }
+      section { padding: 80px 0; }
       .nav-links { display: none; }
       .nav-cta-btn { display: none; }
       .hamburger { display: flex; }
-      .services-grid { grid-template-columns: 1fr; }
-      .hero-title { font-size: clamp(38px, 11vw, 56px); }
+      .hero-inner { flex-direction: column; align-items: flex-start; }
+      .hero-title { font-size: clamp(40px, 11vw, 58px); }
       .hero-actions { flex-direction: column; }
       .hero-actions .btn { width: 100%; justify-content: center; }
-      .hero-trust { gap: 6px 0; }
       .hero-trust-item { border-right: none; padding-right: 0; margin-right: 0; width: 100%; }
+      .services-grid { grid-template-columns: 1fr; }
       .form-row { grid-template-columns: 1fr; }
       .form-wrap { padding: 24px 18px; }
-      .footer-top { flex-direction: column; align-items: flex-start; gap: 20px; }
-      .footer-bottom { flex-direction: column; align-items: flex-start; }
       .about-img { height: 280px; }
       .about-badge { display: none; }
+      .footer-top { flex-direction: column; align-items: flex-start; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
       .footer-top .btn { display: none; }
     }
     @media (max-width: 480px) {
-      .hero-eyebrow { font-size: 11px; padding: 7px 13px; }
       .section-header { margin-bottom: 40px; }
-      .service-card { padding: 24px 20px; }
-      .c-item { padding: 14px 16px; }
+      .service-card { padding: 22px 18px; }
+      .c-item { padding: 14px 14px; }
     }
   </style>
 </head>
@@ -256,7 +289,7 @@
   <a href="#sluzby" onclick="closeMenu()">Slu&#382;by</a>
   <a href="#o-nas" onclick="closeMenu()">O n&#225;s</a>
   <a href="#kontakt" onclick="closeMenu()">Kontakt</a>
-  <a href="#kontakt" class="btn btn-gold" style="font-size:14px;" onclick="closeMenu()">Nez&#228;v&#228;zn&#225; konzult&#225;cia</a>
+  <a href="#kontakt" class="btn btn-gold" style="font-size:15px;" onclick="closeMenu()">Nez&#225;v&#228;zn&#225; konzult&#225;cia</a>
 </div>
 
 <!-- NAVBAR -->
@@ -264,7 +297,7 @@
   <div class="container">
     <div class="nav-inner">
       <a href="#" class="nav-logo">
-        <svg width="32" height="32" viewBox="0 0 36 36" fill="none">
+        <svg width="34" height="34" viewBox="0 0 36 36" fill="none">
           <path d="M18 2L34 13V30C34 32.2 32.2 34 30 34H6C3.8 34 2 32.2 2 30V13L18 2Z" stroke="#C9A84C" stroke-width="1.8" fill="none"/>
           <path d="M12 26V14H19C21.8 14 24 16 24 18.5S21.8 23 19 23H16L22 26" stroke="#C9A84C" stroke-width="1.8" stroke-linecap="round" fill="none"/>
         </svg>
@@ -276,7 +309,7 @@
         <li><a href="#kontakt">Kontakt</a></li>
       </ul>
       <div class="nav-cta-btn">
-        <a href="#kontakt" class="btn btn-gold" style="font-size:13px;padding:11px 20px;">Nez&#228;v&#228;zn&#225; konzult&#225;cia</a>
+        <a href="#kontakt" class="btn btn-gold" style="font-size:13px;padding:11px 22px;">Nez&#225;v&#228;zn&#225; konzult&#225;cia</a>
       </div>
       <button class="hamburger" id="menuOpen" aria-label="Menu">
         <span></span><span></span><span></span>
@@ -289,59 +322,56 @@
 <section id="hero">
   <div class="hero-bg" id="heroBg"></div>
   <div class="hero-overlay"></div>
-
-  <div class="container" style="position:relative;z-index:2;">
-    <div class="hero-stats">
-      <div class="glass stat-card reveal d3">
-        <div class="stat-number">50+</div>
-        <div class="stat-label">Dokon&#269;en&#253;ch projektov</div>
-      </div>
-      <div class="glass stat-card reveal d4">
-        <div class="stat-number">100%</div>
-        <div class="stat-label">Na k&#318;&#250;&#269; realiz&#225;cie</div>
-      </div>
-    </div>
-  </div>
-
   <div class="container">
-    <div class="hero-content">
-      <div class="hero-eyebrow reveal">Trnava &amp; Trnavsk&#253; kraj</div>
-      <h1 class="hero-title reveal d1">
-        Stavby,<br>
-        <span class="gold-line">ktor&#233; stoja</span><br>
-        za to.
-      </h1>
-      <p class="hero-subtitle reveal d2">
-        Realizujeme rodinn&#233; domy na k&#318;&#250;&#269;, zemn&#233; pr&#225;ce a z&#225;mkov&#233; dl&#225;&#382;by v Trnave a okol&#237;. Prec&#237;zne. Na&#269;as. Bez kompromisov.
-      </p>
-      <div class="hero-actions reveal d3">
-        <a href="#kontakt" class="btn btn-gold">
-          <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          Z&#237;skajte cenov&#250; ponuku
-        </a>
-        <a href="#sluzby" class="btn btn-ghost">Na&#353;e slu&#382;by</a>
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-eyebrow reveal">Trnava &amp; Trnavsk&#253; kraj</div>
+        <h1 class="hero-title reveal d1">
+          Stavby,<br>
+          <span class="gold-line">ktor&#233; stoja</span><br>
+          za to.
+        </h1>
+        <p class="hero-subtitle reveal d2">
+          Realizujeme rodinn&#233; domy na k&#318;&#250;&#269;, zemn&#233; pr&#225;ce a z&#225;mkov&#233; dl&#225;&#382;by v Trnave a okol&#237;. Prec&#237;zne. Na&#269;as. Bez kompromisov.
+        </p>
+        <div class="hero-actions reveal d3">
+          <a href="#kontakt" class="btn btn-gold">
+            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            Z&#237;skajte cenov&#250; ponuku
+          </a>
+          <a href="#sluzby" class="btn btn-ghost">Na&#353;e slu&#382;by</a>
+        </div>
+        <div class="hero-trust reveal d4">
+          <div class="hero-trust-item">
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            Rodinn&#233; domy na k&#318;&#250;&#269;
+          </div>
+          <div class="hero-trust-item">
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            Zemn&#233; pr&#225;ce
+          </div>
+          <div class="hero-trust-item">
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            Z&#225;mkov&#225; dl&#225;&#382;ba
+          </div>
+          <div class="hero-trust-item">
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            Trnava a okol&#237;
+          </div>
+        </div>
       </div>
-      <div class="hero-trust reveal d4">
-        <div class="hero-trust-item">
-          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-          Rodinn&#233; domy na k&#318;&#250;&#269;
+      <div class="hero-stats">
+        <div class="glass stat-card reveal d3">
+          <div class="stat-number">50+</div>
+          <div class="stat-label">Dokon&#269;en&#253;ch projektov</div>
         </div>
-        <div class="hero-trust-item">
-          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-          Zemn&#233; pr&#225;ce
-        </div>
-        <div class="hero-trust-item">
-          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-          Z&#225;mkov&#225; dl&#225;&#382;ba
-        </div>
-        <div class="hero-trust-item">
-          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-          Trnava a okol&#237;
+        <div class="glass stat-card reveal d4">
+          <div class="stat-number">100%</div>
+          <div class="stat-label">Na k&#318;&#250;&#269; realiz&#225;cie</div>
         </div>
       </div>
     </div>
   </div>
-
   <div class="scroll-ind">
     <svg width="15" height="23" viewBox="0 0 16 24" fill="none" stroke="currentColor" stroke-width="1.5">
       <rect x="1" y="1" width="14" height="22" rx="7"/>
@@ -377,47 +407,47 @@
         <div class="service-title">N&#237;zkoenergetick&#233; domy</div>
         <div class="service-desc">Domy s n&#237;zkou spotrebou energie a dlhodobou &#250;sporou n&#225;kladov.</div>
       </div>
-      <div class="glass service-card reveal">
+      <div class="glass service-card reveal d3">
         <svg class="service-icon" fill="none" stroke="currentColor" stroke-width="1.4" viewBox="0 0 44 44"><path d="M4 38h36M8 38V24l6-14h12l6 14v14"/><path d="M16 38v-8h12v8"/></svg>
         <div class="service-title">Zemn&#233; a v&#253;kopov&#233; pr&#225;ce</div>
-        <div class="service-desc">Pr&#237;prava staveniska, v&#253;kopy, ter&#233;nn&#233; &#250;pravy. R&#253;chlo a spo&#318;ahlivo.</div>
+        <div class="service-desc">Pr&#237;prava staveniska, v&#253;kopy, ter&#233;nn&#233; &#250;pravy.</div>
       </div>
-      <div class="glass service-card reveal d1">
+      <div class="glass service-card reveal">
         <svg class="service-icon" fill="none" stroke="currentColor" stroke-width="1.4" viewBox="0 0 44 44"><rect x="4" y="28" width="36" height="8" rx="2"/><path d="M10 28V20M22 28V16M34 28V20"/></svg>
         <div class="service-title">Z&#225;kladov&#225; doska a z&#225;klady</div>
         <div class="service-desc">Pevn&#253; z&#225;klad pre ka&#382;d&#250; stavbu &#8212; bet&#243;nov&#233; z&#225;klady a dosky.</div>
       </div>
-      <div class="glass service-card reveal d2">
+      <div class="glass service-card reveal d1">
         <svg class="service-icon" fill="none" stroke="currentColor" stroke-width="1.4" viewBox="0 0 44 44"><path d="M6 32c2-6 8-12 16-12s14 6 16 12M4 40h36M14 20V12M30 20V12M10 12h24"/></svg>
         <div class="service-title">Hydroizol&#225;cia z&#225;kladov</div>
         <div class="service-desc">Spo&#318;ahliv&#225; ochrana z&#225;kladov pred vlhkos&#357;ou a vodou.</div>
       </div>
-      <div class="glass service-card reveal">
+      <div class="glass service-card reveal d2">
         <svg class="service-icon" fill="none" stroke="currentColor" stroke-width="1.4" viewBox="0 0 44 44"><rect x="6" y="22" width="32" height="16" rx="2"/><path d="M14 22V14a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8"/></svg>
         <div class="service-title">Bet&#243;novanie</div>
         <div class="service-desc">Bet&#243;nov&#233; kon&#353;trukcie a plochy s dlhou &#382;ivotnos&#357;ou.</div>
       </div>
-      <div class="glass service-card reveal d1">
+      <div class="glass service-card reveal d3">
         <svg class="service-icon" fill="none" stroke="currentColor" stroke-width="1.4" viewBox="0 0 44 44"><rect x="4" y="4" width="10" height="10" rx="1"/><rect x="17" y="4" width="10" height="10" rx="1"/><rect x="30" y="4" width="10" height="10" rx="1"/><rect x="4" y="17" width="10" height="10" rx="1"/><rect x="17" y="17" width="10" height="10" rx="1"/><rect x="30" y="17" width="10" height="10" rx="1"/><rect x="4" y="30" width="10" height="10" rx="1"/><rect x="17" y="30" width="10" height="10" rx="1"/><rect x="30" y="30" width="10" height="10" rx="1"/></svg>
         <div class="service-title">Z&#225;mkov&#225; dl&#225;&#382;ba</div>
-        <div class="service-desc">Pr&#237;jazdov&#233; cesty, chodn&#237;ky a terasy. Kvalitná pokládka.</div>
+        <div class="service-desc">Pr&#237;jazdov&#233; cesty, chodn&#237;ky a terasy. Kvalitn&#225; pokl&#225;dka.</div>
       </div>
-      <div class="glass service-card reveal d2">
+      <div class="glass service-card reveal">
         <svg class="service-icon" fill="none" stroke="currentColor" stroke-width="1.4" viewBox="0 0 44 44"><path d="M8 36l4-8 4 8 4-8 4 8 4-8 4 8M8 24l4-8 4 8 4-8 4 8"/></svg>
         <div class="service-title">B&#250;racie pr&#225;ce</div>
         <div class="service-desc">Bezpe&#269;n&#225; a efekt&#237;vna demol&#225;cia objektov a kon&#353;trukcii.</div>
       </div>
-      <div class="glass service-card reveal">
+      <div class="glass service-card reveal d1">
         <svg class="service-icon" fill="none" stroke="currentColor" stroke-width="1.4" viewBox="0 0 44 44"><rect x="4" y="4" width="36" height="36" rx="3"/><path d="M4 16h36M16 4v36"/></svg>
         <div class="service-title">Fas&#225;da</div>
         <div class="service-desc">Vonkaj&#353;ie omietky, zateplenie a fin&#225;lna &#250;prava fas&#225;dy.</div>
       </div>
-      <div class="glass service-card reveal d1">
+      <div class="glass service-card reveal d2">
         <svg class="service-icon" fill="none" stroke="currentColor" stroke-width="1.4" viewBox="0 0 44 44"><circle cx="22" cy="22" r="18"/><path d="M22 14v8l5 3"/></svg>
         <div class="service-title">Dokon&#269;ovacie pr&#225;ce</div>
         <div class="service-desc">Fin&#225;lne detaily, ktor&#233; robia rozdiel medzi dobrou a skvelou stavbou.</div>
       </div>
-      <div class="glass service-card reveal d2">
+      <div class="glass service-card reveal d3">
         <svg class="service-icon" fill="none" stroke="currentColor" stroke-width="1.4" viewBox="0 0 44 44"><rect x="4" y="26" width="36" height="10" rx="5"/><circle cx="12" cy="26" r="6"/><circle cx="32" cy="26" r="6"/><path d="M14 20V12h10l6 8"/></svg>
         <div class="service-title">Transport</div>
         <div class="service-desc">Zabezpe&#269;enie materi&#225;lu a odvoz sute z miesta stavby.</div>
@@ -431,7 +461,7 @@
   <div class="container">
     <div class="about-grid">
       <div class="about-img-wrap reveal">
-        <img class="about-img" src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80" alt="RAJASTAV stavebné práce" loading="lazy">
+        <img class="about-img" src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=900&q=80" alt="RAJASTAV stavebn&#233; pr&#225;ce" loading="lazy">
         <div class="glass about-badge">
           <div class="badge-num">5+</div>
           <div class="badge-txt">Rokov sk&#250;senost&#237;</div>
@@ -467,7 +497,7 @@
       <div>
         <div class="section-tag reveal">Kontakt</div>
         <h2 class="contact-title reveal d1">Za&#269;nime<br><span class="gold">v&#225;&#353; projekt</span></h2>
-        <p class="contact-subtitle reveal d2">Nap&#237;&#353;te n&#225;m. Odpovieme do 24 hod&#237;n s nez&#228;v&#228;znou konzult&#225;ciou a cenovým odhadom.</p>
+        <p class="contact-subtitle reveal d2">Nap&#237;&#353;te n&#225;m. Odpovieme do 24 hod&#237;n s nez&#225;v&#228;znou konzult&#225;ciou a cenovým odhadom.</p>
         <div class="contact-items">
           <a href="tel:+421915057112" class="glass c-item reveal d2">
             <div class="c-icon"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.95 13a19.79 19.79 0 01-3.07-8.67A2 2 0 012.88 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L7.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg></div>
@@ -518,7 +548,7 @@
   <div class="container">
     <div class="footer-top">
       <div class="footer-logo">
-        <svg width="30" height="30" viewBox="0 0 36 36" fill="none">
+        <svg width="32" height="32" viewBox="0 0 36 36" fill="none">
           <path d="M18 2L34 13V30C34 32.2 32.2 34 30 34H6C3.8 34 2 32.2 2 30V13L18 2Z" stroke="#C9A84C" stroke-width="1.8" fill="none"/>
           <path d="M12 26V14H19C21.8 14 24 16 24 18.5S21.8 23 19 23H16L22 26" stroke="#C9A84C" stroke-width="1.8" stroke-linecap="round" fill="none"/>
         </svg>
@@ -532,7 +562,7 @@
         <li><a href="#o-nas">O n&#225;s</a></li>
         <li><a href="#kontakt">Kontakt</a></li>
       </ul>
-      <a href="#kontakt" class="btn btn-gold" style="font-size:13px;padding:11px 20px;">Z&#237;ska&#357; ponuku</a>
+      <a href="#kontakt" class="btn btn-gold" style="font-size:13px;padding:11px 22px;">Z&#237;ska&#357; ponuku</a>
     </div>
     <div class="footer-bottom">
       <span class="footer-copy">&copy; 2026 RAJASTAV s.r.o. V&#353;etky pr&#225;va vyhraden&#233;.</span>
@@ -565,7 +595,7 @@
 
   const obs = new IntersectionObserver(function(entries) {
     entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add("visible"); });
-  }, { threshold: 0.08, rootMargin: "0px 0px -36px 0px" });
+  }, { threshold: 0.07, rootMargin: "0px 0px -30px 0px" });
   document.querySelectorAll(".reveal").forEach(function(el) { obs.observe(el); });
 
   setTimeout(function() {
@@ -577,8 +607,7 @@
     var btn = e.target.querySelector(".btn-submit");
     var orig = btn.innerHTML;
     btn.innerHTML = "<svg width='15' height='15' fill='none' stroke='currentColor' stroke-width='2.5' viewBox='0 0 24 24'><polyline points='20 6 9 17 4 12'/></svg> Spr\u00e1va odoslan\u00e1!";
-    btn.style.background = "#2a7a38";
-    btn.style.color = "#fff";
+    btn.style.background = "#2a7a38"; btn.style.color = "#fff";
     setTimeout(function() { btn.innerHTML = orig; btn.style.background = ""; btn.style.color = ""; }, 4500);
   }
 </script>
