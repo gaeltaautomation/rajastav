@@ -9,41 +9,99 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
+    /* =============================================
+       DESIGN TOKENS
+    ============================================= */
     :root {
-      --gold: #C9A84C;
-      --gold-light: #DFC06A;
-      --bg: #080810;
-      --bg-2: #0D0D18;
-      --glass: rgba(255,255,255,0.04);
-      --glass-border: rgba(201,168,76,0.15);
-      --glass-border-hover: rgba(201,168,76,0.42);
-      --text: #FFFFFF;
-      --text-muted: rgba(255,255,255,0.52);
-      --text-dim: rgba(255,255,255,0.22);
-      --radius: 30px;
-      --font: "Lexend Deca", sans-serif;
-      --max-w: 1320px;
-      --px: 60px;
+      --gold:              #C9A84C;
+      --gold-light:        #DFC06A;
+      --bg:                #080810;
+      --bg-2:              #0D0D18;
+      --glass:             rgba(255,255,255,0.05);
+      --glass-border:      rgba(201,168,76,0.18);
+      --glass-border-hover:rgba(201,168,76,0.48);
+      /* WCAG AA text colours (contrast ≥ 4.5:1 on --bg) */
+      --text:              #FFFFFF;            /* 21:1 */
+      --text-muted:        rgba(255,255,255,0.72); /* ~6:1  — was 0.52 (~3.8 FAIL) */
+      --text-dim:          rgba(255,255,255,0.50); /* ~4.6:1 — was 0.22 (FAIL) */
+      --radius:            30px;
+      --font:              "Lexend Deca", sans-serif;
+      --max-w:             1320px;
+      --px:                60px;
+      /* Focus ring */
+      --focus-ring:        0 0 0 3px rgba(201,168,76,0.70);
     }
 
+    /* =============================================
+       RESET & BASE
+    ============================================= */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-    body { font-family: var(--font); background: var(--bg); color: var(--text); overflow-x: hidden; line-height: 1.6; }
+
+    /* Respect reduced-motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+      html { scroll-behavior: auto; }
+    }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
     a { text-decoration: none; color: inherit; }
     img { max-width: 100%; display: block; }
 
+    /* =============================================
+       SKIP LINK (WCAG 2.4.1)
+    ============================================= */
+    .skip-link {
+      position: absolute;
+      top: -100px;
+      left: 16px;
+      z-index: 9999;
+      background: var(--gold);
+      color: #000;
+      font-family: var(--font);
+      font-weight: 700;
+      font-size: 14px;
+      padding: 10px 20px;
+      border-radius: 8px;
+      transition: top 0.2s;
+    }
+    .skip-link:focus { top: 16px; outline: none; box-shadow: var(--focus-ring); }
+
+    /* =============================================
+       GLOBAL FOCUS (WCAG 2.4.7)
+    ============================================= */
+    :focus-visible {
+      outline: none;
+      box-shadow: var(--focus-ring);
+      border-radius: 4px;
+    }
+
+    /* =============================================
+       BACKGROUND ORBS (decorative)
+    ============================================= */
     .bg-orbs { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
     .bg-orb { position: absolute; border-radius: 50%; filter: blur(120px); }
     .bg-orb-1 { width: 900px; height: 900px; background: radial-gradient(circle, rgba(201,168,76,0.09) 0%, transparent 70%); top: -250px; right: -250px; }
     .bg-orb-2 { width: 700px; height: 700px; background: radial-gradient(circle, rgba(201,168,76,0.05) 0%, transparent 70%); bottom: 5%; left: -200px; }
     .bg-orb-3 { width: 500px; height: 500px; background: radial-gradient(circle, rgba(80,60,160,0.05) 0%, transparent 70%); top: 50%; right: 20%; }
 
-    .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    /* =============================================
+       REVEAL ANIMATIONS
+    ============================================= */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
-    .d1 { transition-delay: 0.1s; } .d2 { transition-delay: 0.2s; }
-    .d3 { transition-delay: 0.3s; } .d4 { transition-delay: 0.4s; }
+    .d1 { transition-delay: 0.10s; } .d2 { transition-delay: 0.20s; }
+    .d3 { transition-delay: 0.30s; } .d4 { transition-delay: 0.40s; }
 
-    /* CONTAINER — single source of truth */
+    /* =============================================
+       CONTAINER
+    ============================================= */
     .container {
       width: 100%;
       max-width: var(--max-w);
@@ -51,7 +109,19 @@
       padding: 0 var(--px);
     }
 
+    /* =============================================
+       UTILITIES
+    ============================================= */
     .gold { color: var(--gold); }
+    .sr-only {
+      position: absolute; width: 1px; height: 1px;
+      padding: 0; margin: -1px; overflow: hidden;
+      clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+    }
+
+    /* =============================================
+       GLASSMORPHISM
+    ============================================= */
     .glass {
       background: var(--glass);
       backdrop-filter: blur(24px);
@@ -59,6 +129,10 @@
       border: 1px solid var(--glass-border);
       border-radius: var(--radius);
     }
+
+    /* =============================================
+       SECTION TAG
+    ============================================= */
     .section-tag {
       display: inline-flex; align-items: center; gap: 10px;
       font-size: 11px; font-weight: 600; letter-spacing: 0.2em;
@@ -66,25 +140,36 @@
     }
     .section-tag::before { content: ""; display: block; width: 24px; height: 1px; background: var(--gold); }
 
+    /* =============================================
+       BUTTONS (min 44x44 touch target — WCAG 2.5.5)
+    ============================================= */
     .btn {
       display: inline-flex; align-items: center; gap: 8px;
+      min-height: 48px;
       padding: 14px 30px; border-radius: var(--radius);
-      font-family: var(--font); font-size: 14px; font-weight: 600;
+      font-family: var(--font); font-size: 15px; font-weight: 600;
       cursor: pointer; border: none; transition: all 0.3s ease;
       letter-spacing: 0.01em; white-space: nowrap;
     }
-    .btn-gold { background: var(--gold); color: #000; }
-    .btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 10px 40px rgba(201,168,76,0.3); }
-    .btn-ghost { background: transparent; color: var(--text); border: 1px solid rgba(255,255,255,0.18); }
+    .btn-gold { background: var(--gold); color: #000; } /* contrast 8.5:1 ✓ */
+    .btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 10px 40px rgba(201,168,76,0.30); }
+    .btn-gold:focus-visible { box-shadow: var(--focus-ring); outline: none; }
+    .btn-ghost {
+      background: transparent; color: var(--text);
+      border: 1px solid rgba(255,255,255,0.25);
+    }
     .btn-ghost:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+    .btn-ghost:focus-visible { box-shadow: var(--focus-ring); outline: none; }
 
-    /* NAVBAR */
+    /* =============================================
+       NAVBAR
+    ============================================= */
     #navbar {
       position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-      padding: 22px 0; transition: all 0.4s ease;
+      padding: 22px 0; transition: background 0.4s ease, padding 0.4s ease, border-color 0.4s ease;
     }
     #navbar.scrolled {
-      background: rgba(8,8,16,0.92);
+      background: rgba(8,8,16,0.94);
       backdrop-filter: blur(28px); -webkit-backdrop-filter: blur(28px);
       border-bottom: 1px solid var(--glass-border); padding: 14px 0;
     }
@@ -92,15 +177,28 @@
     .nav-logo { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
     .nav-logo-text { font-size: 20px; font-weight: 800; letter-spacing: 0.07em; }
     .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
-    .nav-links a { font-size: 14px; font-weight: 400; color: var(--text-muted); transition: color 0.25s; position: relative; }
-    .nav-links a::after { content: ""; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: var(--gold); transition: width 0.3s; }
-    .nav-links a:hover { color: var(--text); }
-    .nav-links a:hover::after { width: 100%; }
+    .nav-links a {
+      font-size: 14px; font-weight: 500; color: var(--text-muted);
+      transition: color 0.25s; position: relative;
+      padding: 4px 2px;
+    }
+    .nav-links a::after {
+      content: ""; position: absolute; bottom: -3px; left: 0;
+      width: 0; height: 1px; background: var(--gold); transition: width 0.3s;
+    }
+    .nav-links a:hover, .nav-links a:focus-visible { color: var(--text); outline: none; }
+    .nav-links a:hover::after, .nav-links a:focus-visible::after { width: 100%; }
     .nav-cta-btn { display: flex; }
-    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; background: none; border: none; }
-    .hamburger span { display: block; width: 22px; height: 2px; background: var(--text); border-radius: 2px; }
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; padding: 10px; background: none; border: none;
+      min-width: 44px; min-height: 44px; align-items: center; justify-content: center;
+    }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: transform 0.25s, opacity 0.25s; }
 
-    /* MOBILE MENU */
+    /* =============================================
+       MOBILE MENU
+    ============================================= */
     .mobile-menu {
       display: none; position: fixed; inset: 0;
       background: rgba(8,8,16,0.97); backdrop-filter: blur(32px);
@@ -110,13 +208,21 @@
     .mobile-menu.open { display: flex; }
     .mobile-menu a { font-size: 26px; font-weight: 700; color: var(--text); transition: color 0.2s; }
     .mobile-menu a:hover { color: var(--gold); }
-    .mobile-close { position: absolute; top: 24px; right: 28px; background: none; border: none; color: var(--text-muted); font-size: 28px; cursor: pointer; line-height: 1; }
+    .mobile-close {
+      position: absolute; top: 20px; right: 24px;
+      background: none; border: none; color: var(--text-muted);
+      font-size: 28px; cursor: pointer; line-height: 1;
+      min-width: 44px; min-height: 44px;
+      display: flex; align-items: center; justify-content: center;
+    }
 
-    /* HERO */
+    /* =============================================
+       HERO
+    ============================================= */
     #hero {
       position: relative; min-height: 100svh;
       display: flex; flex-direction: column; justify-content: flex-end;
-      padding-bottom: 90px; overflow: hidden;
+      padding-bottom: 96px; overflow: hidden;
     }
     .hero-bg {
       position: absolute; inset: 0;
@@ -125,116 +231,213 @@
       transform: scale(1.05); transition: transform 8s ease;
     }
     .hero-bg.loaded { transform: scale(1); }
+    /* Stronger overlay for text contrast on any monitor */
     .hero-overlay {
       position: absolute; inset: 0;
       background: linear-gradient(to bottom,
-        rgba(8,8,16,0.15) 0%,
-        rgba(8,8,16,0.40) 38%,
-        rgba(8,8,16,0.82) 70%,
-        rgba(8,8,16,1) 100%);
+        rgba(8,8,16,0.20) 0%,
+        rgba(8,8,16,0.50) 40%,
+        rgba(8,8,16,0.88) 68%,
+        rgba(8,8,16,1.00) 100%);
     }
-
-    /* Hero inner — flex row: content left, stats right */
     .hero-inner {
       position: relative; z-index: 2;
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 40px;
+      display: flex; align-items: flex-end;
+      justify-content: space-between; gap: 40px;
     }
-    .hero-content { flex: 1; max-width: 720px; }
+    .hero-content { flex: 1; max-width: 740px; }
     .hero-eyebrow {
       display: inline-flex; align-items: center; gap: 10px;
-      background: rgba(201,168,76,0.10); border: 1px solid rgba(201,168,76,0.22);
+      background: rgba(201,168,76,0.10); border: 1px solid rgba(201,168,76,0.25);
       border-radius: 100px; padding: 8px 18px;
-      font-size: 12px; font-weight: 500; color: var(--gold);
+      font-size: 12px; font-weight: 600; color: var(--gold);
       letter-spacing: 0.08em; margin-bottom: 28px;
     }
-    .hero-eyebrow::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); animation: pulse-dot 2s infinite; flex-shrink: 0; }
-    @keyframes pulse-dot { 0%,100%{opacity:1}50%{opacity:.2} }
-    .hero-title { font-size: clamp(46px, 6.5vw, 88px); font-weight: 800; line-height: 0.96; letter-spacing: -0.025em; margin-bottom: 24px; }
+    /* Pulsing dot is decorative — aria-hidden in HTML */
+    .hero-eyebrow .dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--gold);
+      animation: pulse-dot 2s infinite; flex-shrink: 0;
+    }
+    @keyframes pulse-dot { 0%,100%{opacity:1} 50%{opacity:.2} }
+    .hero-title {
+      font-size: clamp(46px, 6.5vw, 86px);
+      font-weight: 800; line-height: 0.97;
+      letter-spacing: -0.025em; margin-bottom: 24px;
+    }
     .hero-title .gold-line { color: var(--gold); display: block; }
-    .hero-subtitle { font-size: clamp(15px, 1.6vw, 18px); font-weight: 300; color: var(--text-muted); max-width: 520px; margin-bottom: 40px; line-height: 1.8; }
+    .hero-subtitle {
+      font-size: clamp(16px, 1.6vw, 18px);
+      font-weight: 400; /* weight 300 can reduce legibility */
+      color: var(--text-muted); max-width: 540px;
+      margin-bottom: 40px; line-height: 1.75;
+    }
     .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 52px; }
     .hero-trust { display: flex; align-items: center; flex-wrap: wrap; row-gap: 10px; }
-    .hero-trust-item { display: flex; align-items: center; gap: 7px; font-size: 13px; color: var(--text-muted); padding-right: 20px; margin-right: 20px; border-right: 1px solid rgba(255,255,255,0.1); }
+    .hero-trust-item {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 13px; font-weight: 500; color: var(--text-muted);
+      padding-right: 22px; margin-right: 22px;
+      border-right: 1px solid rgba(255,255,255,0.12);
+    }
     .hero-trust-item:last-child { border-right: none; padding-right: 0; margin-right: 0; }
     .hero-trust-item svg { color: var(--gold); flex-shrink: 0; }
 
-    /* Stats — inline in hero-inner, right side */
+    /* Stats */
     .hero-stats { display: flex; flex-direction: column; gap: 12px; flex-shrink: 0; }
     .stat-card { padding: 22px 30px; text-align: right; min-width: 200px; }
     .stat-number { font-size: 40px; font-weight: 800; color: var(--gold); line-height: 1; margin-bottom: 4px; }
-    .stat-label { font-size: 12px; font-weight: 400; color: var(--text-muted); }
+    .stat-label { font-size: 13px; font-weight: 400; color: var(--text-muted); }
 
-    .scroll-ind { position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%); z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 8px; opacity: 0.3; animation: scroll-bob 2.5s ease-in-out infinite; }
+    .scroll-ind {
+      position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
+      z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 8px;
+      opacity: 0.35; animation: scroll-bob 2.5s ease-in-out infinite;
+    }
     .scroll-ind span { font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--text-muted); }
-    @keyframes scroll-bob { 0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(7px)} }
+    @keyframes scroll-bob { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(7px)} }
 
-    /* SECTIONS */
+    /* =============================================
+       SECTIONS
+    ============================================= */
     section { padding: 120px 0; position: relative; z-index: 1; }
     .section-header { margin-bottom: 64px; }
-    .section-title { font-size: clamp(32px, 4vw, 54px); font-weight: 800; letter-spacing: -0.022em; line-height: 1.04; margin-bottom: 14px; }
-    .section-subtitle { font-size: 16px; font-weight: 300; color: var(--text-muted); max-width: 520px; line-height: 1.8; }
+    .section-title {
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 800; letter-spacing: -0.022em;
+      line-height: 1.05; margin-bottom: 14px;
+    }
+    .section-subtitle {
+      font-size: 16px; font-weight: 400;
+      color: var(--text-muted); max-width: 520px; line-height: 1.75;
+    }
 
-    /* SERVICES */
+    /* =============================================
+       SERVICES
+    ============================================= */
     #sluzby { background: var(--bg-2); }
-    .services-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
-    .service-card { padding: 30px 26px; transition: all 0.35s ease; cursor: default; }
-    .service-card:hover { border-color: var(--glass-border-hover); background: rgba(255,255,255,0.065); transform: translateY(-6px); box-shadow: 0 24px 60px rgba(0,0,0,0.4); }
-    .service-icon { width: 42px; height: 42px; margin-bottom: 18px; color: var(--gold); }
-    .service-title { font-size: 14px; font-weight: 600; margin-bottom: 8px; }
-    .service-desc { font-size: 13px; font-weight: 300; color: var(--text-muted); line-height: 1.6; }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+    .service-card {
+      padding: 30px 26px;
+      transition: border-color 0.3s ease, background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .service-card:hover {
+      border-color: var(--glass-border-hover);
+      background: rgba(255,255,255,0.07);
+      transform: translateY(-6px);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.45);
+    }
+    .service-icon { width: 44px; height: 44px; margin-bottom: 18px; color: var(--gold); }
+    .service-title { font-size: 15px; font-weight: 600; margin-bottom: 8px; }
+    .service-desc { font-size: 14px; font-weight: 400; color: var(--text-muted); line-height: 1.6; }
 
-    /* ABOUT */
+    /* =============================================
+       ABOUT
+    ============================================= */
     #o-nas { background: var(--bg); }
     .about-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 80px; align-items: center; }
     .about-img-wrap { position: relative; }
     .about-img { width: 100%; height: 560px; object-fit: cover; border-radius: var(--radius); }
     .about-badge { position: absolute; bottom: -20px; left: -16px; padding: 22px 28px; }
     .badge-num { font-size: 46px; font-weight: 800; color: var(--gold); line-height: 1; }
-    .badge-txt { font-size: 12px; font-weight: 400; color: var(--text-muted); margin-top: 4px; }
-    .about-title { font-size: clamp(28px, 3.5vw, 46px); font-weight: 800; letter-spacing: -0.02em; line-height: 1.06; margin-bottom: 20px; }
-    .about-body { font-size: 16px; font-weight: 300; color: var(--text-muted); line-height: 1.85; margin-bottom: 40px; }
+    .badge-txt { font-size: 13px; font-weight: 400; color: var(--text-muted); margin-top: 4px; }
+    .about-title {
+      font-size: clamp(28px, 3.5vw, 46px);
+      font-weight: 800; letter-spacing: -0.02em; line-height: 1.06; margin-bottom: 20px;
+    }
+    .about-body {
+      font-size: 16px; font-weight: 400; color: var(--text-muted); line-height: 1.85; margin-bottom: 40px;
+    }
     .pillars { display: flex; flex-direction: column; gap: 12px; }
     .pillar { display: flex; gap: 16px; align-items: flex-start; padding: 18px 20px; }
-    .pillar-icon { width: 40px; height: 40px; border-radius: 12px; flex-shrink: 0; background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.18); display: flex; align-items: center; justify-content: center; color: var(--gold); }
-    .pillar-title { font-size: 14px; font-weight: 600; margin-bottom: 3px; }
-    .pillar-text { font-size: 13px; font-weight: 300; color: var(--text-muted); line-height: 1.55; }
+    .pillar-icon {
+      width: 42px; height: 42px; border-radius: 12px; flex-shrink: 0;
+      background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.20);
+      display: flex; align-items: center; justify-content: center; color: var(--gold);
+    }
+    .pillar-title { font-size: 15px; font-weight: 600; margin-bottom: 3px; }
+    .pillar-text { font-size: 14px; font-weight: 400; color: var(--text-muted); line-height: 1.55; }
 
-    /* CONTACT */
+    /* =============================================
+       CONTACT
+    ============================================= */
     #kontakt { background: var(--bg-2); }
     .contact-grid { display: grid; grid-template-columns: 1fr 1.6fr; gap: 72px; align-items: start; }
-    .contact-title { font-size: clamp(28px, 3.5vw, 46px); font-weight: 800; letter-spacing: -0.02em; line-height: 1.04; margin-bottom: 14px; }
-    .contact-subtitle { font-size: 15px; font-weight: 300; color: var(--text-muted); line-height: 1.75; margin-bottom: 40px; }
+    .contact-title {
+      font-size: clamp(28px, 3.5vw, 46px);
+      font-weight: 800; letter-spacing: -0.02em; line-height: 1.04; margin-bottom: 14px;
+    }
+    .contact-subtitle { font-size: 15px; font-weight: 400; color: var(--text-muted); line-height: 1.75; margin-bottom: 40px; }
     .contact-items { display: flex; flex-direction: column; gap: 12px; }
-    .c-item { display: flex; align-items: center; gap: 14px; padding: 16px 18px; }
-    .c-icon { width: 40px; height: 40px; border-radius: 12px; flex-shrink: 0; background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.18); display: flex; align-items: center; justify-content: center; color: var(--gold); }
-    .c-label { font-size: 10px; font-weight: 500; color: var(--text-dim); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 2px; }
-    .c-val { font-size: 14px; font-weight: 500; }
-    .form-wrap { padding: 40px; }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-    .form-group { margin-bottom: 16px; }
-    .form-label { display: block; font-size: 11px; font-weight: 500; color: var(--text-muted); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 7px; }
-    .form-ctrl { width: 100%; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 13px 18px; font-family: var(--font); font-size: 14px; color: var(--text); outline: none; transition: border-color 0.3s, box-shadow 0.3s; -webkit-appearance: none; appearance: none; }
-    .form-ctrl:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,168,76,0.10); }
-    .form-ctrl::placeholder { color: var(--text-dim); }
-    textarea.form-ctrl { min-height: 114px; resize: vertical; }
-    .btn-submit { width: 100%; padding: 16px; justify-content: center; font-size: 15px; margin-top: 4px; }
+    .c-item { display: flex; align-items: center; gap: 16px; padding: 16px 18px; }
+    .c-item:focus-within { box-shadow: var(--focus-ring); }
+    .c-icon {
+      width: 42px; height: 42px; border-radius: 12px; flex-shrink: 0;
+      background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.20);
+      display: flex; align-items: center; justify-content: center; color: var(--gold);
+    }
+    /* WCAG: labels must have sufficient contrast */
+    .c-label { font-size: 10px; font-weight: 600; color: var(--text-dim); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 2px; }
+    .c-val { font-size: 15px; font-weight: 500; }
 
-    /* FOOTER */
-    footer { background: var(--bg); border-top: 1px solid var(--glass-border); padding: 48px 0 30px; position: relative; z-index: 1; }
-    .footer-top { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px; margin-bottom: 32px; }
+    /* FORM */
+    .form-wrap { padding: 40px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group { margin-bottom: 18px; }
+    .form-label {
+      display: block; font-size: 12px; font-weight: 600;
+      color: var(--text-muted); /* was text-dim — FAIL */
+      letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px;
+    }
+    .form-ctrl {
+      width: 100%;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.14); /* was 0.08 — too low contrast */
+      border-radius: 16px; padding: 13px 18px;
+      font-family: var(--font); font-size: 15px; font-weight: 400;
+      color: var(--text); outline: none;
+      transition: border-color 0.3s, box-shadow 0.3s;
+      -webkit-appearance: none; appearance: none;
+    }
+    .form-ctrl:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(201,168,76,0.18);
+    }
+    .form-ctrl::placeholder { color: rgba(255,255,255,0.35); }
+    textarea.form-ctrl { min-height: 114px; resize: vertical; }
+    .btn-submit { width: 100%; min-height: 52px; padding: 16px; justify-content: center; font-size: 15px; margin-top: 6px; }
+
+    /* =============================================
+       FOOTER
+    ============================================= */
+    footer {
+      background: var(--bg); border-top: 1px solid var(--glass-border);
+      padding: 52px 0 32px; position: relative; z-index: 1;
+    }
+    .footer-top {
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 24px; margin-bottom: 36px;
+    }
     .footer-logo { display: flex; align-items: center; gap: 12px; }
     .footer-logo-name { font-size: 18px; font-weight: 800; letter-spacing: 0.07em; }
     .footer-tagline { font-size: 10px; color: var(--text-dim); letter-spacing: 0.15em; text-transform: uppercase; margin-top: 3px; }
     .footer-links { display: flex; gap: 28px; list-style: none; flex-wrap: wrap; }
-    .footer-links a { font-size: 13px; color: var(--text-muted); transition: color 0.2s; }
+    .footer-links a { font-size: 14px; font-weight: 400; color: var(--text-muted); transition: color 0.2s; }
     .footer-links a:hover { color: var(--gold); }
-    .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 22px; border-top: 1px solid rgba(255,255,255,0.05); flex-wrap: wrap; gap: 8px; }
-    .footer-copy { font-size: 12px; color: var(--text-dim); }
+    .footer-bottom {
+      display: flex; justify-content: space-between; align-items: center;
+      padding-top: 22px; border-top: 1px solid rgba(255,255,255,0.07);
+      flex-wrap: wrap; gap: 8px;
+    }
+    .footer-copy { font-size: 13px; color: var(--text-dim); }
 
-    /* RESPONSIVE */
+    /* =============================================
+       RESPONSIVE
+    ============================================= */
     @media (max-width: 1280px) {
       :root { --px: 40px; }
       .services-grid { grid-template-columns: repeat(3, 1fr); }
@@ -255,13 +458,13 @@
       .nav-cta-btn { display: none; }
       .hamburger { display: flex; }
       .hero-inner { flex-direction: column; align-items: flex-start; }
-      .hero-title { font-size: clamp(40px, 11vw, 58px); }
+      .hero-title { font-size: clamp(40px, 11vw, 56px); }
       .hero-actions { flex-direction: column; }
       .hero-actions .btn { width: 100%; justify-content: center; }
       .hero-trust-item { border-right: none; padding-right: 0; margin-right: 0; width: 100%; }
       .services-grid { grid-template-columns: 1fr; }
       .form-row { grid-template-columns: 1fr; }
-      .form-wrap { padding: 24px 18px; }
+      .form-wrap { padding: 24px 20px; }
       .about-img { height: 280px; }
       .about-badge { display: none; }
       .footer-top { flex-direction: column; align-items: flex-start; }
@@ -271,284 +474,333 @@
     @media (max-width: 480px) {
       .section-header { margin-bottom: 40px; }
       .service-card { padding: 22px 18px; }
-      .c-item { padding: 14px 14px; }
+      .c-item { padding: 14px; }
     }
   </style>
 </head>
 <body>
 
-<div class="bg-orbs">
+<!-- SKIP LINK (WCAG 2.4.1) -->
+<a href="#main-content" class="skip-link">Preskoci&#269; na hlavn&#253; obsah</a>
+
+<div class="bg-orbs" aria-hidden="true">
   <div class="bg-orb bg-orb-1"></div>
   <div class="bg-orb bg-orb-2"></div>
   <div class="bg-orb bg-orb-3"></div>
 </div>
 
 <!-- MOBILE MENU -->
-<div class="mobile-menu" id="mobileMenu">
-  <button class="mobile-close" id="menuClose">&#x2715;</button>
-  <a href="#sluzby" onclick="closeMenu()">Slu&#382;by</a>
-  <a href="#o-nas" onclick="closeMenu()">O n&#225;s</a>
-  <a href="#kontakt" onclick="closeMenu()">Kontakt</a>
-  <a href="#kontakt" class="btn btn-gold" style="font-size:15px;" onclick="closeMenu()">Nez&#225;v&#228;zn&#225; konzult&#225;cia</a>
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Hlavn&#233; menu">
+  <button class="mobile-close" id="menuClose" aria-label="Zavrie&#357; menu">&#x2715;</button>
+  <nav aria-label="Mobiln&#225; navig&#225;cia">
+    <ul style="list-style:none;display:flex;flex-direction:column;align-items:center;gap:32px;">
+      <li><a href="#sluzby" onclick="closeMenu()">Slu&#382;by</a></li>
+      <li><a href="#o-nas" onclick="closeMenu()">O n&#225;s</a></li>
+      <li><a href="#kontakt" onclick="closeMenu()">Kontakt</a></li>
+      <li><a href="#kontakt" class="btn btn-gold" style="font-size:15px;" onclick="closeMenu()">Nez&#225;v&#228;zn&#225; konzult&#225;cia</a></li>
+    </ul>
+  </nav>
 </div>
 
 <!-- NAVBAR -->
-<nav id="navbar">
-  <div class="container">
-    <div class="nav-inner">
-      <a href="#" class="nav-logo">
-        <svg width="34" height="34" viewBox="0 0 36 36" fill="none">
-          <path d="M18 2L34 13V30C34 32.2 32.2 34 30 34H6C3.8 34 2 32.2 2 30V13L18 2Z" stroke="#C9A84C" stroke-width="1.8" fill="none"/>
-          <path d="M12 26V14H19C21.8 14 24 16 24 18.5S21.8 23 19 23H16L22 26" stroke="#C9A84C" stroke-width="1.8" stroke-linecap="round" fill="none"/>
-        </svg>
-        <span class="nav-logo-text">RAJASTAV</span>
-      </a>
-      <ul class="nav-links">
-        <li><a href="#sluzby">Slu&#382;by</a></li>
-        <li><a href="#o-nas">O n&#225;s</a></li>
-        <li><a href="#kontakt">Kontakt</a></li>
+<header role="banner">
+  <nav id="navbar" aria-label="Hlavn&#225; navig&#225;cia">
+    <div class="container">
+      <div class="nav-inner">
+        <a href="#" class="nav-logo" aria-label="RAJASTAV &#8212; domovsk&#225; str&#225;nka">
+          <svg width="34" height="34" viewBox="0 0 36 36" fill="none" aria-hidden="true" focusable="false">
+            <path d="M18 2L34 13V30C34 32.2 32.2 34 30 34H6C3.8 34 2 32.2 2 30V13L18 2Z" stroke="#C9A84C" stroke-width="1.8" fill="none"/>
+            <path d="M12 26V14H19C21.8 14 24 16 24 18.5S21.8 23 19 23H16L22 26" stroke="#C9A84C" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+          </svg>
+          <span class="nav-logo-text">RAJASTAV</span>
+        </a>
+        <ul class="nav-links" role="list">
+          <li><a href="#sluzby">Slu&#382;by</a></li>
+          <li><a href="#o-nas">O n&#225;s</a></li>
+          <li><a href="#kontakt">Kontakt</a></li>
+        </ul>
+        <div class="nav-cta-btn">
+          <a href="#kontakt" class="btn btn-gold" style="font-size:13px;padding:11px 22px;">Nez&#225;v&#228;zn&#225; konzult&#225;cia</a>
+        </div>
+        <button
+          class="hamburger"
+          id="menuOpen"
+          aria-label="Otvori&#357; menu"
+          aria-expanded="false"
+          aria-controls="mobileMenu"
+        >
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- MAIN CONTENT -->
+<main id="main-content">
+
+  <!-- HERO -->
+  <section id="hero" aria-label="&#218;vodn&#225; sekcia">
+    <div class="hero-bg" id="heroBg" role="img" aria-label="Modern&#253; rodinn&#253; dom"></div>
+    <div class="hero-overlay" aria-hidden="true"></div>
+    <div class="container">
+      <div class="hero-inner">
+        <div class="hero-content">
+          <p class="hero-eyebrow reveal" aria-hidden="false">
+            <span class="dot" aria-hidden="true"></span>
+            Trnava &amp; Trnavsk&#253; kraj
+          </p>
+          <h1 class="hero-title reveal d1">
+            Stavby,<br>
+            <span class="gold-line">ktor&#233; stoja</span><br>
+            za to.
+          </h1>
+          <p class="hero-subtitle reveal d2">
+            Realizujeme rodinn&#233; domy na k&#318;&#250;&#269;, zemn&#233; pr&#225;ce a z&#225;mkov&#233; dl&#225;&#382;by v Trnave a okol&#237;. Prec&#237;zne. Na&#269;as. Bez kompromisov.
+          </p>
+          <div class="hero-actions reveal d3">
+            <a href="#kontakt" class="btn btn-gold">
+              <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              Z&#237;skajte cenov&#250; ponuku
+            </a>
+            <a href="#sluzby" class="btn btn-ghost">Na&#353;e slu&#382;by</a>
+          </div>
+          <ul class="hero-trust reveal d4" role="list" aria-label="Oblasti slu&#382;ieb">
+            <li class="hero-trust-item">
+              <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              Rodinn&#233; domy na k&#318;&#250;&#269;
+            </li>
+            <li class="hero-trust-item">
+              <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              Zemn&#233; pr&#225;ce
+            </li>
+            <li class="hero-trust-item">
+              <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              Z&#225;mkov&#225; dl&#225;&#382;ba
+            </li>
+            <li class="hero-trust-item">
+              <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              Trnava a okol&#237;
+            </li>
+          </ul>
+        </div>
+        <div class="hero-stats" aria-label="Statistiky">
+          <div class="glass stat-card reveal d3">
+            <div class="stat-number" aria-label="50 plus">50+</div>
+            <div class="stat-label">Dokon&#269;en&#253;ch projektov</div>
+          </div>
+          <div class="glass stat-card reveal d4">
+            <div class="stat-number" aria-label="100 percent">100%</div>
+            <div class="stat-label">Na k&#318;&#250;&#269; realiz&#225;cie</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-ind" aria-hidden="true">
+      <svg width="15" height="23" viewBox="0 0 16 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <rect x="1" y="1" width="14" height="22" rx="7"/>
+        <circle cx="8" cy="7" r="2" fill="currentColor" stroke="none">
+          <animate attributeName="cy" values="7;14;7" dur="2s" repeatCount="indefinite"/>
+        </circle>
+      </svg>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="sluzby" aria-labelledby="sluzby-title">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-tag reveal" aria-hidden="true">Na&#353;e slu&#382;by</p>
+        <h2 id="sluzby-title" class="section-title reveal d1">&#268;o pre v&#225;s <span class="gold">urob&#237;me</span></h2>
+        <p class="section-subtitle reveal d2">Od v&#253;kopov a&#382; po k&#318;&#250;&#269;e v ruke &#8212; pokr&#253;vame cel&#253; stavebn&#253; proces.</p>
+      </div>
+      <ul class="services-grid" role="list">
+        <li class="glass service-card reveal">
+          <svg class="service-icon" fill="none" stroke="currentColor" stroke-width="1.4" viewBox="0 0 44 44" aria-hidden="true"><path d="M6 38V20L22 8l16 12v18H6z"/><path d="M16 38V28h12v10"/></svg>
+          <h3 class="service-title">Domy na k&#318;&#250;&#269;</h3>
+          <p class="service-desc">Kompletn&#225; realiz&#225;cia rodinn&#233;ho domu od z&#225;kladov po odovzdanie.</p>
+        </li>
+        <li class="glass service-card reveal d1">
+          <svg class="service-icon" fill="none" stroke="currentColor" stroke-width="1.4" viewBox="0 0 44 44" aria-hidden="true"><rect x="8" y="10" width="28" height="28" rx="2"/><path d="M14 10V6M30 10V6M8 22h28"/></svg>
+          <h3 class="service-title">Novostavba</h3>
+          <p class="service-desc">V&#253;stavba nov&#253;ch objektov pod&#318;a projektu a va&#353;ich predst&#225;v.</p>
+        </li>
+        <li class="glass service-card reveal d2">
+          <svg class="service-icon" fill="none" stroke="currentColor" stroke-width="1.4" viewBox="0 0 44 44" aria-hidden="true"><path d="M22 6l18 10v12c0 9-8 14-18 16C12 42 4 37 4 28V16L22 6z"/></svg>
+          <h3 class="service-title">N&#237;zkoenergetick&#233; domy</h3>
+          <p class="service-desc">Domy s n&#237;zkou spotrebou energie a dlhodobou &#250;sporou n&#225;kladov.</p>
+        </li>
+        <li class="glass service-card reveal d3">
+          <svg class="service-icon" fill="none" stroke="currentColor" stroke-width="1.4" viewBox="0 0 44 44" aria-hidden="true"><path d="M4 38h36M8 38V24l6-14h12l6 14v14"/><path d="M16 38v-8h12v8"/></svg>
+          <h3 class="service-title">Zemn&#233; a v&#253;kopov&#233; pr&#225;ce</h3>
+          <p class="service-desc">Pr&#237;prava staveniska, v&#253;kopy, ter&#233;nn&#233; &#250;pravy. R&#253;chlo a spo&#318;ahlivo.</p>
+        </li>
+        <li class="glass service-card reveal">
+          <svg class="service-icon" fill="none" stroke="currentColor" stroke-width="1.4" viewBox="0 0 44 44" aria-hidden="true"><rect x="4" y="28" width="36" height="8" rx="2"/><path d="M10 28V20M22 28V16M34 28V20"/></svg>
+          <h3 class="service-title">Z&#225;kladov&#225; doska a z&#225;klady</h3>
+          <p class="service-desc">Pevn&#253; z&#225;klad pre ka&#382;d&#250; stavbu &#8212; bet&#243;nov&#233; z&#225;klady a dosky.</p>
+        </li>
+        <li class="glass service-card reveal d1">
+          <svg class="service-icon" fill="none" stroke="currentColor" stroke-width="1.4" viewBox="0 0 44 44" aria-hidden="true"><path d="M6 32c2-6 8-12 16-12s14 6 16 12M4 40h36M14 20V12M30 20V12M10 12h24"/></svg>
+          <h3 class="service-title">Hydroizol&#225;cia z&#225;kladov</h3>
+          <p class="service-desc">Spo&#318;ahliv&#225; ochrana z&#225;kladov pred vlhkos&#357;ou a vodou.</p>
+        </li>
+        <li class="glass service-card reveal d2">
+          <svg class="service-icon" fill="none" stroke="currentColor" stroke-width="1.4" viewBox="0 0 44 44" aria-hidden="true"><rect x="6" y="22" width="32" height="16" rx="2"/><path d="M14 22V14a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8"/></svg>
+          <h3 class="service-title">Bet&#243;novanie</h3>
+          <p class="service-desc">Bet&#243;nov&#233; kon&#353;trukcie a plochy s dlhou &#382;ivotnos&#357;ou.</p>
+        </li>
+        <li class="glass service-card reveal d3">
+          <svg class="service-icon" fill="none" stroke="currentColor" stroke-width="1.4" viewBox="0 0 44 44" aria-hidden="true"><rect x="4" y="4" width="10" height="10" rx="1"/><rect x="17" y="4" width="10" height="10" rx="1"/><rect x="30" y="4" width="10" height="10" rx="1"/><rect x="4" y="17" width="10" height="10" rx="1"/><rect x="17" y="17" width="10" height="10" rx="1"/><rect x="30" y="17" width="10" height="10" rx="1"/><rect x="4" y="30" width="10" height="10" rx="1"/><rect x="17" y="30" width="10" height="10" rx="1"/><rect x="30" y="30" width="10" height="10" rx="1"/></svg>
+          <h3 class="service-title">Z&#225;mkov&#225; dl&#225;&#382;ba</h3>
+          <p class="service-desc">Pr&#237;jazdov&#233; cesty, chodn&#237;ky a terasy. Kvalitn&#225; pokl&#225;dka.</p>
+        </li>
+        <li class="glass service-card reveal">
+          <svg class="service-icon" fill="none" stroke="currentColor" stroke-width="1.4" viewBox="0 0 44 44" aria-hidden="true"><path d="M8 36l4-8 4 8 4-8 4 8 4-8 4 8M8 24l4-8 4 8 4-8 4 8"/></svg>
+          <h3 class="service-title">B&#250;racie pr&#225;ce</h3>
+          <p class="service-desc">Bezpe&#269;n&#225; a efekt&#237;vna demol&#225;cia objektov a kon&#353;trukcii.</p>
+        </li>
+        <li class="glass service-card reveal d1">
+          <svg class="service-icon" fill="none" stroke="currentColor" stroke-width="1.4" viewBox="0 0 44 44" aria-hidden="true"><rect x="4" y="4" width="36" height="36" rx="3"/><path d="M4 16h36M16 4v36"/></svg>
+          <h3 class="service-title">Fas&#225;da</h3>
+          <p class="service-desc">Vonkaj&#353;ie omietky, zateplenie a fin&#225;lna &#250;prava fas&#225;dy.</p>
+        </li>
+        <li class="glass service-card reveal d2">
+          <svg class="service-icon" fill="none" stroke="currentColor" stroke-width="1.4" viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="18"/><path d="M22 14v8l5 3"/></svg>
+          <h3 class="service-title">Dokon&#269;ovacie pr&#225;ce</h3>
+          <p class="service-desc">Fin&#225;lne detaily, ktor&#233; robia rozdiel medzi dobrou a skvelou stavbou.</p>
+        </li>
+        <li class="glass service-card reveal d3">
+          <svg class="service-icon" fill="none" stroke="currentColor" stroke-width="1.4" viewBox="0 0 44 44" aria-hidden="true"><rect x="4" y="26" width="36" height="10" rx="5"/><circle cx="12" cy="26" r="6"/><circle cx="32" cy="26" r="6"/><path d="M14 20V12h10l6 8"/></svg>
+          <h3 class="service-title">Transport</h3>
+          <p class="service-desc">Zabezpe&#269;enie materi&#225;lu a odvoz sute z miesta stavby.</p>
+        </li>
       </ul>
-      <div class="nav-cta-btn">
-        <a href="#kontakt" class="btn btn-gold" style="font-size:13px;padding:11px 22px;">Nez&#225;v&#228;zn&#225; konzult&#225;cia</a>
-      </div>
-      <button class="hamburger" id="menuOpen" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
     </div>
-  </div>
-</nav>
+  </section>
 
-<!-- HERO -->
-<section id="hero">
-  <div class="hero-bg" id="heroBg"></div>
-  <div class="hero-overlay"></div>
-  <div class="container">
-    <div class="hero-inner">
-      <div class="hero-content">
-        <div class="hero-eyebrow reveal">Trnava &amp; Trnavsk&#253; kraj</div>
-        <h1 class="hero-title reveal d1">
-          Stavby,<br>
-          <span class="gold-line">ktor&#233; stoja</span><br>
-          za to.
-        </h1>
-        <p class="hero-subtitle reveal d2">
-          Realizujeme rodinn&#233; domy na k&#318;&#250;&#269;, zemn&#233; pr&#225;ce a z&#225;mkov&#233; dl&#225;&#382;by v Trnave a okol&#237;. Prec&#237;zne. Na&#269;as. Bez kompromisov.
-        </p>
-        <div class="hero-actions reveal d3">
-          <a href="#kontakt" class="btn btn-gold">
-            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            Z&#237;skajte cenov&#250; ponuku
-          </a>
-          <a href="#sluzby" class="btn btn-ghost">Na&#353;e slu&#382;by</a>
-        </div>
-        <div class="hero-trust reveal d4">
-          <div class="hero-trust-item">
-            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-            Rodinn&#233; domy na k&#318;&#250;&#269;
-          </div>
-          <div class="hero-trust-item">
-            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-            Zemn&#233; pr&#225;ce
-          </div>
-          <div class="hero-trust-item">
-            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-            Z&#225;mkov&#225; dl&#225;&#382;ba
-          </div>
-          <div class="hero-trust-item">
-            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-            Trnava a okol&#237;
+  <!-- ABOUT -->
+  <section id="o-nas" aria-labelledby="onas-title">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-img-wrap reveal">
+          <img
+            class="about-img"
+            src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=900&q=80"
+            alt="Stavbyved&#250;ci na stavenisku spolo&#269;nosti RAJASTAV"
+            width="900" height="560"
+            loading="lazy"
+          >
+          <div class="glass about-badge" aria-label="Viac ako 5 rokov sk&#250;senost&#237;">
+            <div class="badge-num" aria-hidden="true">5+</div>
+            <div class="badge-txt">Rokov sk&#250;senost&#237;</div>
           </div>
         </div>
-      </div>
-      <div class="hero-stats">
-        <div class="glass stat-card reveal d3">
-          <div class="stat-number">50+</div>
-          <div class="stat-label">Dokon&#269;en&#253;ch projektov</div>
-        </div>
-        <div class="glass stat-card reveal d4">
-          <div class="stat-number">100%</div>
-          <div class="stat-label">Na k&#318;&#250;&#269; realiz&#225;cie</div>
+        <div>
+          <p class="section-tag reveal" aria-hidden="true">O n&#225;s</p>
+          <h2 id="onas-title" class="about-title reveal d1">Mlad&#225; firma.<br><span class="gold">Sk&#250;sen&#237; &#318;udia.</span></h2>
+          <p class="about-body reveal d2">RAJASTAV s.r.o. vznikol z presved&#269;enia, &#382;e stavebn&#237;ctvo m&#244;&#382;e fungova&#357; inak &#8212; transparentne, spo&#318;ahlivo a bez zbyto&#269;n&#253;ch komplik&#225;ci&#237;. Ka&#382;d&#253; projekt berieme osobne.</p>
+          <ul class="pillars" role="list">
+            <li class="glass pillar reveal d2">
+              <div class="pillar-icon" aria-hidden="true"><svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+              <div><h3 class="pillar-title">Kompletn&#225; realiz&#225;cia</h3><p class="pillar-text">Jeden dod&#225;vate&#318;, pln&#225; zodpovednos&#357; od A po Z.</p></div>
+            </li>
+            <li class="glass pillar reveal d3">
+              <div class="pillar-icon" aria-hidden="true"><svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+              <div><h3 class="pillar-title">Pevn&#233; term&#237;ny</h3><p class="pillar-text">Re&#225;lne term&#237;ny. Dodr&#382;iavame ich.</p></div>
+            </li>
+            <li class="glass pillar reveal d4">
+              <div class="pillar-icon" aria-hidden="true"><svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+              <div><h3 class="pillar-title">F&#233;rov&#225; cena</h3><p class="pillar-text">&#381;iadne skryt&#233; poplatky. Cenov&#225; ponuka zdarma.</p></div>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
-  </div>
-  <div class="scroll-ind">
-    <svg width="15" height="23" viewBox="0 0 16 24" fill="none" stroke="currentColor" stroke-width="1.5">
-      <rect x="1" y="1" width="14" height="22" rx="7"/>
-      <circle cx="8" cy="7" r="2" fill="currentColor" stroke="none">
-        <animate attributeName="cy" values="7;14;7" dur="2s" repeatCount="indefinite"/>
-      </circle>
-    </svg>
-    <span>Scroll</span>
-  </div>
-</section>
+  </section>
 
-<!-- SERVICES -->
-<section id="sluzby">
-  <div class="container">
-    <div class="section-header">
-      <div class="section-tag reveal">Na&#353;e slu&#382;by</div>
-      <h2 class="section-title reveal d1">&#268;o pre v&#225;s <span class="gold">urobíme</span></h2>
-      <p class="section-subtitle reveal d2">Od v&#253;kopov a&#382; po k&#318;&#250;&#269;e v ruke &#8212; pokr&#253;vame cel&#253; stavebn&#253; proces.</p>
+  <!-- CONTACT -->
+  <section id="kontakt" aria-labelledby="kontakt-title">
+    <div class="container">
+      <div class="contact-grid">
+        <div>
+          <p class="section-tag reveal" aria-hidden="true">Kontakt</p>
+          <h2 id="kontakt-title" class="contact-title reveal d1">Za&#269;nime<br><span class="gold">v&#225;&#353; projekt</span></h2>
+          <p class="contact-subtitle reveal d2">Nap&#237;&#353;te n&#225;m. Odpovieme do 24 hod&#237;n s nez&#225;v&#228;znou konzult&#225;ciou a cenov&#253;m odhadom.</p>
+          <ul class="contact-items" role="list">
+            <li>
+              <a href="tel:+421915057112" class="glass c-item reveal d2" aria-label="Zavola&#357; na +421 915 057 112">
+                <div class="c-icon" aria-hidden="true"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.95 13a19.79 19.79 0 01-3.07-8.67A2 2 0 012.88 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L7.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg></div>
+                <div><div class="c-label">Telef&#243;n</div><div class="c-val">+421 915 057 112</div></div>
+              </a>
+            </li>
+            <li>
+              <a href="mailto:rajastav.sk@gmail.com" class="glass c-item reveal d3" aria-label="Napisa&#357; email na rajastav.sk@gmail.com">
+                <div class="c-icon" aria-hidden="true"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+                <div><div class="c-label">E-mail</div><div class="c-val">rajastav.sk@gmail.com</div></div>
+              </a>
+            </li>
+            <li>
+              <div class="glass c-item reveal d4">
+                <div class="c-icon" aria-hidden="true"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+                <div><div class="c-label">Oblas&#357; p&#244;sobenia</div><div class="c-val">Trnava a Trnavsk&#253; kraj</div></div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="glass form-wrap reveal d2">
+          <form id="contactForm" onsubmit="handleSubmit(event)" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="inp-meno">Meno a priezvisko <span aria-hidden="true">*</span><span class="sr-only">(povinn&#233;)</span></label>
+                <input id="inp-meno" type="text" class="form-ctrl" placeholder="J&#225;n Nov&#225;k" required autocomplete="name">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="inp-tel">Telef&#243;n <span aria-hidden="true">*</span><span class="sr-only">(povinn&#233;)</span></label>
+                <input id="inp-tel" type="tel" class="form-ctrl" placeholder="+421 900 000 000" required autocomplete="tel">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="inp-email">E-mail <span aria-hidden="true">*</span><span class="sr-only">(povinn&#233;)</span></label>
+              <input id="inp-email" type="email" class="form-ctrl" placeholder="jan.novak@email.sk" required autocomplete="email">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="inp-typ">Typ projektu</label>
+              <select id="inp-typ" class="form-ctrl">
+                <option value="" disabled selected>Vyberte typ projektu</option>
+                <option>Rodinn&#253; dom na k&#318;&#250;&#269;</option>
+                <option>Novostavba</option>
+                <option>Zemn&#233; pr&#225;ce</option>
+                <option>Z&#225;mkov&#225; dl&#225;&#382;ba</option>
+                <option>B&#250;racie pr&#225;ce</option>
+                <option>In&#233;</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="inp-sprava">Spr&#225;va</label>
+              <textarea id="inp-sprava" class="form-ctrl" placeholder="Pop&#237;&#353;te v&#225;&#353; projekt, rozsah pr&#225;c, lokalitu..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-gold btn-submit">
+              <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+              Odosla&#357; dopyt
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
-    <div class="services-grid">
-      <div class="glass service-card reveal">
-        <svg class="service-icon" fill="none" stroke="currentColor" stroke-width="1.4" viewBox="0 0 44 44"><path d="M6 38V20L22 8l16 12v18H6z"/><path d="M16 38V28h12v10"/></svg>
-        <div class="service-title">Domy na k&#318;&#250;&#269;</div>
-        <div class="service-desc">Kompletn&#225; realiz&#225;cia rodinn&#233;ho domu od z&#225;kladov po odovzdanie.</div>
-      </div>
-      <div class="glass service-card reveal d1">
-        <svg class="service-icon" fill="none" stroke="currentColor" stroke-width="1.4" viewBox="0 0 44 44"><rect x="8" y="10" width="28" height="28" rx="2"/><path d="M14 10V6M30 10V6M8 22h28"/></svg>
-        <div class="service-title">Novostavba</div>
-        <div class="service-desc">V&#253;stavba nov&#253;ch objektov pod&#318;a projektu a va&#353;ich predst&#225;v.</div>
-      </div>
-      <div class="glass service-card reveal d2">
-        <svg class="service-icon" fill="none" stroke="currentColor" stroke-width="1.4" viewBox="0 0 44 44"><path d="M22 6l18 10v12c0 9-8 14-18 16C12 42 4 37 4 28V16L22 6z"/></svg>
-        <div class="service-title">N&#237;zkoenergetick&#233; domy</div>
-        <div class="service-desc">Domy s n&#237;zkou spotrebou energie a dlhodobou &#250;sporou n&#225;kladov.</div>
-      </div>
-      <div class="glass service-card reveal d3">
-        <svg class="service-icon" fill="none" stroke="currentColor" stroke-width="1.4" viewBox="0 0 44 44"><path d="M4 38h36M8 38V24l6-14h12l6 14v14"/><path d="M16 38v-8h12v8"/></svg>
-        <div class="service-title">Zemn&#233; a v&#253;kopov&#233; pr&#225;ce</div>
-        <div class="service-desc">Pr&#237;prava staveniska, v&#253;kopy, ter&#233;nn&#233; &#250;pravy.</div>
-      </div>
-      <div class="glass service-card reveal">
-        <svg class="service-icon" fill="none" stroke="currentColor" stroke-width="1.4" viewBox="0 0 44 44"><rect x="4" y="28" width="36" height="8" rx="2"/><path d="M10 28V20M22 28V16M34 28V20"/></svg>
-        <div class="service-title">Z&#225;kladov&#225; doska a z&#225;klady</div>
-        <div class="service-desc">Pevn&#253; z&#225;klad pre ka&#382;d&#250; stavbu &#8212; bet&#243;nov&#233; z&#225;klady a dosky.</div>
-      </div>
-      <div class="glass service-card reveal d1">
-        <svg class="service-icon" fill="none" stroke="currentColor" stroke-width="1.4" viewBox="0 0 44 44"><path d="M6 32c2-6 8-12 16-12s14 6 16 12M4 40h36M14 20V12M30 20V12M10 12h24"/></svg>
-        <div class="service-title">Hydroizol&#225;cia z&#225;kladov</div>
-        <div class="service-desc">Spo&#318;ahliv&#225; ochrana z&#225;kladov pred vlhkos&#357;ou a vodou.</div>
-      </div>
-      <div class="glass service-card reveal d2">
-        <svg class="service-icon" fill="none" stroke="currentColor" stroke-width="1.4" viewBox="0 0 44 44"><rect x="6" y="22" width="32" height="16" rx="2"/><path d="M14 22V14a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8"/></svg>
-        <div class="service-title">Bet&#243;novanie</div>
-        <div class="service-desc">Bet&#243;nov&#233; kon&#353;trukcie a plochy s dlhou &#382;ivotnos&#357;ou.</div>
-      </div>
-      <div class="glass service-card reveal d3">
-        <svg class="service-icon" fill="none" stroke="currentColor" stroke-width="1.4" viewBox="0 0 44 44"><rect x="4" y="4" width="10" height="10" rx="1"/><rect x="17" y="4" width="10" height="10" rx="1"/><rect x="30" y="4" width="10" height="10" rx="1"/><rect x="4" y="17" width="10" height="10" rx="1"/><rect x="17" y="17" width="10" height="10" rx="1"/><rect x="30" y="17" width="10" height="10" rx="1"/><rect x="4" y="30" width="10" height="10" rx="1"/><rect x="17" y="30" width="10" height="10" rx="1"/><rect x="30" y="30" width="10" height="10" rx="1"/></svg>
-        <div class="service-title">Z&#225;mkov&#225; dl&#225;&#382;ba</div>
-        <div class="service-desc">Pr&#237;jazdov&#233; cesty, chodn&#237;ky a terasy. Kvalitn&#225; pokl&#225;dka.</div>
-      </div>
-      <div class="glass service-card reveal">
-        <svg class="service-icon" fill="none" stroke="currentColor" stroke-width="1.4" viewBox="0 0 44 44"><path d="M8 36l4-8 4 8 4-8 4 8 4-8 4 8M8 24l4-8 4 8 4-8 4 8"/></svg>
-        <div class="service-title">B&#250;racie pr&#225;ce</div>
-        <div class="service-desc">Bezpe&#269;n&#225; a efekt&#237;vna demol&#225;cia objektov a kon&#353;trukcii.</div>
-      </div>
-      <div class="glass service-card reveal d1">
-        <svg class="service-icon" fill="none" stroke="currentColor" stroke-width="1.4" viewBox="0 0 44 44"><rect x="4" y="4" width="36" height="36" rx="3"/><path d="M4 16h36M16 4v36"/></svg>
-        <div class="service-title">Fas&#225;da</div>
-        <div class="service-desc">Vonkaj&#353;ie omietky, zateplenie a fin&#225;lna &#250;prava fas&#225;dy.</div>
-      </div>
-      <div class="glass service-card reveal d2">
-        <svg class="service-icon" fill="none" stroke="currentColor" stroke-width="1.4" viewBox="0 0 44 44"><circle cx="22" cy="22" r="18"/><path d="M22 14v8l5 3"/></svg>
-        <div class="service-title">Dokon&#269;ovacie pr&#225;ce</div>
-        <div class="service-desc">Fin&#225;lne detaily, ktor&#233; robia rozdiel medzi dobrou a skvelou stavbou.</div>
-      </div>
-      <div class="glass service-card reveal d3">
-        <svg class="service-icon" fill="none" stroke="currentColor" stroke-width="1.4" viewBox="0 0 44 44"><rect x="4" y="26" width="36" height="10" rx="5"/><circle cx="12" cy="26" r="6"/><circle cx="32" cy="26" r="6"/><path d="M14 20V12h10l6 8"/></svg>
-        <div class="service-title">Transport</div>
-        <div class="service-desc">Zabezpe&#269;enie materi&#225;lu a odvoz sute z miesta stavby.</div>
-      </div>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- ABOUT -->
-<section id="o-nas">
-  <div class="container">
-    <div class="about-grid">
-      <div class="about-img-wrap reveal">
-        <img class="about-img" src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=900&q=80" alt="RAJASTAV stavebn&#233; pr&#225;ce" loading="lazy">
-        <div class="glass about-badge">
-          <div class="badge-num">5+</div>
-          <div class="badge-txt">Rokov sk&#250;senost&#237;</div>
-        </div>
-      </div>
-      <div>
-        <div class="section-tag reveal">O n&#225;s</div>
-        <h2 class="about-title reveal d1">Mlad&#225; firma.<br><span class="gold">Sk&#250;sen&#237; &#318;udia.</span></h2>
-        <p class="about-body reveal d2">RAJASTAV s.r.o. vznikol z presved&#269;enia, &#382;e stavebníctvo m&#244;&#382;e fungova&#357; inak &#8212; transparentne, spo&#318;ahlivo a bez zbyto&#269;n&#253;ch komplik&#225;ci&#237;. Ka&#382;d&#253; projekt berieme osobne.</p>
-        <div class="pillars">
-          <div class="glass pillar reveal d2">
-            <div class="pillar-icon"><svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
-            <div><div class="pillar-title">Kompletn&#225; realiz&#225;cia</div><div class="pillar-text">Jeden dod&#225;vate&#318;, pln&#225; zodpovednos&#357; od A po Z.</div></div>
-          </div>
-          <div class="glass pillar reveal d3">
-            <div class="pillar-icon"><svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-            <div><div class="pillar-title">Pevn&#233; term&#237;ny</div><div class="pillar-text">Re&#225;lne term&#237;ny. Dodr&#382;iavame ich.</div></div>
-          </div>
-          <div class="glass pillar reveal d4">
-            <div class="pillar-icon"><svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
-            <div><div class="pillar-title">F&#233;rov&#225; cena</div><div class="pillar-text">&#381;iadne skryt&#233; poplatky. Cenov&#225; ponuka zdarma.</div></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="kontakt">
-  <div class="container">
-    <div class="contact-grid">
-      <div>
-        <div class="section-tag reveal">Kontakt</div>
-        <h2 class="contact-title reveal d1">Za&#269;nime<br><span class="gold">v&#225;&#353; projekt</span></h2>
-        <p class="contact-subtitle reveal d2">Nap&#237;&#353;te n&#225;m. Odpovieme do 24 hod&#237;n s nez&#225;v&#228;znou konzult&#225;ciou a cenovým odhadom.</p>
-        <div class="contact-items">
-          <a href="tel:+421915057112" class="glass c-item reveal d2">
-            <div class="c-icon"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.95 13a19.79 19.79 0 01-3.07-8.67A2 2 0 012.88 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L7.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg></div>
-            <div><div class="c-label">Telef&#243;n</div><div class="c-val">+421 915 057 112</div></div>
-          </a>
-          <a href="mailto:rajastav.sk@gmail.com" class="glass c-item reveal d3">
-            <div class="c-icon"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
-            <div><div class="c-label">E-mail</div><div class="c-val">rajastav.sk@gmail.com</div></div>
-          </a>
-          <div class="glass c-item reveal d4">
-            <div class="c-icon"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
-            <div><div class="c-label">Oblas&#357; p&#244;sobenia</div><div class="c-val">Trnava a Trnavsk&#253; kraj</div></div>
-          </div>
-        </div>
-      </div>
-      <div class="glass form-wrap reveal d2">
-        <form id="contactForm" onsubmit="handleSubmit(event)">
-          <div class="form-row">
-            <div class="form-group"><label class="form-label">Meno a priezvisko *</label><input type="text" class="form-ctrl" placeholder="J&#225;n Nov&#225;k" required></div>
-            <div class="form-group"><label class="form-label">Telef&#243;n *</label><input type="tel" class="form-ctrl" placeholder="+421 900 000 000" required></div>
-          </div>
-          <div class="form-group"><label class="form-label">E-mail *</label><input type="email" class="form-ctrl" placeholder="jan.novak@email.sk" required></div>
-          <div class="form-group">
-            <label class="form-label">Typ projektu</label>
-            <select class="form-ctrl">
-              <option value="" disabled selected>Vyberte typ projektu</option>
-              <option>Rodinn&#253; dom na k&#318;&#250;&#269;</option>
-              <option>Novostavba</option>
-              <option>Zemn&#233; pr&#225;ce</option>
-              <option>Z&#225;mkov&#225; dl&#225;&#382;ba</option>
-              <option>B&#250;racie pr&#225;ce</option>
-              <option>In&#233;</option>
-            </select>
-          </div>
-          <div class="form-group"><label class="form-label">Spr&#225;va</label><textarea class="form-ctrl" placeholder="Pop&#237;&#353;te v&#225;&#353; projekt, rozsah pr&#225;c, lokalitu..."></textarea></div>
-          <button type="submit" class="btn btn-gold btn-submit">
-            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-            Odosla&#357; dopyt
-          </button>
-        </form>
-      </div>
-    </div>
-  </div>
-</section>
+</main>
 
 <!-- FOOTER -->
-<footer>
+<footer role="contentinfo">
   <div class="container">
     <div class="footer-top">
       <div class="footer-logo">
-        <svg width="32" height="32" viewBox="0 0 36 36" fill="none">
+        <svg width="32" height="32" viewBox="0 0 36 36" fill="none" aria-hidden="true">
           <path d="M18 2L34 13V30C34 32.2 32.2 34 30 34H6C3.8 34 2 32.2 2 30V13L18 2Z" stroke="#C9A84C" stroke-width="1.8" fill="none"/>
           <path d="M12 26V14H19C21.8 14 24 16 24 18.5S21.8 23 19 23H16L22 26" stroke="#C9A84C" stroke-width="1.8" stroke-linecap="round" fill="none"/>
         </svg>
@@ -557,11 +809,13 @@
           <div class="footer-tagline">Staviame na kvalite</div>
         </div>
       </div>
-      <ul class="footer-links">
-        <li><a href="#sluzby">Slu&#382;by</a></li>
-        <li><a href="#o-nas">O n&#225;s</a></li>
-        <li><a href="#kontakt">Kontakt</a></li>
-      </ul>
+      <nav aria-label="Patikov&#225; navig&#225;cia">
+        <ul class="footer-links" role="list">
+          <li><a href="#sluzby">Slu&#382;by</a></li>
+          <li><a href="#o-nas">O n&#225;s</a></li>
+          <li><a href="#kontakt">Kontakt</a></li>
+        </ul>
+      </nav>
       <a href="#kontakt" class="btn btn-gold" style="font-size:13px;padding:11px 22px;">Z&#237;ska&#357; ponuku</a>
     </div>
     <div class="footer-bottom">
@@ -572,43 +826,74 @@
 </footer>
 
 <script>
+  /* Navbar scroll */
   const nav = document.getElementById("navbar");
   window.addEventListener("scroll", function() {
     nav.classList.toggle("scrolled", window.scrollY > 60);
-  });
+  }, { passive: true });
 
+  /* Hero image preload */
   const heroBg = document.getElementById("heroBg");
   const imgSrc = "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=80";
   const preload = new Image();
-  preload.onload = function() { heroBg.style.backgroundImage = "url(" + imgSrc + ")"; heroBg.classList.add("loaded"); };
+  preload.onload = function() {
+    heroBg.style.backgroundImage = "url(" + imgSrc + ")";
+    heroBg.classList.add("loaded");
+  };
   preload.src = imgSrc;
 
-  document.getElementById("menuOpen").addEventListener("click", function() {
-    document.getElementById("mobileMenu").classList.add("open");
+  /* Mobile menu — aria-expanded toggle */
+  const menuBtn  = document.getElementById("menuOpen");
+  const menuEl   = document.getElementById("mobileMenu");
+  const closeBtn = document.getElementById("menuClose");
+
+  menuBtn.addEventListener("click", function() {
+    menuEl.classList.add("open");
+    menuBtn.setAttribute("aria-expanded", "true");
     document.body.style.overflow = "hidden";
+    closeBtn.focus();
   });
-  document.getElementById("menuClose").addEventListener("click", closeMenu);
+
+  closeBtn.addEventListener("click", closeMenu);
+
+  /* Close on Escape */
+  document.addEventListener("keydown", function(e) {
+    if (e.key === "Escape" && menuEl.classList.contains("open")) closeMenu();
+  });
+
   function closeMenu() {
-    document.getElementById("mobileMenu").classList.remove("open");
+    menuEl.classList.remove("open");
+    menuBtn.setAttribute("aria-expanded", "false");
     document.body.style.overflow = "";
+    menuBtn.focus();
   }
 
+  /* Scroll reveal */
   const obs = new IntersectionObserver(function(entries) {
     entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add("visible"); });
-  }, { threshold: 0.07, rootMargin: "0px 0px -30px 0px" });
+  }, { threshold: 0.07, rootMargin: "0px 0px -28px 0px" });
   document.querySelectorAll(".reveal").forEach(function(el) { obs.observe(el); });
 
+  /* Hero items visible immediately */
   setTimeout(function() {
     document.querySelectorAll("#hero .reveal").forEach(function(el) { el.classList.add("visible"); });
   }, 200);
 
+  /* Form submit feedback */
   function handleSubmit(e) {
     e.preventDefault();
-    var btn = e.target.querySelector(".btn-submit");
+    var btn  = e.target.querySelector(".btn-submit");
     var orig = btn.innerHTML;
-    btn.innerHTML = "<svg width='15' height='15' fill='none' stroke='currentColor' stroke-width='2.5' viewBox='0 0 24 24'><polyline points='20 6 9 17 4 12'/></svg> Spr\u00e1va odoslan\u00e1!";
-    btn.style.background = "#2a7a38"; btn.style.color = "#fff";
-    setTimeout(function() { btn.innerHTML = orig; btn.style.background = ""; btn.style.color = ""; }, 4500);
+    btn.innerHTML = "<svg width='15' height='15' fill='none' stroke='currentColor' stroke-width='2.5' viewBox='0 0 24 24' aria-hidden='true'><polyline points='20 6 9 17 4 12'/></svg> Spr&#225;va odoslan&#225;!";
+    btn.setAttribute("aria-label", "Spr&#225;va bola &#250;spe&#353;ne odoslan&#225;");
+    btn.style.background = "#2a7a38";
+    btn.style.color = "#fff";
+    setTimeout(function() {
+      btn.innerHTML = orig;
+      btn.removeAttribute("aria-label");
+      btn.style.background = "";
+      btn.style.color = "";
+    }, 4500);
   }
 </script>
 </body>
