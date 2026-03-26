@@ -152,14 +152,11 @@
 
     /* ===================== SERVICES ===================== */
     #sluzby { background: var(--bg-2); overflow: hidden; }
-
-    /* Top row: header left + 3 cards right */
     .srv-top { display: grid; grid-template-columns: 1fr 1.6fr; gap: 56px; align-items: start; margin-bottom: 56px; }
     .srv-top-head { position: sticky; top: 120px; }
     .srv-top-head .section-tag { margin-bottom: 14px; }
     .srv-top-title { font-size: clamp(28px, 3.2vw, 42px); font-weight: 800; letter-spacing: -.022em; line-height: 1.06; margin-bottom: 12px; }
     .srv-top-sub { font-size: 15px; color: var(--text-muted); line-height: 1.75; margin-bottom: 24px; }
-
     .srv-cards-col { display: flex; flex-direction: column; gap: 16px; }
     .srv-hero-card { position: relative; overflow: hidden; padding: 36px 36px 32px; transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease; cursor: default; }
     .srv-hero-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: var(--gold-border-h); }
@@ -172,8 +169,6 @@
     .srv-card-tags { display: flex; flex-wrap: wrap; gap: 8px; }
     .srv-tag { font-size: 11px; font-weight: 600; letter-spacing: .06em; background: var(--gold-bg); border: 1px solid var(--gold-border); color: var(--gold); padding: 5px 12px; border-radius: 100px; }
     .srv-hero-card .srv-bg-icon { position: absolute; bottom: -16px; right: -12px; opacity: .04; pointer-events: none; }
-
-    /* Bottom row: 2-column service list */
     .srv-list-wrap { border-top: 1px solid var(--border); padding-top: 40px; }
     .srv-list-label { font-size: 11px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 20px; }
     .srv-list { display: grid; grid-template-columns: 1fr 1fr; gap: 0 32px; }
@@ -246,13 +241,15 @@
     .footer-made a { color: rgba(255,255,255,.44); transition: color .2s; }
     .footer-made a:hover { color: #DFC06A; }
 
-    /* RESPONSIVE */
+    /* ===================== RESPONSIVE ===================== */
     @media (max-width: 1280px) { :root { --px: 40px; } }
+
     @media (max-width: 1100px) {
       :root { --nav-max-w: calc(100% - 80px); }
       .srv-top { grid-template-columns: 1fr; gap: 40px; }
       .srv-top-head { position: static; }
     }
+
     @media (max-width: 1024px) {
       :root { --px: 32px; }
       .hero-stats { display: none; }
@@ -263,21 +260,28 @@
       .cta-inner { flex-direction: column; text-align: center; }
       .cta-actions { justify-content: center; }
     }
+
     @media (max-width: 820px) {
       #navbar { top: 10px; padding: 0 16px; }
       .nav-links { display: none; }
       .nav-cta   { display: none; }
       .hamburger { display: flex; }
     }
+
     @media (max-width: 768px) {
       :root { --px: 20px; }
       section { padding: 80px 0; }
+      #hero { padding-bottom: 64px; }
       #cta-band { padding: 52px 0; }
       .hero-inner { flex-direction: column; align-items: flex-start; }
       .hero-title { font-size: clamp(40px,11vw,56px); }
+      .hero-subtitle { max-width: 100%; }
       .hero-actions { flex-direction: column; }
       .hero-actions .btn { width: 100%; justify-content: center; }
       .hero-trust-item { border-right: none; padding-right: 0; margin-right: 0; width: 100%; }
+      .srv-top-head { position: static; }
+      .srv-hero-card { padding: 24px 22px; }
+      .srv-list { grid-template-columns: 1fr; }
       .form-row { grid-template-columns: 1fr; }
       .form-wrap { padding: 24px 20px; }
       .about-img { height: 280px; }
@@ -287,12 +291,14 @@
       .footer-top .btn { display: none; }
       .cta-actions { flex-direction: column; width: 100%; }
       .btn-white, .btn-white-ghost { width: 100%; justify-content: center; }
-      .srv-hero-card { padding: 24px 22px; }
-      .srv-list { grid-template-columns: 1fr; }
     }
+
     @media (max-width: 480px) {
       .section-header { margin-bottom: 40px; }
       .c-item { padding: 14px; }
+      .hero-eyebrow { font-size: 11px; padding: 6px 14px; }
+      .srv-list-name { font-size: 13px; }
+      .pillar { padding: 14px 16px; }
     }
   </style>
 </head>
@@ -385,8 +391,6 @@
   <!-- SERVICES -->
   <section id="sluzby" aria-labelledby="sluzby-title">
     <div class="container">
-
-      <!-- Top: header + 3 feature cards -->
       <div class="srv-top">
         <div class="srv-top-head reveal">
           <p class="section-tag" aria-hidden="true">Naše služby</p>
@@ -397,7 +401,6 @@
             Chcem cenovú ponuku
           </a>
         </div>
-
         <div class="srv-cards-col">
           <div class="glass srv-hero-card reveal">
             <div class="srv-card-num">01</div>
@@ -437,7 +440,6 @@
         </div>
       </div>
 
-      <!-- Bottom: full-width 2-column service list -->
       <div class="srv-list-wrap reveal">
         <p class="srv-list-label">Všetky služby</p>
         <ul class="srv-list" aria-label="Zoznam všetkých služieb">
@@ -455,7 +457,6 @@
           <li class="srv-list-item"><span class="srv-list-num">12</span><span class="srv-list-icon" aria-hidden="true"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="14" width="20" height="6" rx="3"/><circle cx="7" cy="14" r="4"/><circle cx="17" cy="14" r="4"/><path d="M8 10V6h6l4 4"/></svg></span><span class="srv-list-name">Doprava a odvoz sutín</span></li>
         </ul>
       </div>
-
     </div>
   </section>
 
