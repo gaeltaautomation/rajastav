@@ -116,14 +116,15 @@
     .scroll-ind span { font-size: 9px; letter-spacing: .25em; text-transform: uppercase; }
     @keyframes scroll-bob { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(7px)} }
 
-    section { padding: 120px 0; position: relative; z-index: 1; }
-    .section-header { margin-bottom: 64px; }
+    /* SECTIONS — zmenšené vertikálne medzery */
+    section { padding: 80px 0; position: relative; z-index: 1; }
+    .section-header { margin-bottom: 48px; }
     .section-title { font-size: clamp(32px,4vw,52px); font-weight: 800; letter-spacing: -.022em; line-height: 1.05; margin-bottom: 14px; color: var(--text); }
     .section-subtitle { font-size: 16px; color: var(--text-muted); max-width: 560px; line-height: 1.75; }
 
     /* SERVICES */
     #sluzby { background: var(--bg-2); overflow: hidden; }
-    .srv-top { display: grid; grid-template-columns: 1fr 1.6fr; gap: 56px; align-items: start; margin-bottom: 56px; }
+    .srv-top { display: grid; grid-template-columns: 1fr 1.6fr; gap: 56px; align-items: start; margin-bottom: 48px; }
     .srv-top-head { position: sticky; top: 120px; }
     .srv-top-head .section-tag { margin-bottom: 14px; }
     .srv-top-title { font-size: clamp(28px, 3.2vw, 42px); font-weight: 800; letter-spacing: -.022em; line-height: 1.06; margin-bottom: 12px; }
@@ -140,7 +141,7 @@
     .srv-card-tags { display: flex; flex-wrap: wrap; gap: 8px; }
     .srv-tag { font-size: 11px; font-weight: 600; letter-spacing: .06em; background: var(--gold-bg); border: 1px solid var(--gold-border); color: var(--gold); padding: 5px 12px; border-radius: 100px; }
     .srv-hero-card .srv-bg-icon { position: absolute; bottom: -16px; right: -12px; opacity: .04; pointer-events: none; }
-    .srv-list-wrap { border-top: 1px solid var(--border); padding-top: 40px; }
+    .srv-list-wrap { border-top: 1px solid var(--border); padding-top: 36px; }
     .srv-list-label { font-size: 11px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 20px; }
     .srv-list { display: grid; grid-template-columns: 1fr 1fr; gap: 0 32px; }
     .srv-list-item { display: flex; align-items: center; gap: 14px; padding: 13px 0; border-bottom: 1px solid var(--border); transition: color .2s; cursor: default; }
@@ -151,7 +152,7 @@
     .srv-list-item:hover .srv-list-icon { background: rgba(184,146,42,.15); border-color: var(--gold-border-h); }
     .srv-list-name { font-size: 14px; font-weight: 600; color: var(--text); flex: 1; transition: color .2s; }
 
-    /* REALIZACIE — PROJECT CARDS + LIGHTBOX */
+    /* REALIZACIE */
     #realizacie { background: var(--bg-2); overflow: hidden; }
     .proj-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
     .proj-card { position: relative; border-radius: var(--radius); overflow: hidden; cursor: pointer; background: var(--text); }
@@ -203,7 +204,7 @@
     .pillar-text  { font-size: 14px; color: var(--text-muted); line-height: 1.55; }
 
     /* CTA BAND */
-    #cta-band { background: var(--gold); padding: 72px 0; }
+    #cta-band { background: var(--gold); padding: 64px 0; }
     .cta-inner { display: flex; align-items: center; justify-content: space-between; gap: 40px; flex-wrap: wrap; }
     .cta-text h2 { font-size: clamp(26px,3vw,40px); font-weight: 800; color: #fff; letter-spacing: -.02em; line-height: 1.05; margin-bottom: 8px; }
     .cta-text p { font-size: 16px; color: rgba(255,255,255,.80); line-height: 1.6; }
@@ -246,8 +247,8 @@
     .file-remove:hover { color: #c0392b; }
 
     /* FOOTER */
-    footer { background: var(--text); color: rgba(255,255,255,.80); padding: 52px 0 32px; position: relative; z-index: 1; }
-    .footer-top { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px; margin-bottom: 36px; }
+    footer { background: var(--text); color: rgba(255,255,255,.80); padding: 48px 0 28px; position: relative; z-index: 1; }
+    .footer-top { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px; margin-bottom: 32px; }
     .footer-logo img { height: 52px; width: auto; filter: brightness(0) invert(1); opacity: .9; }
     .footer-links { display: flex; gap: 28px; flex-wrap: wrap; }
     .footer-links a { font-size: 14px; color: rgba(255,255,255,.62); transition: color .2s; }
@@ -286,9 +287,9 @@
     }
     @media (max-width: 768px) {
       :root { --px: 20px; }
-      section { padding: 80px 0; }
+      section { padding: 56px 0; }
       #hero { padding-bottom: 64px; }
-      #cta-band { padding: 52px 0; }
+      #cta-band { padding: 44px 0; }
       .hero-inner { flex-direction: column; align-items: flex-start; }
       .hero-title { font-size: clamp(38px,11vw,56px); }
       .hero-subtitle { max-width: 100%; font-size: clamp(15px,4vw,17px); }
@@ -312,7 +313,7 @@
       .proj-card-body { padding: 20px 18px 18px; }
     }
     @media (max-width: 480px) {
-      .section-header { margin-bottom: 40px; }
+      .section-header { margin-bottom: 32px; }
       .c-item { padding: 14px; }
       .hero-eyebrow { font-size: 11px; padding: 6px 14px; }
       .srv-list-name { font-size: 13px; }
@@ -683,7 +684,7 @@
 </footer>
 
 <script>
-  // PROJECT DATA
+  // PROJECT DATA — bazén URL opravené (medzera → pomlčka)
   var PROJECTS = [
     {
       title: 'Rodinný dom na kľúč',
@@ -699,11 +700,11 @@
       title: 'Výstavba bazéna',
       sub: 'Trnava · 2025',
       photos: [
-        { src: 'https://rajastav.sk/photos/Trnava-vystavba-bazena-2025-3.jpeg', alt: 'Výstavba bazéna, Trnava 2025 — fáza 1' },
-        { src: 'https://rajastav.sk/photos/Trnava-vystavba bazena-2025.jpeg',   alt: 'Výstavba bazéna, Trnava 2025 — fáza 2' },
-        { src: 'https://rajastav.sk/photos/Trnava-vystavba bazena-2025-1.jpeg', alt: 'Výstavba bazéna, Trnava 2025 — fáza 3' },
-        { src: 'https://rajastav.sk/photos/Trnava-vystavba bazena-2025-2.jpeg', alt: 'Výstavba bazéna, Trnava 2025 — fáza 4' },
-        { src: 'https://rajastav.sk/photos/Trnava-vystavba bazena-2025-4.jpeg', alt: 'Výstavba bazéna, Trnava 2025 — fáza 5' }
+        { src: 'https://rajastav.sk/photos/Trnava-vystavba-bazena-2025-3.jpeg',   alt: 'Výstavba bazéna, Trnava 2025 — fáza 1' },
+        { src: 'https://rajastav.sk/photos/Trnava-vystavba-bazena-2025.jpeg',     alt: 'Výstavba bazéna, Trnava 2025 — fáza 2' },
+        { src: 'https://rajastav.sk/photos/Trnava-vystavba-bazena-2025-1.jpeg',   alt: 'Výstavba bazéna, Trnava 2025 — fáza 3' },
+        { src: 'https://rajastav.sk/photos/Trnava-vystavba-bazena-2025-2.jpeg',   alt: 'Výstavba bazéna, Trnava 2025 — fáza 4' },
+        { src: 'https://rajastav.sk/photos/Trnava-vystavba-bazena-2025-4.jpeg',   alt: 'Výstavba bazéna, Trnava 2025 — fáza 5' }
       ]
     },
     {
@@ -791,14 +792,12 @@
   });
   lb.addEventListener('click', function(e) { if (e.target === lb) closeLightbox(); });
 
-  // Attach project cards
   document.querySelectorAll('.proj-card').forEach(function(card) {
     function open() { openLightbox(parseInt(card.dataset.project), 0); }
     card.addEventListener('click', open);
     card.addEventListener('keydown', function(e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
   });
 
-  // SWIPE on lightbox
   var lbTouchX = null;
   lb.addEventListener('touchstart', function(e) { lbTouchX = e.touches[0].clientX; }, { passive: true });
   lb.addEventListener('touchend', function(e) {
