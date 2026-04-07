@@ -151,27 +151,43 @@
     .srv-list-item:hover .srv-list-icon { background: rgba(184,146,42,.15); border-color: var(--gold-border-h); }
     .srv-list-name { font-size: 14px; font-weight: 600; color: var(--text); flex: 1; transition: color .2s; }
 
-    /* REALIZACIE CAROUSEL */
-    #realizacie { background: var(--bg); overflow: hidden; }
-    .carousel-wrap { position: relative; }
-    .carousel-track-outer { overflow: hidden; border-radius: var(--radius); -webkit-mask-image: -webkit-radial-gradient(white, black); }
-    .carousel-track { display: flex; gap: 20px; transition: transform .5s cubic-bezier(.4,0,.2,1); will-change: transform; }
-    .carousel-slide { flex: 0 0 calc(50% - 10px); min-width: 0; position: relative; border-radius: var(--radius); overflow: hidden; aspect-ratio: 16/10; cursor: pointer; }
-    .carousel-slide img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease; display: block; }
-    .carousel-slide:hover img { transform: scale(1.04); }
-    .carousel-caption { position: absolute; bottom: 0; left: 0; right: 0; padding: 28px 28px 24px; background: linear-gradient(to top, rgba(10,9,8,.85) 0%, transparent 100%); color: #fff; }
-    .carousel-caption-title { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
-    .carousel-caption-sub { font-size: 13px; color: rgba(255,255,255,.65); }
-    .carousel-nav { display: flex; align-items: center; justify-content: space-between; margin-top: 28px; }
-    .carousel-dots { display: flex; gap: 8px; }
-    .carousel-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); border: none; cursor: pointer; transition: background .2s, transform .2s; padding: 0; }
-    .carousel-dot.active { background: var(--gold); transform: scale(1.3); }
-    .carousel-btns { display: flex; gap: 10px; }
-    .carousel-btn { width: 44px; height: 44px; border-radius: 50%; border: 1.5px solid var(--border); background: var(--bg-card); backdrop-filter: blur(12px); cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--text); transition: border-color .2s, background .2s, transform .2s; }
-    .carousel-btn:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+    /* REALIZACIE — PROJECT CARDS + LIGHTBOX */
+    #realizacie { background: var(--bg-2); overflow: hidden; }
+    .proj-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    .proj-card { position: relative; border-radius: var(--radius); overflow: hidden; cursor: pointer; background: var(--text); }
+    .proj-card-img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; transition: transform .55s ease, opacity .4s ease; opacity: .88; }
+    .proj-card:hover .proj-card-img { transform: scale(1.04); opacity: 1; }
+    .proj-card-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,9,8,.88) 0%, rgba(10,9,8,.3) 50%, transparent 100%); transition: opacity .3s; }
+    .proj-card-body { position: absolute; bottom: 0; left: 0; right: 0; padding: 28px 28px 24px; }
+    .proj-card-tag { display: inline-flex; align-items: center; gap: 6px; background: rgba(184,146,42,.18); border: 1px solid rgba(184,146,42,.35); border-radius: 100px; padding: 4px 12px; font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #DFC06A; margin-bottom: 10px; }
+    .proj-card-title { font-size: clamp(16px,1.5vw,20px); font-weight: 800; color: #fff; line-height: 1.15; margin-bottom: 4px; letter-spacing: -.01em; }
+    .proj-card-sub { font-size: 13px; color: rgba(255,255,255,.60); }
+    .proj-card-count { position: absolute; top: 18px; right: 18px; background: rgba(10,9,8,.55); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,.14); border-radius: 100px; padding: 5px 12px; font-size: 11px; font-weight: 600; color: rgba(255,255,255,.80); display: flex; align-items: center; gap: 5px; }
+    .proj-card-count svg { color: #DFC06A; }
+
+    /* LIGHTBOX */
+    #lightbox { display: none; position: fixed; inset: 0; z-index: 2000; background: rgba(8,7,6,.96); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); flex-direction: column; align-items: center; justify-content: center; }
+    #lightbox.open { display: flex; }
+    .lb-close { position: absolute; top: 20px; right: 24px; background: rgba(255,255,255,.10); border: 1px solid rgba(255,255,255,.15); border-radius: 50%; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #fff; transition: background .2s; z-index: 10; }
+    .lb-close:hover { background: rgba(255,255,255,.18); }
+    .lb-inner { display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 1100px; padding: 0 24px; gap: 20px; }
+    .lb-img-wrap { position: relative; width: 100%; }
+    .lb-img { width: 100%; max-height: 72vh; object-fit: contain; border-radius: 20px; display: block; }
+    .lb-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,.10); border: 1px solid rgba(255,255,255,.15); border-radius: 50%; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #fff; transition: background .2s, transform .2s; }
+    .lb-arrow:hover { background: rgba(255,255,255,.20); }
+    .lb-arrow-prev { left: -24px; }
+    .lb-arrow-next { right: -24px; }
+    .lb-meta { text-align: center; }
+    .lb-title { font-size: 17px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+    .lb-sub { font-size: 13px; color: rgba(255,255,255,.50); }
+    .lb-thumbs { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 4px; max-width: 100%; scrollbar-width: none; }
+    .lb-thumbs::-webkit-scrollbar { display: none; }
+    .lb-thumb { width: 72px; height: 52px; object-fit: cover; border-radius: 10px; cursor: pointer; opacity: .45; transition: opacity .2s, transform .2s; border: 2px solid transparent; flex-shrink: 0; }
+    .lb-thumb.active { opacity: 1; border-color: var(--gold); transform: scale(1.06); }
+    .lb-counter { font-size: 12px; color: rgba(255,255,255,.35); letter-spacing: .1em; }
 
     /* ABOUT */
-    #o-nas { background: var(--bg-2); }
+    #o-nas { background: var(--bg); }
     .about-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 80px; align-items: center; }
     .about-img-wrap { position: relative; }
     .about-img { width: 100%; height: 560px; object-fit: cover; border-radius: var(--radius); }
@@ -216,7 +232,6 @@
     .form-ctrl::placeholder { color: var(--text-dim); }
     textarea.form-ctrl { min-height: 114px; resize: vertical; }
     .btn-submit { width: 100%; min-height: 52px; padding: 16px; justify-content: center; font-size: 15px; margin-top: 6px; }
-    /* FILE UPLOAD */
     .file-drop { position: relative; border: 1.5px dashed var(--gold-border); border-radius: 16px; padding: 24px 20px; text-align: center; cursor: pointer; transition: border-color .25s, background .25s; background: var(--gold-bg); }
     .file-drop:hover, .file-drop.dragover { border-color: var(--gold); background: rgba(184,146,42,.12); }
     .file-drop input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
@@ -233,7 +248,6 @@
     /* FOOTER */
     footer { background: var(--text); color: rgba(255,255,255,.80); padding: 52px 0 32px; position: relative; z-index: 1; }
     .footer-top { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px; margin-bottom: 36px; }
-    .footer-logo { display: flex; align-items: center; gap: 12px; }
     .footer-logo img { height: 52px; width: auto; filter: brightness(0) invert(1); opacity: .9; }
     .footer-links { display: flex; gap: 28px; flex-wrap: wrap; }
     .footer-links a { font-size: 14px; color: rgba(255,255,255,.62); transition: color .2s; }
@@ -260,13 +274,15 @@
       .contact-grid { grid-template-columns: 1fr; gap: 48px; }
       .cta-inner { flex-direction: column; text-align: center; }
       .cta-actions { justify-content: center; }
-      .carousel-slide { flex: 0 0 calc(80% - 10px); }
+      .lb-arrow-prev { left: 4px; }
+      .lb-arrow-next { right: 4px; }
     }
     @media (max-width: 820px) {
       #navbar { top: 10px; padding: 0 16px; }
       .nav-links { display: none; }
       .nav-cta   { display: none; }
       .hamburger { display: flex; }
+      .proj-grid { grid-template-columns: 1fr; }
     }
     @media (max-width: 768px) {
       :root { --px: 20px; }
@@ -291,7 +307,9 @@
       .footer-top .btn { display: none; }
       .cta-actions { flex-direction: column; width: 100%; }
       .btn-white, .btn-white-ghost { width: 100%; justify-content: center; }
-      .carousel-slide { flex: 0 0 calc(90% - 10px); }
+      .lb-img { max-height: 55vh; }
+      .lb-thumb { width: 56px; height: 42px; }
+      .proj-card-body { padding: 20px 18px 18px; }
     }
     @media (max-width: 480px) {
       .section-header { margin-bottom: 40px; }
@@ -309,6 +327,30 @@
   <div class="bg-orb bg-orb-1"></div>
   <div class="bg-orb bg-orb-2"></div>
   <div class="bg-orb bg-orb-3"></div>
+</div>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" role="dialog" aria-modal="true" aria-label="Galéria projektu">
+  <button class="lb-close" id="lbClose" aria-label="Zavrieť galériu">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
+  <div class="lb-inner">
+    <div class="lb-img-wrap">
+      <button class="lb-arrow lb-arrow-prev" id="lbPrev" aria-label="Predchádzajúca fotka">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <img id="lbImg" class="lb-img" src="" alt="" loading="lazy">
+      <button class="lb-arrow lb-arrow-next" id="lbNext" aria-label="Nasledujúca fotka">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+    </div>
+    <div class="lb-meta">
+      <div id="lbTitle" class="lb-title"></div>
+      <div id="lbSub" class="lb-sub"></div>
+    </div>
+    <div id="lbThumbs" class="lb-thumbs" role="list" aria-label="Miniatúry fotiek"></div>
+    <div id="lbCounter" class="lb-counter"></div>
+  </div>
 </div>
 
 <div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Hlavné menu">
@@ -409,10 +451,7 @@
             <h3 class="srv-card-title">Dom na kľúč — bez starostí</h3>
             <p class="srv-card-desc">O všetko sa postaráme my — vy dostanete kľúče od hotového domu. Od projektu a stavebného povolenia až po kolaudáciu.</p>
             <div class="srv-card-tags">
-              <span class="srv-tag">Domy na kľúč</span>
-              <span class="srv-tag">Novostavba</span>
-              <span class="srv-tag">Nízkoenergetické</span>
-              <span class="srv-tag">Projektová dokumentácia</span>
+              <span class="srv-tag">Domy na kľúč</span><span class="srv-tag">Novostavba</span><span class="srv-tag">Nízkoenergetické</span><span class="srv-tag">Projektová dokumentácia</span>
             </div>
             <svg class="srv-bg-icon" width="140" height="140" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 44 44" aria-hidden="true"><path d="M6 38V20L22 8l16 12v18H6z"/><path d="M16 38V28h12v10"/></svg>
           </div>
@@ -421,11 +460,7 @@
             <h3 class="srv-card-title">Zemné a búracie práce</h3>
             <p class="srv-card-desc">Každá stavba stojí a padá na základoch. Výkopy, terénne úpravy, základové dosky, betonáž, hydroizolácie — celý proces rýchlo a kvalitne.</p>
             <div class="srv-card-tags">
-              <span class="srv-tag">Výkopové práce</span>
-              <span class="srv-tag">Základy &amp; dosky</span>
-              <span class="srv-tag">Hydroizolácia</span>
-              <span class="srv-tag">Betonáž</span>
-              <span class="srv-tag">Búracie práce</span>
+              <span class="srv-tag">Výkopové práce</span><span class="srv-tag">Základy &amp; dosky</span><span class="srv-tag">Hydroizolácia</span><span class="srv-tag">Betonáž</span><span class="srv-tag">Búracie práce</span>
             </div>
             <svg class="srv-bg-icon" width="140" height="140" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 44 44" aria-hidden="true"><rect x="4" y="28" width="36" height="8" rx="2"/><path d="M10 28V20M22 28V16M34 28V20"/></svg>
           </div>
@@ -434,15 +469,12 @@
             <h3 class="srv-card-title">Exteriér a dokončovacie práce</h3>
             <p class="srv-card-desc">Zámková dlažba, oplotenie, fasáda — finálne detaily, ktoré dotvárajú celkový dojem vášho domu.</p>
             <div class="srv-card-tags">
-              <span class="srv-tag">Zámková dlažba</span>
-              <span class="srv-tag">Fasáda</span>
-              <span class="srv-tag">Oplotenie</span>
+              <span class="srv-tag">Zámková dlažba</span><span class="srv-tag">Fasáda</span><span class="srv-tag">Oplotenie</span>
             </div>
             <svg class="srv-bg-icon" width="140" height="140" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 44 44" aria-hidden="true"><rect x="4" y="4" width="10" height="10" rx="1"/><rect x="17" y="4" width="10" height="10" rx="1"/><rect x="30" y="4" width="10" height="10" rx="1"/><rect x="4" y="17" width="10" height="10" rx="1"/><rect x="17" y="17" width="10" height="10" rx="1"/><rect x="30" y="17" width="10" height="10" rx="1"/><rect x="4" y="30" width="10" height="10" rx="1"/><rect x="17" y="30" width="10" height="10" rx="1"/><rect x="30" y="30" width="10" height="10" rx="1"/></svg>
           </div>
         </div>
       </div>
-
       <div class="srv-list-wrap reveal">
         <p class="srv-list-label">Všetky služby</p>
         <ul class="srv-list" aria-label="Zoznam všetkých služieb">
@@ -471,42 +503,68 @@
         <h2 id="realizacie-title" class="section-title reveal d1">Realizácie,<br><span class="gold">ktoré hovoria za nás</span></h2>
         <p class="section-subtitle reveal d2">Každý projekt je iný. Tieto sú dôkazom, že termíny a kvalitu berieme vážne.</p>
       </div>
-      <div class="carousel-wrap reveal d2">
-        <div class="carousel-track-outer" aria-label="Galéria realizácií">
-          <div class="carousel-track" id="carouselTrack" role="list">
-            <div class="carousel-slide" role="listitem">
-              <img src="https://images.unsplash.com/photo-1590725140246-20acddc1ec6d?auto=format&fit=crop&w=900&q=80" alt="Rodinný dom na kľúč, Trnava 2024" loading="lazy" width="900" height="562">
-              <div class="carousel-caption"><div class="carousel-caption-title">Rodinný dom na kľúč</div><div class="carousel-caption-sub">Trnava · 2024</div></div>
-            </div>
-            <div class="carousel-slide" role="listitem">
-              <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=900&q=80" alt="Zemné práce a základy, Hlohovec 2024" loading="lazy" width="900" height="562">
-              <div class="carousel-caption"><div class="carousel-caption-title">Zemné práce a základy</div><div class="carousel-caption-sub">Hlohovec · 2024</div></div>
-            </div>
-            <div class="carousel-slide" role="listitem">
-              <img src="https://images.unsplash.com/photo-1508450859948-4e04fabaa4ea?auto=format&fit=crop&w=900&q=80" alt="Zámková dlažba a exteriér, Piešťany 2023" loading="lazy" width="900" height="562">
-              <div class="carousel-caption"><div class="carousel-caption-title">Zámková dlažba a exteriér</div><div class="carousel-caption-sub">Piešťany · 2023</div></div>
-            </div>
-            <div class="carousel-slide" role="listitem">
-              <img src="https://images.unsplash.com/photo-1601760562234-9814eea6db90?auto=format&fit=crop&w=900&q=80" alt="Novostavba s fasádou, Trnava 2023" loading="lazy" width="900" height="562">
-              <div class="carousel-caption"><div class="carousel-caption-title">Novostavba s fasádou</div><div class="carousel-caption-sub">Trnava · 2023</div></div>
-            </div>
-            <div class="carousel-slide" role="listitem">
-              <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=900&q=80" alt="Základová doska, Sereď 2025" loading="lazy" width="900" height="562">
-              <div class="carousel-caption"><div class="carousel-caption-title">Základová doska</div><div class="carousel-caption-sub">Sereď · 2025</div></div>
-            </div>
+      <div class="proj-grid">
+
+        <!-- Projekt 1: Galanta RD na kľúč -->
+        <div class="proj-card reveal" data-project="0" role="button" tabindex="0" aria-label="Otvoriť galériu: Rodinný dom na kľúč, Galanta 2025">
+          <img class="proj-card-img" src="https://rajastav.sk/photos/Galanta-vystavba-RD-na-kluc-2025.jpeg" alt="Výstavba rodinného domu na kľúč, Galanta 2025" loading="lazy">
+          <div class="proj-card-overlay" aria-hidden="true"></div>
+          <div class="proj-card-count" aria-hidden="true">
+            <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5" fill="currentColor" stroke="none"/><polyline points="21 15 16 10 5 21"/></svg>
+            4 fotky
+          </div>
+          <div class="proj-card-body">
+            <div class="proj-card-tag">Dom na kľúč</div>
+            <div class="proj-card-title">Rodinný dom na kľúč</div>
+            <div class="proj-card-sub">Galanta · 2025</div>
           </div>
         </div>
-        <div class="carousel-nav">
-          <div class="carousel-dots" id="carouselDots" role="tablist" aria-label="Snímky galérie"></div>
-          <div class="carousel-btns">
-            <button class="carousel-btn" id="carouselPrev" aria-label="Predchádzajúca fotka">
-              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
-            </button>
-            <button class="carousel-btn" id="carouselNext" aria-label="Nasledujúca fotka">
-              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
-            </button>
+
+        <!-- Projekt 2: Trnava Bazén -->
+        <div class="proj-card reveal d1" data-project="1" role="button" tabindex="0" aria-label="Otvoriť galériu: Výstavba bazéna, Trnava 2025">
+          <img class="proj-card-img" src="https://rajastav.sk/photos/Trnava-vystavba bazena-2025.jpeg" alt="Výstavba bazéna, Trnava 2025" loading="lazy">
+          <div class="proj-card-overlay" aria-hidden="true"></div>
+          <div class="proj-card-count" aria-hidden="true">
+            <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5" fill="currentColor" stroke="none"/><polyline points="21 15 16 10 5 21"/></svg>
+            5 fotiek
+          </div>
+          <div class="proj-card-body">
+            <div class="proj-card-tag">Zemné práce</div>
+            <div class="proj-card-title">Výstavba bazéna</div>
+            <div class="proj-card-sub">Trnava · 2025</div>
           </div>
         </div>
+
+        <!-- Projekt 3: Trnava Skladová hala -->
+        <div class="proj-card reveal d2" data-project="2" role="button" tabindex="0" aria-label="Otvoriť galériu: Výstavba skladovej haly, Trnava 2024">
+          <img class="proj-card-img" src="https://rajastav.sk/photos/Trnava-vystavba-skladovej-haly-2024.jpeg" alt="Výstavba skladovej haly, Trnava 2024" loading="lazy">
+          <div class="proj-card-overlay" aria-hidden="true"></div>
+          <div class="proj-card-count" aria-hidden="true">
+            <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5" fill="currentColor" stroke="none"/><polyline points="21 15 16 10 5 21"/></svg>
+            2 fotky
+          </div>
+          <div class="proj-card-body">
+            <div class="proj-card-tag">Základy</div>
+            <div class="proj-card-title">Výstavba základových pätiek pod konštrukciu</div>
+            <div class="proj-card-sub">Trnava · 2024</div>
+          </div>
+        </div>
+
+        <!-- Projekt 4: Kráľov Brod Kúpeľňa -->
+        <div class="proj-card reveal d3" data-project="3" role="button" tabindex="0" aria-label="Otvoriť galériu: Rekonštrukcia kúpeľne, Kráľov Brod 2026">
+          <img class="proj-card-img" src="https://rajastav.sk/photos/Kralov-Brod-kupelna-2026.jpeg" alt="Rekonštrukcia kúpeľne, Kráľov Brod 2026" loading="lazy">
+          <div class="proj-card-overlay" aria-hidden="true"></div>
+          <div class="proj-card-count" aria-hidden="true">
+            <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5" fill="currentColor" stroke="none"/><polyline points="21 15 16 10 5 21"/></svg>
+            4 fotky
+          </div>
+          <div class="proj-card-body">
+            <div class="proj-card-tag">Rekonštrukcia</div>
+            <div class="proj-card-title">Rekonštrukcia kúpeľne</div>
+            <div class="proj-card-sub">Kráľov Brod · 2026</div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -516,7 +574,7 @@
     <div class="container">
       <div class="about-grid">
         <div class="about-img-wrap reveal">
-          <img class="about-img" src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=900&q=80" alt="Stavbyvedúci spoločnosti RAJASTAV na stavenisku" width="900" height="560" loading="lazy">
+          <img class="about-img" src="https://rajastav.sk/photos/Galanta-vystavba-RD-na-kluc-2025-1.jpeg" alt="Stavbyvedúci spoločnosti RAJASTAV na stavenisku" width="900" height="560" loading="lazy">
           <div class="glass about-badge">
             <div class="badge-num">5+</div>
             <div class="badge-txt">Rokov na trhu</div>
@@ -580,12 +638,7 @@
               <label class="form-label" for="inp-typ">Typ projektu</label>
               <select id="inp-typ" class="form-ctrl">
                 <option value="" disabled selected>Vyberte typ projektu</option>
-                <option>Rodinný dom na kľúč</option>
-                <option>Novostavba</option>
-                <option>Zemné práce</option>
-                <option>Zámková dlažba</option>
-                <option>Búracie práce</option>
-                <option>Iné</option>
+                <option>Rodinný dom na kľúč</option><option>Novostavba</option><option>Zemné práce</option><option>Zámková dlažba</option><option>Búracie práce</option><option>Iné</option>
               </select>
             </div>
             <div class="form-group"><label class="form-label" for="inp-sprava">Váš projekt</label><textarea id="inp-sprava" class="form-ctrl" placeholder="Čo plánujete? Napr. rodinný dom 150m², pozemok v Trnave, začiatok jar 2026…"></textarea></div>
@@ -614,15 +667,10 @@
 <footer role="contentinfo">
   <div class="container">
     <div class="footer-top">
-      <div class="footer-logo">
-        <img src="rajastav vertical black.png" alt="RAJASTAV — Staviame na kvalite" height="52">
-      </div>
+      <div class="footer-logo"><img src="rajastav vertical black.png" alt="RAJASTAV — Staviame na kvalite" height="52"></div>
       <nav aria-label="Päticková navigácia">
         <ul class="footer-links">
-          <li><a href="#sluzby">Služby</a></li>
-          <li><a href="#realizacie">Realizácie</a></li>
-          <li><a href="#o-nas">O nás</a></li>
-          <li><a href="#kontakt">Kontakt</a></li>
+          <li><a href="#sluzby">Služby</a></li><li><a href="#realizacie">Realizácie</a></li><li><a href="#o-nas">O nás</a></li><li><a href="#kontakt">Kontakt</a></li>
         </ul>
       </nav>
       <a href="#kontakt" class="btn btn-gold" style="font-size:13px;padding:11px 22px;">Chcem cenovú ponuku</a>
@@ -635,50 +683,174 @@
 </footer>
 
 <script>
+  // PROJECT DATA
+  var PROJECTS = [
+    {
+      title: 'Rodinný dom na kľúč',
+      sub: 'Galanta · 2025',
+      photos: [
+        { src: 'https://rajastav.sk/photos/Galanta-vystavba-RD-na-kluc-2025.jpeg',  alt: 'Výstavba RD na kľúč, Galanta 2025 — pohľad 1' },
+        { src: 'https://rajastav.sk/photos/Galanta-vystavba-RD-na-kluc-2025-1.jpeg', alt: 'Výstavba RD na kľúč, Galanta 2025 — pohľad 2' },
+        { src: 'https://rajastav.sk/photos/Galanta-vystavba-RD-na-kluc-2025-2.jpeg', alt: 'Výstavba RD na kľúč, Galanta 2025 — pohľad 3' },
+        { src: 'https://rajastav.sk/photos/Galanta-vystavba-RD-na-kluc-2025-3.jpeg', alt: 'Výstavba RD na kľúč, Galanta 2025 — pohľad 4' }
+      ]
+    },
+    {
+      title: 'Výstavba bazéna',
+      sub: 'Trnava · 2025',
+      photos: [
+        { src: 'https://rajastav.sk/photos/Trnava-vystavba bazena-2025.jpeg',   alt: 'Výstavba bazéna, Trnava 2025 — fáza 1' },
+        { src: 'https://rajastav.sk/photos/Trnava-vystavba bazena-2025-1.jpeg', alt: 'Výstavba bazéna, Trnava 2025 — fáza 2' },
+        { src: 'https://rajastav.sk/photos/Trnava-vystavba bazena-2025-2.jpeg', alt: 'Výstavba bazéna, Trnava 2025 — fáza 3' },
+        { src: 'https://rajastav.sk/photos/Trnava-vystavba bazena-2025-3.jpeg', alt: 'Výstavba bazéna, Trnava 2025 — fáza 4' },
+        { src: 'https://rajastav.sk/photos/Trnava-vystavba bazena-2025-4.jpeg', alt: 'Výstavba bazéna, Trnava 2025 — fáza 5' }
+      ]
+    },
+    {
+      title: 'Výstavba základových pätiek pod konštrukciu',
+      sub: 'Trnava · 2024',
+      photos: [
+        { src: 'https://rajastav.sk/photos/Trnava-vystavba-skladovej-haly-2024.jpeg',   alt: 'Výstavba základových pätiek, Trnava 2024 — pohľad 1' },
+        { src: 'https://rajastav.sk/photos/Trnava-vystavba-skladovej-haly-2024-1.jpeg', alt: 'Výstavba základových pätiek, Trnava 2024 — pohľad 2' }
+      ]
+    },
+    {
+      title: 'Rekonštrukcia kúpeľne',
+      sub: 'Kráľov Brod · 2026',
+      photos: [
+        { src: 'https://rajastav.sk/photos/Kralov-Brod-kupelna-2026.jpeg',   alt: 'Rekonštrukcia kúpeľne, Kráľov Brod 2026 — pohľad 1' },
+        { src: 'https://rajastav.sk/photos/Kralov-Brod-kupelna-2026-1.jpeg', alt: 'Rekonštrukcia kúpeľne, Kráľov Brod 2026 — pohľad 2' },
+        { src: 'https://rajastav.sk/photos/Kralov-Brod-kupelna-2026-2.jpeg', alt: 'Rekonštrukcia kúpeľne, Kráľov Brod 2026 — pohľad 3' },
+        { src: 'https://rajastav.sk/photos/Kralov-Brod-kupelna-2026-3.jpeg', alt: 'Rekonštrukcia kúpeľne, Kráľov Brod 2026 — pohľad 4' }
+      ]
+    }
+  ];
+
+  // LIGHTBOX
+  var lb = document.getElementById('lightbox');
+  var lbImg = document.getElementById('lbImg');
+  var lbTitle = document.getElementById('lbTitle');
+  var lbSub = document.getElementById('lbSub');
+  var lbThumbs = document.getElementById('lbThumbs');
+  var lbCounter = document.getElementById('lbCounter');
+  var currentProject = 0;
+  var currentPhoto = 0;
+
+  function openLightbox(projectIdx, photoIdx) {
+    currentProject = projectIdx;
+    currentPhoto = photoIdx || 0;
+    document.body.style.overflow = 'hidden';
+    lb.classList.add('open');
+    renderLightbox();
+    document.getElementById('lbClose').focus();
+  }
+
+  function closeLightbox() {
+    lb.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function renderLightbox() {
+    var p = PROJECTS[currentProject];
+    var ph = p.photos[currentPhoto];
+    lbImg.src = ph.src;
+    lbImg.alt = ph.alt;
+    lbTitle.textContent = p.title;
+    lbSub.textContent = p.sub;
+    lbCounter.textContent = (currentPhoto + 1) + ' / ' + p.photos.length;
+    lbThumbs.innerHTML = '';
+    p.photos.forEach(function(photo, i) {
+      var t = document.createElement('img');
+      t.className = 'lb-thumb' + (i === currentPhoto ? ' active' : '');
+      t.src = photo.src;
+      t.alt = photo.alt;
+      t.setAttribute('role', 'listitem');
+      t.setAttribute('tabindex', '0');
+      t.addEventListener('click', function() { currentPhoto = i; renderLightbox(); });
+      t.addEventListener('keydown', function(e) { if (e.key === 'Enter') { currentPhoto = i; renderLightbox(); } });
+      lbThumbs.appendChild(t);
+    });
+    // scroll active thumb into view
+    var activeThumb = lbThumbs.querySelectorAll('.lb-thumb')[currentPhoto];
+    if (activeThumb) activeThumb.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' });
+  }
+
+  function lbGoTo(dir) {
+    var p = PROJECTS[currentProject];
+    currentPhoto = (currentPhoto + dir + p.photos.length) % p.photos.length;
+    renderLightbox();
+  }
+
+  document.getElementById('lbClose').addEventListener('click', closeLightbox);
+  document.getElementById('lbPrev').addEventListener('click', function() { lbGoTo(-1); });
+  document.getElementById('lbNext').addEventListener('click', function() { lbGoTo(1); });
+  document.addEventListener('keydown', function(e) {
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape')     closeLightbox();
+    if (e.key === 'ArrowLeft')  lbGoTo(-1);
+    if (e.key === 'ArrowRight') lbGoTo(1);
+  });
+  lb.addEventListener('click', function(e) { if (e.target === lb) closeLightbox(); });
+
+  // Attach project cards
+  document.querySelectorAll('.proj-card').forEach(function(card) {
+    function open() { openLightbox(parseInt(card.dataset.project), 0); }
+    card.addEventListener('click', open);
+    card.addEventListener('keydown', function(e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
+  });
+
+  // SWIPE on lightbox
+  var lbTouchX = null;
+  lb.addEventListener('touchstart', function(e) { lbTouchX = e.touches[0].clientX; }, { passive: true });
+  lb.addEventListener('touchend', function(e) {
+    if (lbTouchX === null) return;
+    var dx = e.changedTouches[0].clientX - lbTouchX;
+    if (Math.abs(dx) > 50) lbGoTo(dx < 0 ? 1 : -1);
+    lbTouchX = null;
+  }, { passive: true });
+
   // NAVBAR
-  var navPill = document.getElementById("navPill");
-  window.addEventListener("scroll", function() { navPill.classList.toggle("scrolled", window.scrollY > 60); }, { passive: true });
-  var sections = document.querySelectorAll("section[id]");
-  var navAnchors = document.querySelectorAll(".nav-links a[data-section]");
+  var navPill = document.getElementById('navPill');
+  window.addEventListener('scroll', function() { navPill.classList.toggle('scrolled', window.scrollY > 60); }, { passive: true });
+  var sections = document.querySelectorAll('section[id]');
+  var navAnchors = document.querySelectorAll('.nav-links a[data-section]');
   var navObs = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
-      if (entry.isIntersecting) navAnchors.forEach(function(a) { a.classList.toggle("active", a.dataset.section === entry.target.id); });
+      if (entry.isIntersecting) navAnchors.forEach(function(a) { a.classList.toggle('active', a.dataset.section === entry.target.id); });
     });
   }, { threshold: 0.35 });
   sections.forEach(function(s) { navObs.observe(s); });
 
   // HERO BG
-  var heroBg = document.getElementById("heroBg");
-  var imgSrc = "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=80";
+  var heroBg = document.getElementById('heroBg');
+  var imgSrc = 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=80';
   var pre = new Image();
-  pre.onload = function() { heroBg.style.backgroundImage = "url(" + imgSrc + ")"; heroBg.classList.add("loaded"); };
+  pre.onload = function() { heroBg.style.backgroundImage = 'url(' + imgSrc + ')'; heroBg.classList.add('loaded'); };
   pre.src = imgSrc;
 
   // MOBILE MENU
-  var menuBtn = document.getElementById("menuOpen");
-  var menuEl  = document.getElementById("mobileMenu");
-  var closeBtn = document.getElementById("menuClose");
-  menuBtn.addEventListener("click", function() { menuEl.classList.add("open"); menuBtn.setAttribute("aria-expanded","true"); document.body.style.overflow="hidden"; closeBtn.focus(); });
-  closeBtn.addEventListener("click", closeMenu);
-  document.addEventListener("keydown", function(e) { if (e.key==="Escape" && menuEl.classList.contains("open")) closeMenu(); });
-  function closeMenu() { menuEl.classList.remove("open"); menuBtn.setAttribute("aria-expanded","false"); document.body.style.overflow=""; menuBtn.focus(); }
+  var menuBtn = document.getElementById('menuOpen');
+  var menuEl  = document.getElementById('mobileMenu');
+  var closeBtn = document.getElementById('menuClose');
+  menuBtn.addEventListener('click', function() { menuEl.classList.add('open'); menuBtn.setAttribute('aria-expanded','true'); document.body.style.overflow='hidden'; closeBtn.focus(); });
+  closeBtn.addEventListener('click', closeMenu);
+  document.addEventListener('keydown', function(e) { if (e.key==='Escape' && menuEl.classList.contains('open')) closeMenu(); });
+  function closeMenu() { menuEl.classList.remove('open'); menuBtn.setAttribute('aria-expanded','false'); document.body.style.overflow=''; menuBtn.focus(); }
 
   // REVEAL
-  var obs = new IntersectionObserver(function(entries) { entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add("visible"); }); }, { threshold: 0.07, rootMargin: "0px 0px -28px 0px" });
-  document.querySelectorAll(".reveal").forEach(function(el) { obs.observe(el); });
-  setTimeout(function() { document.querySelectorAll("#hero .reveal").forEach(function(el) { el.classList.add("visible"); }); }, 200);
+  var obs = new IntersectionObserver(function(entries) { entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.07, rootMargin: '0px 0px -28px 0px' });
+  document.querySelectorAll('.reveal').forEach(function(el) { obs.observe(el); });
+  setTimeout(function() { document.querySelectorAll('#hero .reveal').forEach(function(el) { el.classList.add('visible'); }); }, 200);
 
   // FILE UPLOAD
-  var fileInput = document.getElementById("fileInput");
-  var fileList  = document.getElementById("fileList");
-  var fileDrop  = document.getElementById("fileDrop");
+  var fileInput = document.getElementById('fileInput');
+  var fileList  = document.getElementById('fileList');
+  var fileDrop  = document.getElementById('fileDrop');
   var selectedFiles = [];
-
-  fileInput.addEventListener("change", function() { addFiles(this.files); this.value = ""; });
-  fileDrop.addEventListener("dragover",  function(e) { e.preventDefault(); fileDrop.classList.add("dragover"); });
-  fileDrop.addEventListener("dragleave", function()  { fileDrop.classList.remove("dragover"); });
-  fileDrop.addEventListener("drop", function(e) { e.preventDefault(); fileDrop.classList.remove("dragover"); addFiles(e.dataTransfer.files); });
-
+  fileInput.addEventListener('change', function() { addFiles(this.files); this.value = ''; });
+  fileDrop.addEventListener('dragover',  function(e) { e.preventDefault(); fileDrop.classList.add('dragover'); });
+  fileDrop.addEventListener('dragleave', function()  { fileDrop.classList.remove('dragover'); });
+  fileDrop.addEventListener('drop', function(e) { e.preventDefault(); fileDrop.classList.remove('dragover'); addFiles(e.dataTransfer.files); });
   function addFiles(files) {
     Array.from(files).forEach(function(f) {
       if (selectedFiles.find(function(x) { return x.name === f.name; })) return;
@@ -686,73 +858,28 @@
     });
     renderFiles();
   }
-
   function renderFiles() {
-    fileList.innerHTML = "";
+    fileList.innerHTML = '';
     selectedFiles.forEach(function(f, i) {
-      var item = document.createElement("div");
-      item.className = "file-item";
-      var size = f.size > 1048576 ? (f.size/1048576).toFixed(1)+" MB" : Math.round(f.size/1024)+" KB";
-      item.innerHTML = "<svg width='14' height='14' fill='none' stroke='currentColor' stroke-width='2' viewBox='0 0 24 24'><path d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z'/><polyline points='14 2 14 8 20 8'/></svg><span class='file-item-name'>" + f.name + "</span><span style='font-size:11px;color:var(--text-dim);flex-shrink:0;'>" + size + "</span><button class='file-remove' data-idx='" + i + "' aria-label='Odstraniť '" + f.name + "'><svg width='14' height='14' fill='none' stroke='currentColor' stroke-width='2.5' viewBox='0 0 24 24'><line x1='18' y1='6' x2='6' y2='18'/><line x1='6' y1='6' x2='18' y2='18'/></svg></button>";
+      var item = document.createElement('div');
+      item.className = 'file-item';
+      var size = f.size > 1048576 ? (f.size/1048576).toFixed(1)+' MB' : Math.round(f.size/1024)+' KB';
+      item.innerHTML = "<svg width='14' height='14' fill='none' stroke='currentColor' stroke-width='2' viewBox='0 0 24 24'><path d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z'/><polyline points='14 2 14 8 20 8'/></svg><span class='file-item-name'>" + f.name + "</span><span style='font-size:11px;color:var(--text-dim);flex-shrink:0;'>" + size + "</span><button class='file-remove' data-idx='" + i + "' aria-label='Odstraniť'><svg width='14' height='14' fill='none' stroke='currentColor' stroke-width='2.5' viewBox='0 0 24 24'><line x1='18' y1='6' x2='6' y2='18'/><line x1='6' y1='6' x2='18' y2='18'/></svg></button>";
       fileList.appendChild(item);
     });
-    fileList.querySelectorAll(".file-remove").forEach(function(btn) {
-      btn.addEventListener("click", function() {
-        selectedFiles.splice(parseInt(this.dataset.idx), 1);
-        renderFiles();
-      });
+    fileList.querySelectorAll('.file-remove').forEach(function(btn) {
+      btn.addEventListener('click', function() { selectedFiles.splice(parseInt(this.dataset.idx), 1); renderFiles(); });
     });
   }
 
   // FORM
   function handleSubmit(e) {
     e.preventDefault();
-    var btn = e.target.querySelector(".btn-submit"); var orig = btn.innerHTML;
+    var btn = e.target.querySelector('.btn-submit'); var orig = btn.innerHTML;
     btn.innerHTML = "<svg width='15' height='15' fill='none' stroke='currentColor' stroke-width='2.5' viewBox='0 0 24 24'><polyline points='20 6 9 17 4 12'/></svg> Správa odoslaná!";
-    btn.style.background = "#2a7a38";
-    setTimeout(function() { btn.innerHTML = orig; btn.style.background = ""; }, 4500);
+    btn.style.background = '#2a7a38';
+    setTimeout(function() { btn.innerHTML = orig; btn.style.background = ''; }, 4500);
   }
-
-  // CAROUSEL
-  var track = document.getElementById("carouselTrack");
-  var slides = track.querySelectorAll(".carousel-slide");
-  var dotsContainer = document.getElementById("carouselDots");
-  var totalSlides = slides.length;
-  var current = 0;
-  var slidesVisible = window.innerWidth <= 1024 ? 1 : 2;
-
-  function buildDots() {
-    dotsContainer.innerHTML = "";
-    var count = totalSlides - slidesVisible + 1;
-    for (var i = 0; i < count; i++) {
-      var d = document.createElement("button");
-      d.className = "carousel-dot" + (i === 0 ? " active" : "");
-      d.setAttribute("role","tab");
-      d.setAttribute("aria-label", "Snímka " + (i+1));
-      d.setAttribute("aria-selected", i === 0 ? "true" : "false");
-      d.dataset.idx = i;
-      d.addEventListener("click", function() { goTo(parseInt(this.dataset.idx)); });
-      dotsContainer.appendChild(d);
-    }
-  }
-
-  function goTo(idx) {
-    slidesVisible = window.innerWidth <= 1024 ? 1 : 2;
-    var max = totalSlides - slidesVisible;
-    current = Math.max(0, Math.min(idx, max));
-    var slideW = slides[0].offsetWidth + 20;
-    track.style.transform = "translateX(-" + (current * slideW) + "px)";
-    document.querySelectorAll(".carousel-dot").forEach(function(d, i) {
-      d.classList.toggle("active", i === current);
-      d.setAttribute("aria-selected", i === current ? "true" : "false");
-    });
-  }
-
-  document.getElementById("carouselPrev").addEventListener("click", function() { goTo(current - 1); });
-  document.getElementById("carouselNext").addEventListener("click", function() { goTo(current + 1); });
-  window.addEventListener("resize", function() { slidesVisible = window.innerWidth <= 1024 ? 1 : 2; buildDots(); goTo(current); }, { passive: true });
-
-  buildDots();
 </script>
 </body>
 </html>
