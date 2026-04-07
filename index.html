@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="RAJASTAV s.r.o. — Rodinné domy na kľúč, zemné práce a zámková dlažba v Trnave a Trnavskom kraji. Cenovú ponuku dostanete do 24 hodín. Zadarmo.">
-  <title>RAJASTAV — Rodinné domy na kľúč | Trnava</title>
+  <meta name="description" content="RAJASTAV s.r.o. — Rodinné domy na kľúč, zemné práce a zámková dlažba v Trnave, Galante, Piešťanoch a okolí. Cenovú ponuku dostanete zdarma.">
+  <title>RAJASTAV — Rodinné domy na kľúč | Trnava, Galanta, Piešťany</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -89,7 +89,7 @@
 
     /* HERO */
     #hero { position: relative; min-height: 100svh; display: flex; flex-direction: column; justify-content: flex-end; padding-bottom: 96px; overflow: hidden; }
-    .hero-bg { position: absolute; inset: 0; background-size: cover; background-position: center 35%; transform: scale(1.04); transition: transform 8s ease; }
+    .hero-bg { position: absolute; inset: 0; background-size: cover; background-position: center 35%; transform: scale(1.04); transition: transform 8s ease; -webkit-mask-image: -webkit-radial-gradient(white, black); }
     .hero-bg.loaded { transform: scale(1); }
     .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(10,9,8,.15) 0%, rgba(10,9,8,.48) 42%, rgba(10,9,8,.86) 68%, rgba(10,9,8,1.0) 100%); }
     .hero-inner { position: relative; z-index: 2; display: flex; align-items: flex-end; justify-content: space-between; gap: 40px; }
@@ -97,10 +97,10 @@
     .hero-eyebrow { display: inline-flex; align-items: center; gap: 10px; background: rgba(184,146,42,.12); border: 1px solid rgba(184,146,42,.28); border-radius: 100px; padding: 7px 18px; font-size: 12px; font-weight: 600; color: #DFC06A; letter-spacing: .08em; margin-bottom: 26px; }
     .hero-eyebrow .dot { width: 6px; height: 6px; border-radius: 50%; background: #DFC06A; animation: pulse-dot 2s infinite; flex-shrink: 0; }
     @keyframes pulse-dot { 0%,100%{opacity:1} 50%{opacity:.2} }
-    .hero-title { font-size: clamp(46px,6.5vw,86px); font-weight: 800; line-height: .94; letter-spacing: -.025em; margin-bottom: 24px; color: #fff; }
+    .hero-title { font-size: clamp(44px,6.5vw,86px); font-weight: 800; line-height: .94; letter-spacing: -.025em; margin-bottom: 24px; color: #fff; }
     .hero-title .line { display: block; line-height: .94; color: #fff; }
     .hero-title .line-gold { display: block; line-height: .94; color: #DFC06A; }
-    .hero-subtitle { font-size: clamp(16px,1.6vw,18px); font-weight: 400; color: rgba(255,255,255,.78); max-width: 540px; margin-bottom: 40px; line-height: 1.75; }
+    .hero-subtitle { font-size: clamp(15px,1.6vw,18px); font-weight: 400; color: rgba(255,255,255,.78); max-width: 580px; margin-bottom: 40px; line-height: 1.75; }
     .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 48px; }
     .hero-actions .btn-ghost { color: rgba(255,255,255,.85); border-color: rgba(255,255,255,.28); }
     .hero-actions .btn-ghost:hover { border-color: #DFC06A; color: #DFC06A; }
@@ -119,7 +119,7 @@
     section { padding: 120px 0; position: relative; z-index: 1; }
     .section-header { margin-bottom: 64px; }
     .section-title { font-size: clamp(32px,4vw,52px); font-weight: 800; letter-spacing: -.022em; line-height: 1.05; margin-bottom: 14px; color: var(--text); }
-    .section-subtitle { font-size: 16px; color: var(--text-muted); max-width: 520px; line-height: 1.75; }
+    .section-subtitle { font-size: 16px; color: var(--text-muted); max-width: 560px; line-height: 1.75; }
 
     /* SERVICES */
     #sluzby { background: var(--bg-2); overflow: hidden; }
@@ -154,7 +154,7 @@
     /* REALIZACIE CAROUSEL */
     #realizacie { background: var(--bg); overflow: hidden; }
     .carousel-wrap { position: relative; }
-    .carousel-track-outer { overflow: hidden; border-radius: var(--radius); }
+    .carousel-track-outer { overflow: hidden; border-radius: var(--radius); -webkit-mask-image: -webkit-radial-gradient(white, black); }
     .carousel-track { display: flex; gap: 20px; transition: transform .5s cubic-bezier(.4,0,.2,1); will-change: transform; }
     .carousel-slide { flex: 0 0 calc(50% - 10px); min-width: 0; position: relative; border-radius: var(--radius); overflow: hidden; aspect-ratio: 16/10; cursor: pointer; }
     .carousel-slide img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease; display: block; }
@@ -170,25 +170,8 @@
     .carousel-btn { width: 44px; height: 44px; border-radius: 50%; border: 1.5px solid var(--border); background: var(--bg-card); backdrop-filter: blur(12px); cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--text); transition: border-color .2s, background .2s, transform .2s; }
     .carousel-btn:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
 
-    /* PARK STROJOV */
-    #park { background: var(--bg-2); }
-    .park-intro { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; margin-bottom: 64px; }
-    .park-tagline { font-size: clamp(14px,1.3vw,16px); color: var(--text-muted); line-height: 1.8; }
-    .park-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-    .park-card { position: relative; overflow: hidden; padding: 0; transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease; }
-    .park-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); border-color: var(--gold-border-h); }
-    .park-card-img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; transition: transform .5s ease; }
-    .park-card:hover .park-card-img { transform: scale(1.04); }
-    .park-card-body { padding: 22px 24px 24px; }
-    .park-card-name { font-size: 17px; font-weight: 800; letter-spacing: -.015em; margin-bottom: 12px; color: var(--text); }
-    .park-specs { display: flex; flex-direction: column; gap: 7px; }
-    .park-spec { display: flex; justify-content: space-between; align-items: center; font-size: 13px; padding: 7px 0; border-bottom: 1px solid var(--border); }
-    .park-spec:last-child { border-bottom: none; }
-    .park-spec-key { color: var(--text-dim); font-weight: 500; }
-    .park-spec-val { color: var(--text); font-weight: 700; }
-
     /* ABOUT */
-    #o-nas { background: var(--bg); }
+    #o-nas { background: var(--bg-2); }
     .about-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 80px; align-items: center; }
     .about-img-wrap { position: relative; }
     .about-img { width: 100%; height: 560px; object-fit: cover; border-radius: var(--radius); }
@@ -215,7 +198,7 @@
     .btn-white-ghost:hover { border-color: #fff; background: rgba(255,255,255,.12); }
 
     /* CONTACT */
-    #kontakt { background: var(--bg-2); }
+    #kontakt { background: var(--bg); }
     .contact-grid { display: grid; grid-template-columns: 1fr 1.6fr; gap: 72px; align-items: start; }
     .contact-title    { font-size: clamp(28px,3.5vw,46px); font-weight: 800; letter-spacing: -.02em; line-height: 1.04; margin-bottom: 14px; }
     .contact-subtitle { font-size: 15px; color: var(--text-muted); line-height: 1.75; margin-bottom: 40px; }
@@ -233,6 +216,19 @@
     .form-ctrl::placeholder { color: var(--text-dim); }
     textarea.form-ctrl { min-height: 114px; resize: vertical; }
     .btn-submit { width: 100%; min-height: 52px; padding: 16px; justify-content: center; font-size: 15px; margin-top: 6px; }
+    /* FILE UPLOAD */
+    .file-drop { position: relative; border: 1.5px dashed var(--gold-border); border-radius: 16px; padding: 24px 20px; text-align: center; cursor: pointer; transition: border-color .25s, background .25s; background: var(--gold-bg); }
+    .file-drop:hover, .file-drop.dragover { border-color: var(--gold); background: rgba(184,146,42,.12); }
+    .file-drop input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
+    .file-drop-icon { color: var(--gold); margin: 0 auto 10px; display: block; }
+    .file-drop-text { font-size: 13px; font-weight: 600; color: var(--text-muted); margin-bottom: 4px; }
+    .file-drop-hint { font-size: 11px; color: var(--text-dim); }
+    .file-list { margin-top: 12px; display: flex; flex-direction: column; gap: 6px; }
+    .file-item { display: flex; align-items: center; gap: 10px; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 8px 14px; font-size: 13px; color: var(--text-muted); }
+    .file-item svg { color: var(--gold); flex-shrink: 0; }
+    .file-item-name { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .file-remove { background: none; border: none; cursor: pointer; color: var(--text-dim); padding: 0; display: flex; align-items: center; transition: color .2s; }
+    .file-remove:hover { color: #c0392b; }
 
     /* FOOTER */
     footer { background: var(--text); color: rgba(255,255,255,.80); padding: 52px 0 32px; position: relative; z-index: 1; }
@@ -254,8 +250,6 @@
       :root { --nav-max-w: calc(100% - 80px); }
       .srv-top { grid-template-columns: 1fr; gap: 40px; }
       .srv-top-head { position: static; }
-      .park-grid { grid-template-columns: 1fr 1fr; }
-      .park-intro { grid-template-columns: 1fr; gap: 24px; }
     }
     @media (max-width: 1024px) {
       :root { --px: 32px; }
@@ -280,8 +274,8 @@
       #hero { padding-bottom: 64px; }
       #cta-band { padding: 52px 0; }
       .hero-inner { flex-direction: column; align-items: flex-start; }
-      .hero-title { font-size: clamp(40px,11vw,56px); }
-      .hero-subtitle { max-width: 100%; }
+      .hero-title { font-size: clamp(38px,11vw,56px); }
+      .hero-subtitle { max-width: 100%; font-size: clamp(15px,4vw,17px); }
       .hero-actions { flex-direction: column; }
       .hero-actions .btn { width: 100%; justify-content: center; }
       .hero-trust-item { border-right: none; padding-right: 0; margin-right: 0; width: 100%; }
@@ -298,7 +292,6 @@
       .cta-actions { flex-direction: column; width: 100%; }
       .btn-white, .btn-white-ghost { width: 100%; justify-content: center; }
       .carousel-slide { flex: 0 0 calc(90% - 10px); }
-      .park-grid { grid-template-columns: 1fr; }
     }
     @media (max-width: 480px) {
       .section-header { margin-bottom: 40px; }
@@ -359,30 +352,30 @@
 
   <!-- HERO -->
   <section id="hero" aria-label="Úvodná sekcia">
-    <div class="hero-bg" id="heroBg" role="img" aria-label="Moderný rodinný dom v Trnave"></div>
+    <div class="hero-bg" id="heroBg" role="img" aria-label="Moderný rodinný dom"></div>
     <div class="hero-overlay" aria-hidden="true"></div>
     <div class="container">
       <div class="hero-inner">
         <div class="hero-content">
-          <p class="hero-eyebrow reveal"><span class="dot" aria-hidden="true"></span>Stavebná firma · Trnava a okolie</p>
+          <p class="hero-eyebrow reveal"><span class="dot" aria-hidden="true"></span>Stavebná spoločnosť — Trnava, Galanta, Piešťany a okolie</p>
           <h1 class="hero-title reveal d1">
-            <span class="line">Váš dom.</span>
-            <span class="line-gold">Načas.</span>
-            <span class="line">Bez starostí.</span>
+            <span class="line">Váš vysnívaný</span>
+            <span class="line-gold">domov.</span>
+            <span class="line">Na kľúč.</span>
           </h1>
-          <p class="hero-subtitle reveal d2">Postavíme vám rodinný dom na kľúč — od výkopu až po odovzdanie kľúčov. Jeden partner, jasná cena, pevný termín. Žiadne prekvapenia.</p>
+          <p class="hero-subtitle reveal d2">Postavíme vám vysnívaný domov — od projektu až po odovzdanie domu na kľúč, s dôrazom na kvalitu a precíznosť.</p>
           <div class="hero-actions reveal d3">
             <a href="#kontakt" class="btn btn-gold">
               <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              Zistite orientačnú cenu
+              Cenová ponuka zdarma
             </a>
             <a href="#sluzby" class="btn btn-ghost">Čo všetko robíme</a>
           </div>
           <ul class="hero-trust reveal d4" aria-label="Kľúčové výhody">
-            <li class="hero-trust-item"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Cenovú ponuku do 24 hodín</li>
-            <li class="hero-trust-item"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Jeden dodávateľ, nula zmätku</li>
-            <li class="hero-trust-item"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Termín = záväzok</li>
-            <li class="hero-trust-item"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Bez skrytých poplatkov</li>
+            <li class="hero-trust-item"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Cenová ponuka zdarma</li>
+            <li class="hero-trust-item"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Spoľahlivý dodávateľ</li>
+            <li class="hero-trust-item"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Termín je záväzok</li>
+            <li class="hero-trust-item"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Bez dodatočných nákladov</li>
           </ul>
         </div>
         <div class="hero-stats" aria-label="Štatistiky">
@@ -404,7 +397,7 @@
         <div class="srv-top-head reveal">
           <p class="section-tag" aria-hidden="true">Naše služby</p>
           <h2 id="sluzby-title" class="srv-top-title">Všetko pod<br><span class="gold">jednou strechou</span></h2>
-          <p class="srv-top-sub">Nemusíte hľadať výkopára, betonára aj dlažbára zvlášť. Robíme celý stavebný proces — vy máte jediné číslo, na ktoré zavoláte.</p>
+          <p class="srv-top-sub">Vybavíme za vás projektovú dokumentáciu, stavebné povolenie, celý proces výstavby až po samotnú kolaudáciu. Vy máte jediné číslo, na ktoré zavoláte.</p>
           <a href="#kontakt" class="btn btn-gold" style="font-size:14px;padding:12px 26px;min-height:44px;">
             <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             Chcem cenovú ponuku
@@ -413,36 +406,37 @@
         <div class="srv-cards-col">
           <div class="glass srv-hero-card reveal">
             <div class="srv-card-num">01</div>
-            <h3 class="srv-card-title">Dom na kľúč — vy sa len nasťahujete</h3>
-            <p class="srv-card-desc">Nemusíte koordinovať desať remeselníkov. Prevezmeme celú stavbu od základovej dosky — murivo, strecha, inštalácie, fasáda, dlažba. Odovzdáme vám kľúče od hotového domu.</p>
+            <h3 class="srv-card-title">Dom na kľúč — bez starostí</h3>
+            <p class="srv-card-desc">O všetko sa postaráme my — vy dostanete kľúče od hotového domu. Od projektu a stavebného povolenia až po kolaudáciu.</p>
             <div class="srv-card-tags">
               <span class="srv-tag">Domy na kľúč</span>
               <span class="srv-tag">Novostavba</span>
               <span class="srv-tag">Nízkoenergetické</span>
+              <span class="srv-tag">Projektová dokumentácia</span>
             </div>
             <svg class="srv-bg-icon" width="140" height="140" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 44 44" aria-hidden="true"><path d="M6 38V20L22 8l16 12v18H6z"/><path d="M16 38V28h12v10"/></svg>
           </div>
           <div class="glass srv-hero-card reveal d1">
             <div class="srv-card-num">02</div>
-            <h3 class="srv-card-title">Zemné práce bez čakania a prekvapení</h3>
-            <p class="srv-card-desc">Každá stavba stojí a padá so základmi. Výkopy, terénne úpravy, základové dosky, betónovanie aj hydroizolácia — urobíme to rýchlo, presne a bez toho, aby ste museli za nami bežať.</p>
+            <h3 class="srv-card-title">Zemné a búracie práce</h3>
+            <p class="srv-card-desc">Každá stavba stojí a padá na základoch. Výkopy, terénne úpravy, základové dosky, betonáž, hydroizolácie — celý proces rýchlo a kvalitne.</p>
             <div class="srv-card-tags">
               <span class="srv-tag">Výkopové práce</span>
               <span class="srv-tag">Základy &amp; dosky</span>
               <span class="srv-tag">Hydroizolácia</span>
-              <span class="srv-tag">Betónovanie</span>
+              <span class="srv-tag">Betonáž</span>
+              <span class="srv-tag">Búracie práce</span>
             </div>
             <svg class="srv-bg-icon" width="140" height="140" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 44 44" aria-hidden="true"><rect x="4" y="28" width="36" height="8" rx="2"/><path d="M10 28V20M22 28V16M34 28V20"/></svg>
           </div>
           <div class="glass srv-hero-card reveal d2">
             <div class="srv-card-num">03</div>
-            <h3 class="srv-card-title">Exteriér, ktorý vyzerá presne tak, ako ste si predstavovali</h3>
-            <p class="srv-card-desc">Zámková dlažba, fasáda, búracie práce, odvoz sutín. Finálne detaily, ktoré rozhodujú o tom, či budete hrdí ukázať dom susedom — alebo nie.</p>
+            <h3 class="srv-card-title">Exteriér a dokončovacie práce</h3>
+            <p class="srv-card-desc">Zámková dlažba, oplotenie, fasáda — finálne detaily, ktoré dotvárajú celkový dojem vášho domu.</p>
             <div class="srv-card-tags">
               <span class="srv-tag">Zámková dlažba</span>
               <span class="srv-tag">Fasáda</span>
-              <span class="srv-tag">Búracie práce</span>
-              <span class="srv-tag">Doprava &amp; odvoz</span>
+              <span class="srv-tag">Oplotenie</span>
             </div>
             <svg class="srv-bg-icon" width="140" height="140" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 44 44" aria-hidden="true"><rect x="4" y="4" width="10" height="10" rx="1"/><rect x="17" y="4" width="10" height="10" rx="1"/><rect x="30" y="4" width="10" height="10" rx="1"/><rect x="4" y="17" width="10" height="10" rx="1"/><rect x="17" y="17" width="10" height="10" rx="1"/><rect x="30" y="17" width="10" height="10" rx="1"/><rect x="4" y="30" width="10" height="10" rx="1"/><rect x="17" y="30" width="10" height="10" rx="1"/><rect x="30" y="30" width="10" height="10" rx="1"/></svg>
           </div>
@@ -454,16 +448,16 @@
         <ul class="srv-list" aria-label="Zoznam všetkých služieb">
           <li class="srv-list-item"><span class="srv-list-num">01</span><span class="srv-list-icon" aria-hidden="true"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span><span class="srv-list-name">Domy na kľúč</span></li>
           <li class="srv-list-item"><span class="srv-list-num">02</span><span class="srv-list-icon" aria-hidden="true"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></span><span class="srv-list-name">Novostavba</span></li>
-          <li class="srv-list-item"><span class="srv-list-num">03</span><span class="srv-list-icon" aria-hidden="true"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></span><span class="srv-list-name">Nízkoenergetické domy</span></li>
+          <li class="srv-list-item"><span class="srv-list-num">03</span><span class="srv-list-icon" aria-hidden="true"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></span><span class="srv-list-name">Projektová dokumentácia</span></li>
           <li class="srv-list-item"><span class="srv-list-num">04</span><span class="srv-list-icon" aria-hidden="true"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M2 22h20M6 18V10M10 18V4M14 18V10M18 18V4"/></svg></span><span class="srv-list-name">Zemné a výkopové práce</span></li>
           <li class="srv-list-item"><span class="srv-list-num">05</span><span class="srv-list-icon" aria-hidden="true"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="14" width="20" height="6" rx="1"/><path d="M6 14V10M12 14V8M18 14V10"/></svg></span><span class="srv-list-name">Základová doska a základy</span></li>
           <li class="srv-list-item"><span class="srv-list-num">06</span><span class="srv-list-icon" aria-hidden="true"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span><span class="srv-list-name">Hydroizolácia základov</span></li>
-          <li class="srv-list-item"><span class="srv-list-num">07</span><span class="srv-list-icon" aria-hidden="true"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="10" width="18" height="10" rx="1"/><path d="M8 10V7a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v3"/></svg></span><span class="srv-list-name">Betónovanie</span></li>
+          <li class="srv-list-item"><span class="srv-list-num">07</span><span class="srv-list-icon" aria-hidden="true"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="10" width="18" height="10" rx="1"/><path d="M8 10V7a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v3"/></svg></span><span class="srv-list-name">Betonáž</span></li>
           <li class="srv-list-item"><span class="srv-list-num">08</span><span class="srv-list-icon" aria-hidden="true"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="6" height="6" rx="1"/><rect x="9" y="2" width="6" height="6" rx="1"/><rect x="16" y="2" width="6" height="6" rx="1"/><rect x="2" y="9" width="6" height="6" rx="1"/><rect x="9" y="9" width="6" height="6" rx="1"/><rect x="16" y="9" width="6" height="6" rx="1"/><rect x="2" y="16" width="6" height="6" rx="1"/><rect x="9" y="16" width="6" height="6" rx="1"/><rect x="16" y="16" width="6" height="6" rx="1"/></svg></span><span class="srv-list-name">Zámková dlažba</span></li>
           <li class="srv-list-item"><span class="srv-list-num">09</span><span class="srv-list-icon" aria-hidden="true"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/></svg></span><span class="srv-list-name">Búracie práce</span></li>
           <li class="srv-list-item"><span class="srv-list-num">10</span><span class="srv-list-icon" aria-hidden="true"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="2"/><path d="M2 8h20M8 2v20"/></svg></span><span class="srv-list-name">Fasáda a zateplenie</span></li>
-          <li class="srv-list-item"><span class="srv-list-num">11</span><span class="srv-list-icon" aria-hidden="true"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span><span class="srv-list-name">Dokončovacie práce</span></li>
-          <li class="srv-list-item"><span class="srv-list-num">12</span><span class="srv-list-icon" aria-hidden="true"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="14" width="20" height="6" rx="3"/><circle cx="7" cy="14" r="4"/><circle cx="17" cy="14" r="4"/><path d="M8 10V6h6l4 4"/></svg></span><span class="srv-list-name">Doprava a odvoz sutín</span></li>
+          <li class="srv-list-item"><span class="srv-list-num">11</span><span class="srv-list-icon" aria-hidden="true"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="18"/><rect x="14" y="3" width="7" height="18"/><path d="M10 8h4M10 16h4"/></svg></span><span class="srv-list-name">Oplotenie</span></li>
+          <li class="srv-list-item"><span class="srv-list-num">12</span><span class="srv-list-icon" aria-hidden="true"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span><span class="srv-list-name">Kolaudácia a odovzdanie</span></li>
         </ul>
       </div>
     </div>
@@ -517,54 +511,6 @@
     </div>
   </section>
 
-  <!-- PARK STROJOV -->
-  <section id="park" aria-labelledby="park-title">
-    <div class="container">
-      <div class="park-intro">
-        <div>
-          <p class="section-tag reveal" aria-hidden="true">Naše vybavenie</p>
-          <h2 id="park-title" class="section-title reveal d1">Stroje,<br><span class="gold">čo makajú namiesto vás</span></h2>
-        </div>
-        <p class="park-tagline reveal d2">Vlastný strojový park znamená, že nepotrebujeme čakať na externé firmy. Keď je termín, jedeme. Žiadne výhovorky.</p>
-      </div>
-      <div class="park-grid">
-        <div class="glass park-card reveal">
-          <img class="park-card-img" src="https://images.unsplash.com/photo-1590486803833-1c5dc8ddd4c8?auto=format&fit=crop&w=700&q=80" alt="Mini rypadlo na zemné práce" loading="lazy" width="700" height="525">
-          <div class="park-card-body">
-            <h3 class="park-card-name">Mini rypadlo</h3>
-            <ul class="park-specs">
-              <li class="park-spec"><span class="park-spec-key">Využitie</span><span class="park-spec-val">Zemné práce, výkopy</span></li>
-              <li class="park-spec"><span class="park-spec-key">Lyžica</span><span class="park-spec-val">30 – 80 cm</span></li>
-              <li class="park-spec"><span class="park-spec-key">Dostupnosť</span><span class="park-spec-val">Ihneď</span></li>
-            </ul>
-          </div>
-        </div>
-        <div class="glass park-card reveal d1">
-          <img class="park-card-img" src="https://images.unsplash.com/photo-1581094271901-8022df4466f9?auto=format&fit=crop&w=700&q=80" alt="Nákladné vozidlo na odvoz materiálu" loading="lazy" width="700" height="525">
-          <div class="park-card-body">
-            <h3 class="park-card-name">Nákladné vozidlo</h3>
-            <ul class="park-specs">
-              <li class="park-spec"><span class="park-spec-key">Využitie</span><span class="park-spec-val">Dovoz &amp; odvoz sutín</span></li>
-              <li class="park-spec"><span class="park-spec-key">Nosnosť</span><span class="park-spec-val">do 12 t</span></li>
-              <li class="park-spec"><span class="park-spec-key">Dostupnosť</span><span class="park-spec-val">Ihneď</span></li>
-            </ul>
-          </div>
-        </div>
-        <div class="glass park-card reveal d2">
-          <img class="park-card-img" src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=700&q=80" alt="Vibračná platňa na hutnenie zeminy" loading="lazy" width="700" height="525">
-          <div class="park-card-body">
-            <h3 class="park-card-name">Vibračná platňa</h3>
-            <ul class="park-specs">
-              <li class="park-spec"><span class="park-spec-key">Využitie</span><span class="park-spec-val">Hutnenie, dlažba</span></li>
-              <li class="park-spec"><span class="park-spec-key">Typ</span><span class="park-spec-val">Reverzná</span></li>
-              <li class="park-spec"><span class="park-spec-key">Dostupnosť</span><span class="park-spec-val">Ihneď</span></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- O NAS -->
   <section id="o-nas" aria-labelledby="onas-title">
     <div class="container">
@@ -578,12 +524,12 @@
         </div>
         <div>
           <p class="section-tag reveal" aria-hidden="true">Prečo RAJASTAV</p>
-          <h2 id="onas-title" class="about-title reveal d1">Stavebná firma,<br><span class="gold">ktorá odpovedá na telefón.</span></h2>
-          <p class="about-body reveal d2">Vieme, čo vás trápi. Firma, ktorá zmizne po zálohe. Termíny, ktoré sa posúvajú. Faktúry, kde nikto nevie, za čo presne. RAJASTAV vznikol ako odpoveď na tieto problémy — s jasnou komunikáciou, reálnymi cenami a stavbami, na ktoré sme hrdí.</p>
+          <h2 id="onas-title" class="about-title reveal d1">Stavebná spoločnosť,<br><span class="gold">ktorá stavia na kvalite.</span></h2>
+          <p class="about-body reveal d2">Spokojnosť zákazníka je pre nás kľúčová. Preto kladieme dôraz na komunikáciu so zákazníkom a kvalitu prevedených prác. Spolupracujeme len s overenými dodávateľmi a dbáme na každý detail — od prvého stretnutia až po odovzdanie kľúčov.</p>
           <ul class="pillars">
             <li class="glass pillar reveal d2"><div class="pillar-icon" aria-hidden="true"><svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div><div><h3 class="pillar-title">Žiadny zmätok s dodávateľmi</h3><p class="pillar-text">Jeden dodávateľ, jedna zmluva, jedna zodpovednosť. Od výkopu po kľúče.</p></div></li>
-            <li class="glass pillar reveal d3"><div class="pillar-icon" aria-hidden="true"><svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div><h3 class="pillar-title">Termín, ktorý platí</h3><p class="pillar-text">Dohodnutý dátum nie je orientačný. Je to náš záväzok voči vám.</p></div></li>
-            <li class="glass pillar reveal d4"><div class="pillar-icon" aria-hidden="true"><svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><div><h3 class="pillar-title">Cena, ktorá neprekvapí</h3><p class="pillar-text">Cenová ponuka zdarma. Žiadne skryté položky, žiadne dodatočné faktúry.</p></div></li>
+            <li class="glass pillar reveal d3"><div class="pillar-icon" aria-hidden="true"><svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div><h3 class="pillar-title">Termín je záväzok</h3><p class="pillar-text">Dohodnutý dátum nie je orientačný. Je to náš záväzok voči vám.</p></div></li>
+            <li class="glass pillar reveal d4"><div class="pillar-icon" aria-hidden="true"><svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><div><h3 class="pillar-title">Bez dodatočných nákladov</h3><p class="pillar-text">Cenová ponuka zdarma. Žiadne skryté položky, žiadne dodatočné faktúry.</p></div></li>
           </ul>
         </div>
       </div>
@@ -595,8 +541,8 @@
     <div class="container">
       <div class="cta-inner reveal">
         <div class="cta-text">
-          <h2>Máte pozemok?<br>Zvyšok nechajte na nás.</h2>
-          <p>Zavolajte alebo napíšte — cenovú ponuku dostanete do 24 hodín. Zadarmo a bez záväzkov.</p>
+          <h2>Máte pozemok?<br>Zavolajte alebo napíšte.</h2>
+          <p>Cenovú ponuku vypracujeme zdarma a bez záväzkov.</p>
         </div>
         <div class="cta-actions">
           <a href="tel:+421915057112" class="btn-white">
@@ -616,11 +562,11 @@
         <div>
           <p class="section-tag reveal" aria-hidden="true">Kontakt</p>
           <h2 id="kontakt-title" class="contact-title reveal d1">Povedzte nám<br><span class="gold">o svojom projekte</span></h2>
-          <p class="contact-subtitle reveal d2">Popíšte nám, čo plánujete — aj pár viet stačí. Ozveme sa do 24 hodín s orientačnou cenou a prvými otázkami.</p>
+          <p class="contact-subtitle reveal d2">Popíšte nám, čo plánujete — aj pár viet stačí. Ozveme sa vám v čo najkratšom čase s orientačnou cenou a prvými otázkami.</p>
           <ul class="contact-items">
             <li><a href="tel:+421915057112" class="glass c-item reveal d2" aria-label="Zavolať na +421 915 057 112"><div class="c-icon" aria-hidden="true"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.95 13a19.79 19.79 0 01-3.07-8.67A2 2 0 012.88 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L7.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg></div><div><div class="c-label">Zavolajte priamo</div><div class="c-val">+421 915 057 112</div></div></a></li>
-            <li><a href="mailto:rajastav.sk@gmail.com" class="glass c-item reveal d3" aria-label="Napísať e-mail"><div class="c-icon" aria-hidden="true"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div><div class="c-label">Napíšte e-mail</div><div class="c-val">rajastav.sk@gmail.com</div></div></a></li>
-            <li><div class="glass c-item reveal d4"><div class="c-icon" aria-hidden="true"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div><div class="c-label">Kde pôsobíme</div><div class="c-val">Trnava a Trnavský kraj</div></div></div></li>
+            <li><a href="mailto:info@rajastav.sk" class="glass c-item reveal d3" aria-label="Napísať e-mail"><div class="c-icon" aria-hidden="true"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div><div class="c-label">Napíšte e-mail</div><div class="c-val">info@rajastav.sk</div></div></a></li>
+            <li><div class="glass c-item reveal d4"><div class="c-icon" aria-hidden="true"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div><div class="c-label">Kde pôsobíme</div><div class="c-val">Trnava, Galanta, Piešťany a okolie</div></div></div></li>
           </ul>
         </div>
         <div class="glass form-wrap reveal d2">
@@ -643,6 +589,16 @@
               </select>
             </div>
             <div class="form-group"><label class="form-label" for="inp-sprava">Váš projekt</label><textarea id="inp-sprava" class="form-ctrl" placeholder="Čo plánujete? Napr. rodinný dom 150m², pozemok v Trnave, začiatok jar 2026…"></textarea></div>
+            <div class="form-group">
+              <label class="form-label">Prílohy <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--text-dim);">(voliteľné)</span></label>
+              <div class="file-drop" id="fileDrop">
+                <input type="file" id="fileInput" multiple accept=".pdf,.dwg,.dxf,.jpg,.jpeg,.png,.heic" aria-label="Nahrať prílohy">
+                <svg class="file-drop-icon" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                <p class="file-drop-text">Kliknite alebo pretiahnite súbory sem</p>
+                <p class="file-drop-hint">PDF, DWG, DXF, JPG, PNG — max. 20 MB / súbor</p>
+              </div>
+              <div class="file-list" id="fileList"></div>
+            </div>
             <button type="submit" class="btn btn-gold btn-submit">
               <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
               Chcem cenovú ponuku
@@ -711,6 +667,42 @@
   var obs = new IntersectionObserver(function(entries) { entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add("visible"); }); }, { threshold: 0.07, rootMargin: "0px 0px -28px 0px" });
   document.querySelectorAll(".reveal").forEach(function(el) { obs.observe(el); });
   setTimeout(function() { document.querySelectorAll("#hero .reveal").forEach(function(el) { el.classList.add("visible"); }); }, 200);
+
+  // FILE UPLOAD
+  var fileInput = document.getElementById("fileInput");
+  var fileList  = document.getElementById("fileList");
+  var fileDrop  = document.getElementById("fileDrop");
+  var selectedFiles = [];
+
+  fileInput.addEventListener("change", function() { addFiles(this.files); this.value = ""; });
+  fileDrop.addEventListener("dragover",  function(e) { e.preventDefault(); fileDrop.classList.add("dragover"); });
+  fileDrop.addEventListener("dragleave", function()  { fileDrop.classList.remove("dragover"); });
+  fileDrop.addEventListener("drop", function(e) { e.preventDefault(); fileDrop.classList.remove("dragover"); addFiles(e.dataTransfer.files); });
+
+  function addFiles(files) {
+    Array.from(files).forEach(function(f) {
+      if (selectedFiles.find(function(x) { return x.name === f.name; })) return;
+      selectedFiles.push(f);
+    });
+    renderFiles();
+  }
+
+  function renderFiles() {
+    fileList.innerHTML = "";
+    selectedFiles.forEach(function(f, i) {
+      var item = document.createElement("div");
+      item.className = "file-item";
+      var size = f.size > 1048576 ? (f.size/1048576).toFixed(1)+" MB" : Math.round(f.size/1024)+" KB";
+      item.innerHTML = "<svg width='14' height='14' fill='none' stroke='currentColor' stroke-width='2' viewBox='0 0 24 24'><path d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z'/><polyline points='14 2 14 8 20 8'/></svg><span class='file-item-name'>" + f.name + "</span><span style='font-size:11px;color:var(--text-dim);flex-shrink:0;'>" + size + "</span><button class='file-remove' data-idx='" + i + "' aria-label='Odstraniť '" + f.name + "'><svg width='14' height='14' fill='none' stroke='currentColor' stroke-width='2.5' viewBox='0 0 24 24'><line x1='18' y1='6' x2='6' y2='18'/><line x1='6' y1='6' x2='18' y2='18'/></svg></button>";
+      fileList.appendChild(item);
+    });
+    fileList.querySelectorAll(".file-remove").forEach(function(btn) {
+      btn.addEventListener("click", function() {
+        selectedFiles.splice(parseInt(this.dataset.idx), 1);
+        renderFiles();
+      });
+    });
+  }
 
   // FORM
   function handleSubmit(e) {
