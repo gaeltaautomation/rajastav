@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Ochrana osobn&#253;ch &#250;dajov a z&#225;sady použ&#237;vania s&#250;borov cookies — RAJASTAV s.r.o.">
+  <meta name="robots" content="noindex, follow">
+  <title>Ochrana osobn&#253;ch &#250;dajov &amp; Cookies — RAJASTAV</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold:          #B8922A;
+      --gold-light:    #D4A93A;
+      --gold-bg:       rgba(184,146,42,0.08);
+      --gold-border:   rgba(184,146,42,0.22);
+      --gold-border-h: rgba(184,146,42,0.55);
+      --bg:            #F7F6F3;
+      --bg-2:          #EFEDE8;
+      --bg-card:       rgba(255,255,255,0.75);
+      --text:          #0F0E0C;
+      --text-muted:    #5A5649;
+      --text-dim:      #8C8779;
+      --border:        rgba(15,14,12,0.09);
+      --shadow-sm:     0 2px 12px rgba(15,14,12,0.07);
+      --shadow-md:     0 8px 40px rgba(15,14,12,0.10);
+      --radius:        30px;
+      --font:          "Lexend Deca", sans-serif;
+      --max-w:         860px;
+      --px:            60px;
+      --focus-ring:    0 0 0 3px rgba(184,146,42,0.45);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font); background: var(--bg); color: var(--text); overflow-x: hidden; line-height: 1.7; }
+    a { text-decoration: none; color: var(--gold); }
+    a:hover { color: var(--gold-light); }
+    img { max-width: 100%; display: block; }
+    ul { list-style: none; }
+    .skip-link { position: absolute; top: -100px; left: 16px; z-index: 9999; background: var(--gold); color: #fff; font-family: var(--font); font-weight: 700; font-size: 14px; padding: 10px 20px; border-radius: 8px; transition: top .2s; }
+    .skip-link:focus { top: 16px; }
+    :focus-visible { outline: none; box-shadow: var(--focus-ring); border-radius: 4px; }
+    .bg-orbs { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+    .bg-orb { position: absolute; border-radius: 50%; filter: blur(130px); }
+    .bg-orb-1 { width: 700px; height: 700px; background: radial-gradient(circle, rgba(184,146,42,.08) 0%, transparent 70%); top: -200px; right: -200px; }
+    .bg-orb-2 { width: 500px; height: 500px; background: radial-gradient(circle, rgba(184,146,42,.06) 0%, transparent 70%); bottom: 10%; left: -150px; }
+    .container { width: 100%; max-width: var(--max-w); margin: 0 auto; padding: 0 var(--px); position: relative; z-index: 1; }
+    .gold { color: var(--gold); }
+    .glass { background: var(--bg-card); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow-sm); }
+    .btn { display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 14px 30px; border-radius: var(--radius); font-family: var(--font); font-size: 15px; font-weight: 600; cursor: pointer; border: none; transition: all .25s ease; letter-spacing: .01em; white-space: nowrap; }
+    .btn-gold { background: var(--gold); color: #fff; }
+    .btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 10px 36px rgba(184,146,42,.28); }
+
+    /* NAVBAR */
+    #navbar { position: fixed; top: 16px; left: 0; right: 0; z-index: 1000; display: flex; justify-content: center; pointer-events: none; padding: 0 var(--px); }
+    .nav-pill { pointer-events: all; width: 100%; max-width: 1040px; display: flex; align-items: center; justify-content: space-between; gap: 8px; background: rgba(247,246,243,.90); backdrop-filter: blur(28px); -webkit-backdrop-filter: blur(28px); border: 1px solid var(--border); border-radius: 100px; padding: 7px 7px 7px 16px; box-shadow: var(--shadow-md); transition: box-shadow .3s, border-color .3s, background .3s; }
+    .nav-pill.scrolled { background: rgba(247,246,243,.97); border-color: rgba(184,146,42,.28); box-shadow: 0 20px 60px rgba(15,14,12,.14); }
+    .nav-logo { display: flex; align-items: center; gap: 10px; flex-shrink: 0; padding: 2px 0; }
+    .nav-logo img { height: 36px; width: auto; display: block; }
+    .nav-links { display: flex; align-items: center; gap: 2px; flex: 1; justify-content: center; }
+    .nav-links a { font-size: 14px; font-weight: 500; color: var(--text-muted); padding: 7px 16px; border-radius: 100px; transition: color .2s, background .2s; }
+    .nav-links a:hover { color: var(--text); background: rgba(15,14,12,.06); }
+    .nav-cta .btn { font-size: 13px; padding: 10px 22px; min-height: 38px; border-radius: 100px; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 10px; background: none; border: none; min-width: 44px; min-height: 44px; align-items: center; justify-content: center; flex-shrink: 0; }
+    .hamburger span { display: block; width: 20px; height: 2px; background: var(--text); border-radius: 2px; transition: all .2s; }
+    .mobile-menu { display: none; position: fixed; inset: 0; background: rgba(247,246,243,.97); backdrop-filter: blur(32px); z-index: 999; flex-direction: column; align-items: center; justify-content: center; gap: 36px; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-size: 26px; font-weight: 700; color: var(--text); transition: color .2s; }
+    .mobile-menu a:hover { color: var(--gold); }
+    .mobile-close { position: absolute; top: 20px; right: 24px; background: none; border: none; color: var(--text-muted); font-size: 28px; cursor: pointer; line-height: 1; min-width: 44px; min-height: 44px; display: flex; align-items: center; justify-content: center; }
+
+    /* PAGE HERO */
+    .page-hero { padding: 160px 0 56px; }
+    .page-hero-tag { display: inline-flex; align-items: center; gap: 10px; font-size: 11px; font-weight: 600; letter-spacing: .20em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+    .page-hero-tag::before { content: ""; display: block; width: 22px; height: 1px; background: var(--gold); }
+    .page-hero h1 { font-size: clamp(32px, 5vw, 52px); font-weight: 800; letter-spacing: -.022em; line-height: 1.05; margin-bottom: 14px; }
+    .page-hero-meta { font-size: 13px; color: var(--text-dim); }
+
+    /* CONTENT */
+    .legal-body { padding-bottom: 100px; }
+    .legal-toc { padding: 28px 32px; margin-bottom: 56px; }
+    .legal-toc-title { font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 16px; }
+    .legal-toc ol { list-style: decimal; padding-left: 18px; display: flex; flex-direction: column; gap: 8px; }
+    .legal-toc ol li a { font-size: 14px; font-weight: 500; color: var(--text-muted); transition: color .2s; }
+    .legal-toc ol li a:hover { color: var(--gold); }
+    .legal-section { margin-bottom: 52px; scroll-margin-top: 100px; }
+    .legal-section h2 { font-size: clamp(18px, 2.2vw, 24px); font-weight: 800; letter-spacing: -.018em; line-height: 1.15; margin-bottom: 16px; color: var(--text); padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+    .legal-section h3 { font-size: 16px; font-weight: 700; margin: 24px 0 10px; color: var(--text); }
+    .legal-section p { font-size: 15px; color: var(--text-muted); line-height: 1.85; margin-bottom: 14px; }
+    .legal-section p:last-child { margin-bottom: 0; }
+    .legal-section ul { padding-left: 0; display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
+    .legal-section ul li { font-size: 15px; color: var(--text-muted); line-height: 1.75; padding-left: 20px; position: relative; }
+    .legal-section ul li::before { content: "–"; position: absolute; left: 0; color: var(--gold); font-weight: 700; }
+    .legal-section strong { color: var(--text); font-weight: 600; }
+    .legal-section a { color: var(--gold); }
+    .cookie-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+    .cookie-table th { background: var(--gold-bg); border: 1px solid var(--gold-border); padding: 10px 14px; font-weight: 700; color: var(--text); text-align: left; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; }
+    .cookie-table td { border: 1px solid var(--border); padding: 10px 14px; color: var(--text-muted); vertical-align: top; }
+    .cookie-table tr:nth-child(even) td { background: rgba(15,14,12,.02); }
+    .badge-cat { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 3px 10px; border-radius: 100px; }
+    .badge-necessary  { background: rgba(42,122,56,.12);  color: #2a7a38; border: 1px solid rgba(42,122,56,.25); }
+    .badge-analytics  { background: rgba(184,146,42,.12); color: var(--gold); border: 1px solid var(--gold-border); }
+    .badge-marketing  { background: rgba(120,80,200,.10); color: #7850c8; border: 1px solid rgba(120,80,200,.22); }
+    .info-box { background: var(--gold-bg); border: 1px solid var(--gold-border); border-radius: 16px; padding: 18px 22px; margin: 20px 0; }
+    .info-box p { font-size: 14px; color: var(--text-muted); margin: 0; }
+    .info-box strong { color: var(--gold); }
+
+    /* FOOTER */
+    footer { background: var(--text); color: rgba(255,255,255,.80); padding: 48px 0 28px; position: relative; z-index: 1; }
+    .footer-top { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px; margin-bottom: 32px; }
+    .footer-logo img { height: 52px; width: auto; filter: brightness(0) invert(1); opacity: .9; }
+    .footer-links { display: flex; gap: 28px; flex-wrap: wrap; }
+    .footer-links a { font-size: 14px; color: rgba(255,255,255,.62); transition: color .2s; }
+    .footer-links a:hover { color: #DFC06A; }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 22px; border-top: 1px solid rgba(255,255,255,.10); flex-wrap: wrap; gap: 8px; }
+    .footer-copy { font-size: 13px; color: rgba(255,255,255,.40); }
+    .footer-made { font-size: 12px; color: rgba(255,255,255,.28); }
+    .footer-made a { color: rgba(255,255,255,.44); transition: color .2s; }
+    .footer-made a:hover { color: #DFC06A; }
+
+    /* RESPONSIVE */
+    @media (max-width: 1280px) { :root { --px: 40px; } }
+    @media (max-width: 820px) {
+      #navbar { top: 10px; padding: 0 16px; }
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      .cookie-table { font-size: 12px; }
+      .cookie-table th, .cookie-table td { padding: 8px 10px; }
+    }
+    @media (max-width: 768px) {
+      :root { --px: 20px; }
+      .page-hero { padding: 130px 0 40px; }
+      .legal-toc { padding: 20px; }
+      .footer-top { flex-direction: column; align-items: flex-start; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
+      .footer-top .btn { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Prejdi na hlavn&#253; obsah</a>
+<div class="bg-orbs" aria-hidden="true">
+  <div class="bg-orb bg-orb-1"></div>
+  <div class="bg-orb bg-orb-2"></div>
+</div>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Hlavn&#233; menu">
+  <button class="mobile-close" id="menuClose" aria-label="Zavrie&#357; menu">&#x2715;</button>
+  <nav>
+    <ul style="display:flex;flex-direction:column;align-items:center;gap:32px;">
+      <li><a href="index.html#sluzby"     onclick="closeMenu()">Slu&#382;by</a></li>
+      <li><a href="index.html#realizacie" onclick="closeMenu()">Realiz&#225;cie</a></li>
+      <li><a href="index.html#o-nas"      onclick="closeMenu()">O n&#225;s</a></li>
+      <li><a href="index.html#kontakt"    onclick="closeMenu()">Kontakt</a></li>
+      <li><a href="index.html#kontakt" class="btn btn-gold" style="font-size:15px;" onclick="closeMenu()">Chcem cenov&#250; ponuku</a></li>
+    </ul>
+  </nav>
+</div>
+
+<header role="banner">
+  <nav id="navbar" aria-label="Hlavn&#225; navig&#225;cia">
+    <div class="nav-pill" id="navPill">
+      <a href="index.html" class="nav-logo" aria-label="RAJASTAV &#8212; domovsk&#225; str&#225;nka">
+        <img src="rajastav vertical black.png" alt="RAJASTAV logo" width="auto" height="36">
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html#sluzby">Slu&#382;by</a></li>
+        <li><a href="index.html#realizacie">Realiz&#225;cie</a></li>
+        <li><a href="index.html#o-nas">O n&#225;s</a></li>
+        <li><a href="index.html#kontakt">Kontakt</a></li>
+      </ul>
+      <div class="nav-cta">
+        <a href="index.html#kontakt" class="btn btn-gold">Chcem cenov&#250; ponuku</a>
+      </div>
+      <button class="hamburger" id="menuOpen" aria-label="Otvori&#357; menu" aria-expanded="false" aria-controls="mobileMenu">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<main id="main-content">
+
+  <!-- PAGE HERO -->
+  <div class="page-hero container">
+    <p class="page-hero-tag">Právne inform&#225;cie</p>
+    <h1>Ochrana osobn&#253;ch &#250;dajov<br><span class="gold">&amp; Cookie Policy</span></h1>
+    <p class="page-hero-meta">Posledn&#225; aktualizácia: apr&#237;l 2026 &nbsp;&#183;&nbsp; RAJASTAV s.r.o.</p>
+  </div>
+
+  <!-- LEGAL BODY -->
+  <div class="legal-body">
+    <div class="container">
+
+      <!-- TOC -->
+      <nav class="glass legal-toc" aria-label="Obsah dokumentu">
+        <p class="legal-toc-title">Obsah</p>
+        <ol>
+          <li><a href="#prevadzkovatel">Prev&#225;dzkovate&#318; osobn&#253;ch &#250;dajov</a></li>
+          <li><a href="#ake-udaje">Ak&#233; osobn&#233; &#250;daje zbierame</a></li>
+          <li><a href="#ucel">&#218;&#269;el a pr&#225;vny z&#225;klad spracov&#225;vania</a></li>
+          <li><a href="#cookies">S&#250;bory cookies</a></li>
+          <li><a href="#cookie-tabulka">Prehla&#271; cookies</a></li>
+          <li><a href="#tretie-strany">Zdieľanie &#250;dajov s tret&#237;mi stranami</a></li>
+          <li><a href="#uchovavanie">Doba uchov&#225;vania</a></li>
+          <li><a href="#prava">Va&#353;e pr&#225;va</a></li>
+          <li><a href="#bezpecnost">Bezpe&#269;nos&#357; &#250;dajov</a></li>
+          <li><a href="#zmeny">Zmeny tohto dokumentu</a></li>
+          <li><a href="#kontakt-gdpr">Kontakt</a></li>
+        </ol>
+      </nav>
+
+      <!-- 1. PREVADZKOVATEL -->
+      <section class="legal-section" id="prevadzkovatel">
+        <h2>1. Prev&#225;dzkovate&#318; osobn&#253;ch &#250;dajov</h2>
+        <p>Prev&#225;dzkovate&#318;om Va&#353;ich osobn&#253;ch &#250;dajov v zmysle nariadenia Európskeho parlamentu a Rady (E&#218;) 2016/679 (GDPR) je:</p>
+        <ul>
+          <li><strong>Obchodn&#233; meno:</strong> RAJASTAV s.r.o.</li>
+          <li><strong>S&#237;dlo:</strong> Slovenská republika</li>
+          <li><strong>E-mail:</strong> <a href="mailto:info@rajastav.sk">info@rajastav.sk</a></li>
+          <li><strong>Telef&#243;n:</strong> <a href="tel:+421915057112">+421 915 057 112</a></li>
+        </ul>
+      </section>
+
+      <!-- 2. AKE UDAJE -->
+      <section class="legal-section" id="ake-udaje">
+        <h2>2. Ak&#233; osobn&#233; &#250;daje zbierame</h2>
+        <h3>Kontaktn&#253; formul&#225;r</h3>
+        <p>Ke&#271; n&#225;m po&#353;lete spr&#225;vu prostredn&#237;ctvom kontaktn&#233;ho formul&#225;ra, zbierame:</p>
+        <ul>
+          <li>Meno a priezvisko</li>
+          <li>Telef&#243;nne &#269;&#237;slo</li>
+          <li>E-mailov&#225; adresa</li>
+          <li>Typ projektu a obsah Va&#353;ej spr&#225;vy</li>
+          <li>Pr&#237;lohy, ktor&#233; n&#225;m dobrovoľne zapo&#353;lete (napr. projekt&#225;)</li>
+        </ul>
+        <h3>Automaticky zbieran&#233; &#250;daje</h3>
+        <p>Pri nav&#353;t&#237;ven&#237; webovej str&#225;nky m&#244;&#382;u by&#357; automaticky zaznamenan&#233; technick&#233; &#250;daje: IP adresa, typ preh&#318;ada&#269;a, opera&#269;n&#253; syst&#233;m, nav&#353;t&#237;ven&#233; str&#225;nky a &#269;as n&#225;v&#353;tevy. Tieto &#250;daje s&#250; spracov&#225;van&#233; len po udelení s&#250;hlasu s analytick&#253;mi cookies.</p>
+      </section>
+
+      <!-- 3. UCEL -->
+      <section class="legal-section" id="ucel">
+        <h2>3. &#218;&#269;el a pr&#225;vny z&#225;klad spracov&#225;vania</h2>
+        <table class="cookie-table">
+          <thead>
+            <tr>
+              <th>&#218;&#269;el</th>
+              <th>Pr&#225;vny z&#225;klad</th>
+              <th>Popis</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Odpove&#271; na dopyt</strong></td>
+              <td>&#268;l. 6 ods. 1 p&#237;sm. b) GDPR<br><em>(plnenie zmluvy / predzmluvn&#233; vzťahy)</em></td>
+              <td>Spracovanie kontaktn&#233;ho formul&#225;ra a komunikácia s V&#225;mi ohľadom Va&#353;ej po&#382;iadavky.</td>
+            </tr>
+            <tr>
+              <td><strong>Analytika webu</strong></td>
+              <td>&#268;l. 6 ods. 1 p&#237;sm. a) GDPR<br><em>(s&#250;hlas)</em></td>
+              <td>Merajme n&#225;v&#353;tevnos&#357; a spr&#225;vanie na webe pomocou Google Analytics 4, len po Va&#353;om s&#250;hlase.</td>
+            </tr>
+            <tr>
+              <td><strong>Bezpe&#269;nos&#357; webu</strong></td>
+              <td>&#268;l. 6 ods. 1 p&#237;sm. f) GDPR<br><em>(opodstatnený z&#225;ujem)</em></td>
+              <td>Ochrana pred zneužitím formul&#225;ra a spam&#250;.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- 4. COOKIES -->
+      <section class="legal-section" id="cookies">
+        <h2>4. S&#250;bory cookies</h2>
+        <p>S&#250;bory cookies s&#250; mal&#233; textov&#233; s&#250;bory, ktor&#233; sa ukladaj&#250; do Va&#353;ho zariadenia pri nav&#353;t&#237;ven&#237; webovej str&#225;nky. Pou&#382;&#237;vame ich na zaistenie spr&#225;vnej funkcie str&#225;nky a &#8212; po Va&#353;om s&#250;hlase &#8212; na analytiku n&#225;v&#353;tevnosti.</p>
+        <div class="info-box">
+          <p><strong>&#916;le&#382;it&#233;:</strong> Analytick&#233; cookies (Google Analytics 4) sa na&#269;&#237;taj&#250; len po kliknut&#237; na tlačidlo &#8222;Prijať&#8220; v cookie banneri. M&#244;&#382;ete s&#250;hlas kedykoľvek odvolať zmenen&#237;m nastavení cookies v päte str&#225;nky.</p>
+        </div>
+        <h3>Kateg&#243;rie cookies</h3>
+        <ul>
+          <li><strong>Nevyhnutn&#233; cookies</strong> &#8212; zabezpe&#269;uj&#250; z&#225;kladn&#250; funkciu webu, nemo&#382;no ich vypn&#250;&#357;. Nevyzaduj&#250; s&#250;hlas.</li>
+          <li><strong>Analytick&#233; cookies</strong> &#8212; pomáhaj&#250; n&#225;m pochopiť, ako nav&#353;tevn&#237;ci pou&#382;&#237;vaj&#250; web. Vy&#382;aduj&#250; s&#250;hlas.</li>
+        </ul>
+        <h3>Spr&#225;va s&#250;hlasu</h3>
+        <p>Na spr&#225;vu s&#250;hlasu s cookies pou&#382;&#237;vame banner, ktor&#253; sa zobraz&#237; pri prvej n&#225;v&#353;teve. S&#250;hlas m&#244;&#382;ete kedykoľvek zmeniť alebo odvolať kliknut&#237;m na odkaz &#8222;Nastavenia cookies&#8220; v päte str&#225;nky.</p>
+        <p>Google Analytics je nakonfigurovan&#253; v re&#382;ime <strong>Consent Mode v2</strong> &#8212; bez Va&#353;ho s&#250;hlasu nezbiera &#382;iadn&#233; identifik&#225;tory ani neposiela d&#225;ta.</p>
+      </section>
+
+      <!-- 5. COOKIE TABULKA -->
+      <section class="legal-section" id="cookie-tabulka">
+        <h2>5. Prehľad cookies</h2>
+        <div style="overflow-x:auto;">
+        <table class="cookie-table">
+          <thead>
+            <tr>
+              <th>N&#225;zov</th>
+              <th>Kateg&#243;ria</th>
+              <th>Poskytovateľ</th>
+              <th>&#218;&#269;el</th>
+              <th>Platnosť</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>cookie_consent</code></td>
+              <td><span class="badge-cat badge-necessary">Nevyhnutn&#233;</span></td>
+              <td>rajastav.sk</td>
+              <td>Uchov&#225;va Va&#353;u voľbu o s&#250;hlase s cookies</td>
+              <td>1 rok</td>
+            </tr>
+            <tr>
+              <td><code>_ga</code></td>
+              <td><span class="badge-cat badge-analytics">Analytick&#233;</span></td>
+              <td>Google Analytics</td>
+              <td>Rozli&#353;uje jednotliv&#253;ch pou&#382;&#237;vateľov</td>
+              <td>2 roky</td>
+            </tr>
+            <tr>
+              <td><code>_ga_XXXXXXXX</code></td>
+              <td><span class="badge-cat badge-analytics">Analytick&#233;</span></td>
+              <td>Google Analytics 4</td>
+              <td>Udrž;iava stav relácie pre GA4 property</td>
+              <td>2 roky</td>
+            </tr>
+            <tr>
+              <td><code>_gid</code></td>
+              <td><span class="badge-cat badge-analytics">Analytick&#233;</span></td>
+              <td>Google Analytics</td>
+              <td>Rozli&#353;uje pou&#382;&#237;vateľov pre obdobie 24 hod&#237;n</td>
+              <td>24 hod&#237;n</td>
+            </tr>
+          </tbody>
+        </table>
+        </div>
+      </section>
+
+      <!-- 6. TRETIE STRANY -->
+      <section class="legal-section" id="tretie-strany">
+        <h2>6. Zdieľanie &#250;dajov s tret&#237;mi stranami</h2>
+        <p>Va&#353;e osobn&#233; &#250;daje nepredávame, nepren&#225;&#353;ame ani nezverejňujeme tret&#237;m stran&#225;m na ich vlastn&#233; marketingov&#233; &#250;&#269;ely. &#218;daje m&#244;&#382;u by&#357; zdieľan&#233; iba v nasledovn&#253;ch pr&#237;padoch:</p>
+        <ul>
+          <li><strong>Google LLC</strong> &#8212; po&#269;&#237;tanie n&#225;v&#353;tevnosti cez Google Analytics 4, len po udelení s&#250;hlasu. Google spracov&#225;va &#250;daje na serveroch v E&#218;/EHP. <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Privacy Policy Google</a></li>
+          <li><strong>Microsoft (Bing)</strong> &#8212; indexácia webu cez Bing Webmaster Tools. Bing nenastavuje cookies na Va&#353;om zariadení pri b&#382;nej n&#225;v&#353;teve.</li>
+          <li><strong>Webhostingov&#253; poskytovateľ (HostCreators)</strong> &#8212; technická prevádzka webovej str&#225;nky a e-mailovej komunikácie.</li>
+          <li><strong>Orgány verejnej správy</strong> &#8212; ak n&#225;m to ulo&#382;&#237; z&#225;kon alebo s&#250;dn&#253; pr&#237;kaz.</li>
+        </ul>
+      </section>
+
+      <!-- 7. UCHOVAVANIE -->
+      <section class="legal-section" id="uchovavanie">
+        <h2>7. Doba uchov&#225;vania &#250;dajov</h2>
+        <ul>
+          <li><strong>Kontaktn&#253; formul&#225;r</strong> &#8212; korešpondencia uchov&#225;van&#225; po dobu 3 rokov od poslednej komunik&#225;cie, resp. do odvolania s&#250;hlasu.</li>
+          <li><strong>GA4 analytick&#233; d&#225;ta</strong> &#8212; 14 mesiacov (nastaven&#233; v Google Analytics, po&#382;adovan&#233; minimum pre GDPR).</li>
+          <li><strong>S&#250;bory cookies</strong> &#8212; viď prehľad v &#269;asti 5.</li>
+        </ul>
+      </section>
+
+      <!-- 8. PRAVA -->
+      <section class="legal-section" id="prava">
+        <h2>8. Va&#353;e pr&#225;va</h2>
+        <p>Ako dotknut&#225; osoba m&#225;te podľa GDPR nasledovn&#233; pr&#225;va:</p>
+        <ul>
+          <li><strong>Pr&#225;vo na pr&#237;stup</strong> &#8212; m&#244;&#382;ete po&#382;iadať o k&#243;piu Va&#353;ich &#250;dajov, ktor&#233; spracov&#225;vame.</li>
+          <li><strong>Pr&#225;vo na opravu</strong> &#8212; ak s&#250; Va&#353;e &#250;daje nesprávne alebo neaktu&#225;lne.</li>
+          <li><strong>Pr&#225;vo na vymazanie</strong> &#8212; m&#244;&#382;ete po&#382;iadať o vymazanie Va&#353;ich &#250;dajov (&#8222;právo by&#357; zabudn&#250;t&#253;&#8220;).</li>
+          <li><strong>Pr&#225;vo na obmedzenie spracov&#225;vania</strong> &#8212; za ur&#269;it&#253;ch podmienok m&#244;&#382;ete po&#382;iadať o pozastavenie spracov&#225;vania.</li>
+          <li><strong>Pr&#225;vo na prenosnosť</strong> &#8212; m&#244;&#382;ete po&#382;iadať o poskytnutie Va&#353;ich &#250;dajov v &#353;tandardizovanom form&#225;te.</li>
+          <li><strong>Pr&#225;vo namietať</strong> &#8212; m&#244;&#382;ete namietať spracov&#225;vanie zalo&#382;en&#233; na legitímnom z&#225;ujme.</li>
+          <li><strong>Pr&#225;vo odvolať s&#250;hlas</strong> &#8212; s&#250;hlas s cookies m&#244;&#382;ete kedykoľvek odvolať bez ujmy.</li>
+        </ul>
+        <div class="info-box">
+          <p>Na uplatnenie Va&#353;ich pr&#225;v n&#225;s kontaktujte na <strong><a href="mailto:info@rajastav.sk">info@rajastav.sk</a></strong>. Odpoviemo do <strong>30 dn&#237;</strong>. M&#244;&#382;ete sa tie&#382; obrátit' na <strong>&#218;rad na ochranu osobn&#253;ch &#250;dajov SR</strong>: <a href="https://www.uoou.sk" target="_blank" rel="noopener">uoou.sk</a></p>
+        </div>
+      </section>
+
+      <!-- 9. BEZPECNOST -->
+      <section class="legal-section" id="bezpecnost">
+        <h2>9. Bezpe&#269;nosť &#250;dajov</h2>
+        <p>Prijali sme primeran&#233; technick&#233; a organiza&#269;n&#233; opatrenia na ochranu Va&#353;ich osobn&#253;ch &#250;dajov pred neopr&#225;vnen&#253;m pr&#237;stupom, stratou alebo zneu&#382;it&#237;m. Prenos d&#225;t prebieha cez &#353;ifrovanie HTTPS (SSL/TLS). Prenos e-mailov je zai&#353;ten&#253; SMTP cez SSL/TLS na HostCreators serveroch.</p>
+      </section>
+
+      <!-- 10. ZMENY -->
+      <section class="legal-section" id="zmeny">
+        <h2>10. Zmeny tohto dokumentu</h2>
+        <p>Tento dokument m&#244;&#382;eme priebe&#382;ne aktualizovať. D&#225;tum poslednej zmeny je uveden&#253; v z&#225;hlaví str&#225;nky. Pri podstatných zmenách V&#225;s upozorníme bannerm alebo e-mailom, ak m&#225;me Va&#353;u adresu.</p>
+      </section>
+
+      <!-- 11. KONTAKT -->
+      <section class="legal-section" id="kontakt-gdpr">
+        <h2>11. Kontakt</h2>
+        <p>Ak m&#225;te otázky t&#253;kaj&#250;ce sa spracov&#225;vania Va&#353;ich osobn&#253;ch &#250;dajov alebo si chcete uplatniť niektoré z Va&#353;ich pr&#225;v, kontaktujte n&#225;s:</p>
+        <ul>
+          <li><strong>E-mail:</strong> <a href="mailto:info@rajastav.sk">info@rajastav.sk</a></li>
+          <li><strong>Telef&#243;n:</strong> <a href="tel:+421915057112">+421 915 057 112</a></li>
+          <li><strong>Web:</strong> <a href="https://rajastav.sk">rajastav.sk</a></li>
+        </ul>
+        <div style="margin-top:40px;">
+          <a href="index.html" class="btn btn-gold">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+            Sp&#228;&#357; na hlavn&#250; str&#225;nku
+          </a>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+</main>
+
+<footer role="contentinfo">
+  <div class="container" style="max-width:1320px;">
+    <div class="footer-top">
+      <div class="footer-logo"><img src="rajastav vertical black.png" alt="RAJASTAV" height="52"></div>
+      <nav>
+        <ul class="footer-links">
+          <li><a href="index.html#sluzby">Slu&#382;by</a></li>
+          <li><a href="index.html#realizacie">Realiz&#225;cie</a></li>
+          <li><a href="index.html#o-nas">O n&#225;s</a></li>
+          <li><a href="index.html#kontakt">Kontakt</a></li>
+        </ul>
+      </nav>
+      <a href="index.html#kontakt" class="btn btn-gold" style="font-size:13px;padding:11px 22px;">Chcem cenov&#250; ponuku</a>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">&copy; 2026 RAJASTAV s.r.o. V&#353;etky pr&#225;va vyhraden&#233;.</span>
+      <span class="footer-made">Web od <a href="https://gaelta.com" target="_blank" rel="noopener">Gaelta</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  var navPill = document.getElementById('navPill');
+  window.addEventListener('scroll', function() { navPill.classList.toggle('scrolled', window.scrollY > 60); }, { passive: true });
+
+  var menuBtn  = document.getElementById('menuOpen');
+  var menuEl   = document.getElementById('mobileMenu');
+  var closeBtn = document.getElementById('menuClose');
+  menuBtn.addEventListener('click', function() { menuEl.classList.add('open'); menuBtn.setAttribute('aria-expanded','true'); document.body.style.overflow='hidden'; closeBtn.focus(); });
+  closeBtn.addEventListener('click', closeMenu);
+  document.addEventListener('keydown', function(e) { if (e.key==='Escape' && menuEl.classList.contains('open')) closeMenu(); });
+  function closeMenu() { menuEl.classList.remove('open'); menuBtn.setAttribute('aria-expanded','false'); document.body.style.overflow=''; menuBtn.focus(); }
+</script>
+</body>
+</html>
