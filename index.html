@@ -116,7 +116,7 @@
     .scroll-ind span { font-size: 9px; letter-spacing: .25em; text-transform: uppercase; }
     @keyframes scroll-bob { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(7px)} }
 
-    /* SECTIONS — zmenšené vertikálne medzery */
+    /* SECTIONS */
     section { padding: 80px 0; position: relative; z-index: 1; }
     .section-header { margin-bottom: 48px; }
     .section-title { font-size: clamp(32px,4vw,52px); font-weight: 800; letter-spacing: -.022em; line-height: 1.05; margin-bottom: 14px; color: var(--text); }
@@ -187,18 +187,13 @@
     .lb-thumb.active { opacity: 1; border-color: var(--gold); transform: scale(1.06); }
     .lb-counter { font-size: 12px; color: rgba(255,255,255,.35); letter-spacing: .1em; }
 
-    /* ABOUT */
+    /* ABOUT — bez fotky, single column */
     #o-nas { background: var(--bg); }
-    .about-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 80px; align-items: center; }
-    .about-img-wrap { position: relative; }
-    .about-img { width: 100%; height: 560px; object-fit: cover; border-radius: var(--radius); }
-    .about-badge { position: absolute; bottom: -20px; left: -16px; padding: 22px 28px; }
-    .badge-num { font-size: 46px; font-weight: 800; color: var(--gold); line-height: 1; }
-    .badge-txt { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
+    .about-single { max-width: 860px; }
     .about-title { font-size: clamp(28px,3.5vw,46px); font-weight: 800; letter-spacing: -.02em; line-height: 1.06; margin-bottom: 18px; }
     .about-body  { font-size: 16px; color: var(--text-muted); line-height: 1.85; margin-bottom: 40px; }
-    .pillars { display: flex; flex-direction: column; gap: 12px; }
-    .pillar { display: flex; gap: 16px; align-items: flex-start; padding: 18px 20px; }
+    .pillars { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+    .pillar { display: flex; gap: 16px; align-items: flex-start; padding: 22px 20px; }
     .pillar-icon { width: 42px; height: 42px; border-radius: 12px; flex-shrink: 0; background: var(--gold-bg); border: 1px solid var(--gold-border); display: flex; align-items: center; justify-content: center; color: var(--gold); }
     .pillar-title { font-size: 15px; font-weight: 600; margin-bottom: 3px; color: var(--text); }
     .pillar-text  { font-size: 14px; color: var(--text-muted); line-height: 1.55; }
@@ -265,13 +260,11 @@
       :root { --nav-max-w: calc(100% - 80px); }
       .srv-top { grid-template-columns: 1fr; gap: 40px; }
       .srv-top-head { position: static; }
+      .pillars { grid-template-columns: 1fr; }
     }
     @media (max-width: 1024px) {
       :root { --px: 32px; }
       .hero-stats { display: none; }
-      .about-grid { grid-template-columns: 1fr; gap: 52px; }
-      .about-img { height: 420px; }
-      .about-badge { left: 16px; bottom: -12px; }
       .contact-grid { grid-template-columns: 1fr; gap: 48px; }
       .cta-inner { flex-direction: column; text-align: center; }
       .cta-actions { justify-content: center; }
@@ -301,8 +294,6 @@
       .srv-list { grid-template-columns: 1fr; }
       .form-row { grid-template-columns: 1fr; }
       .form-wrap { padding: 24px 20px; }
-      .about-img { height: 280px; }
-      .about-badge { display: none; }
       .footer-top { flex-direction: column; align-items: flex-start; }
       .footer-bottom { flex-direction: column; align-items: flex-start; }
       .footer-top .btn { display: none; }
@@ -311,6 +302,7 @@
       .lb-img { max-height: 55vh; }
       .lb-thumb { width: 56px; height: 42px; }
       .proj-card-body { padding: 20px 18px 18px; }
+      .pillars { grid-template-columns: 1fr; }
     }
     @media (max-width: 480px) {
       .section-header { margin-bottom: 32px; }
@@ -440,7 +432,7 @@
         <div class="srv-top-head reveal">
           <p class="section-tag" aria-hidden="true">Naše služby</p>
           <h2 id="sluzby-title" class="srv-top-title">Všetko pod<br><span class="gold">jednou strechou</span></h2>
-          <p class="srv-top-sub">Vybavíme za vás projektovú dokumentáciu, stavebné povolenie, celý proces výstavby až po samotnú kolaudáciu. Vy máte jediné číslo, na ktoré zavoláte.</p>
+          <p class="srv-top-sub">Vybavíme za vás projektovú dokumentáciu, stavebné povolenie, celý proces výstavby až po samotnú kolaudáciu. Vy potrebujete len jedno číslo, na ktoré zavoláte.</p>
           <a href="#kontakt" class="btn btn-gold" style="font-size:14px;padding:12px 26px;min-height:44px;">
             <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             Chcem cenovú ponuku
@@ -506,53 +498,8 @@
       </div>
       <div class="proj-grid">
 
-        <!-- Projekt 1: Galanta RD na kľúč -->
-        <div class="proj-card reveal" data-project="0" role="button" tabindex="0" aria-label="Otvoriť galériu: Rodinný dom na kľúč, Galanta 2025">
-          <img class="proj-card-img" src="https://rajastav.sk/photos/Galanta-vystavba-RD-na-kluc-2025-2.jpeg" alt="Výstavba rodinného domu na kľúč, Galanta 2025" loading="lazy">
-          <div class="proj-card-overlay" aria-hidden="true"></div>
-          <div class="proj-card-count" aria-hidden="true">
-            <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5" fill="currentColor" stroke="none"/><polyline points="21 15 16 10 5 21"/></svg>
-            4 fotky
-          </div>
-          <div class="proj-card-body">
-            <div class="proj-card-tag">Dom na kľúč</div>
-            <div class="proj-card-title">Rodinný dom na kľúč</div>
-            <div class="proj-card-sub">Galanta · 2025</div>
-          </div>
-        </div>
-
-        <!-- Projekt 2: Trnava Bazén -->
-        <div class="proj-card reveal d1" data-project="1" role="button" tabindex="0" aria-label="Otvoriť galériu: Výstavba bazéna, Trnava 2025">
-          <img class="proj-card-img" src="https://rajastav.sk/photos/Trnava-vystavba-bazena-2025-3.jpeg" alt="Výstavba bazéna, Trnava 2025" loading="lazy">
-          <div class="proj-card-overlay" aria-hidden="true"></div>
-          <div class="proj-card-count" aria-hidden="true">
-            <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5" fill="currentColor" stroke="none"/><polyline points="21 15 16 10 5 21"/></svg>
-            5 fotiek
-          </div>
-          <div class="proj-card-body">
-            <div class="proj-card-tag">Zemné práce</div>
-            <div class="proj-card-title">Výstavba bazéna</div>
-            <div class="proj-card-sub">Trnava · 2025</div>
-          </div>
-        </div>
-
-        <!-- Projekt 3: Trnava Skladová hala -->
-        <div class="proj-card reveal d2" data-project="2" role="button" tabindex="0" aria-label="Otvoriť galériu: Výstavba skladovej haly, Trnava 2024">
-          <img class="proj-card-img" src="https://rajastav.sk/photos/Trnava-vystavba-skladovej-haly-2024-1.jpeg" alt="Výstavba základových pätiek, Trnava 2024" loading="lazy">
-          <div class="proj-card-overlay" aria-hidden="true"></div>
-          <div class="proj-card-count" aria-hidden="true">
-            <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5" fill="currentColor" stroke="none"/><polyline points="21 15 16 10 5 21"/></svg>
-            2 fotky
-          </div>
-          <div class="proj-card-body">
-            <div class="proj-card-tag">Základy</div>
-            <div class="proj-card-title">Výstavba základových pätiek pod konštrukciu</div>
-            <div class="proj-card-sub">Trnava · 2024</div>
-          </div>
-        </div>
-
-        <!-- Projekt 4: Kráľov Brod Kúpeľňa -->
-        <div class="proj-card reveal d3" data-project="3" role="button" tabindex="0" aria-label="Otvoriť galériu: Rekonštrukcia kúpeľne, Kráľov Brod 2026">
+        <!-- Projekt 1: Kráľov Brod Kúpeľňa — PRVÁ -->
+        <div class="proj-card reveal" data-project="0" role="button" tabindex="0" aria-label="Otvoriť galériu: Rekonštrukcia kúpeľne, Kráľov Brod 2026">
           <img class="proj-card-img" src="https://rajastav.sk/photos/Kralov-Brod-kupelna-2026-1.jpeg" alt="Rekonštrukcia kúpeľne, Kráľov Brod 2026" loading="lazy">
           <div class="proj-card-overlay" aria-hidden="true"></div>
           <div class="proj-card-count" aria-hidden="true">
@@ -566,32 +513,68 @@
           </div>
         </div>
 
+        <!-- Projekt 2: Galanta RD na kľúč -->
+        <div class="proj-card reveal d1" data-project="1" role="button" tabindex="0" aria-label="Otvoriť galériu: Rodinný dom na kľúč, Galanta 2025">
+          <img class="proj-card-img" src="https://rajastav.sk/photos/Galanta-vystavba-RD-na-kluc-2025-2.jpeg" alt="Výstavba rodinného domu na kľúč, Galanta 2025" loading="lazy">
+          <div class="proj-card-overlay" aria-hidden="true"></div>
+          <div class="proj-card-count" aria-hidden="true">
+            <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5" fill="currentColor" stroke="none"/><polyline points="21 15 16 10 5 21"/></svg>
+            4 fotky
+          </div>
+          <div class="proj-card-body">
+            <div class="proj-card-tag">Dom na kľúč</div>
+            <div class="proj-card-title">Rodinný dom na kľúč</div>
+            <div class="proj-card-sub">Galanta · 2025</div>
+          </div>
+        </div>
+
+        <!-- Projekt 3: Trnava Bazén -->
+        <div class="proj-card reveal d2" data-project="2" role="button" tabindex="0" aria-label="Otvoriť galériu: Výstavba bazéna, Trnava 2025">
+          <img class="proj-card-img" src="https://rajastav.sk/photos/Trnava-vystavba-bazena-2025-3.jpeg" alt="Výstavba bazéna, Trnava 2025" loading="lazy">
+          <div class="proj-card-overlay" aria-hidden="true"></div>
+          <div class="proj-card-count" aria-hidden="true">
+            <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5" fill="currentColor" stroke="none"/><polyline points="21 15 16 10 5 21"/></svg>
+            5 fotiek
+          </div>
+          <div class="proj-card-body">
+            <div class="proj-card-tag">Zemné práce</div>
+            <div class="proj-card-title">Výstavba bazéna</div>
+            <div class="proj-card-sub">Trnava · 2025</div>
+          </div>
+        </div>
+
+        <!-- Projekt 4: Trnava Skladová hala -->
+        <div class="proj-card reveal d3" data-project="3" role="button" tabindex="0" aria-label="Otvoriť galériu: Výstavba základových pätiek, Trnava 2024">
+          <img class="proj-card-img" src="https://rajastav.sk/photos/Trnava-vystavba-skladovej-haly-2024-1.jpeg" alt="Výstavba základových pätiek, Trnava 2024" loading="lazy">
+          <div class="proj-card-overlay" aria-hidden="true"></div>
+          <div class="proj-card-count" aria-hidden="true">
+            <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5" fill="currentColor" stroke="none"/><polyline points="21 15 16 10 5 21"/></svg>
+            2 fotky
+          </div>
+          <div class="proj-card-body">
+            <div class="proj-card-tag">Základy</div>
+            <div class="proj-card-title">Výstavba základových pätiek pod konštrukciu</div>
+            <div class="proj-card-sub">Trnava · 2024</div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
 
-  <!-- O NAS -->
+  <!-- O NAS — bez fotky -->
   <section id="o-nas" aria-labelledby="onas-title">
     <div class="container">
-      <div class="about-grid">
-        <div class="about-img-wrap reveal">
-          <img class="about-img" src="https://rajastav.sk/photos/Galanta-vystavba-RD-na-kluc-2025-1.jpeg" alt="Stavbyvedúci spoločnosti RAJASTAV na stavenisku" width="900" height="560" loading="lazy">
-          <div class="glass about-badge">
-            <div class="badge-num">5+</div>
-            <div class="badge-txt">Rokov na trhu</div>
-          </div>
-        </div>
-        <div>
-          <p class="section-tag reveal" aria-hidden="true">Prečo RAJASTAV</p>
-          <h2 id="onas-title" class="about-title reveal d1">Stavebná spoločnosť,<br><span class="gold">ktorá stavia na kvalite.</span></h2>
-          <p class="about-body reveal d2">Spokojnosť zákazníka je pre nás kľúčová. Preto kladieme dôraz na komunikáciu so zákazníkom a kvalitu prevedených prác. Spolupracujeme len s overenými dodávateľmi a dbáme na každý detail — od prvého stretnutia až po odovzdanie kľúčov.</p>
-          <ul class="pillars">
-            <li class="glass pillar reveal d2"><div class="pillar-icon" aria-hidden="true"><svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div><div><h3 class="pillar-title">Žiadny zmätok s dodávateľmi</h3><p class="pillar-text">Jeden dodávateľ, jedna zmluva, jedna zodpovednosť. Od výkopu po kľúče.</p></div></li>
-            <li class="glass pillar reveal d3"><div class="pillar-icon" aria-hidden="true"><svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div><h3 class="pillar-title">Termín je záväzok</h3><p class="pillar-text">Dohodnutý dátum nie je orientačný. Je to náš záväzok voči vám.</p></div></li>
-            <li class="glass pillar reveal d4"><div class="pillar-icon" aria-hidden="true"><svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><div><h3 class="pillar-title">Bez dodatočných nákladov</h3><p class="pillar-text">Cenová ponuka zdarma. Žiadne skryté položky, žiadne dodatočné faktúry.</p></div></li>
-          </ul>
-        </div>
+      <div class="about-single">
+        <p class="section-tag reveal" aria-hidden="true">Prečo RAJASTAV</p>
+        <h2 id="onas-title" class="about-title reveal d1">Stavebná spoločnosť,<br><span class="gold">ktorá stavia na kvalite.</span></h2>
+        <p class="about-body reveal d2">Spokojnosť zákazníka je pre nás kľúčová. Preto kladieme dôraz na komunikáciu so zákazníkom a kvalitu prevedených prác. Spolupracujeme len s overenými dodávateľmi a dbáme na každý detail — od prvého stretnutia až po odovzdanie kľúčov.</p>
       </div>
+      <ul class="pillars">
+        <li class="glass pillar reveal d2"><div class="pillar-icon" aria-hidden="true"><svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div><div><h3 class="pillar-title">Žiadny zmätok s dodávateľmi</h3><p class="pillar-text">Jeden dodávateľ, jedna zmluva, jedna zodpovednosť. Od výkopu po kľúče.</p></div></li>
+        <li class="glass pillar reveal d3"><div class="pillar-icon" aria-hidden="true"><svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div><h3 class="pillar-title">Termín je záväzok</h3><p class="pillar-text">Dohodnutý dátum nie je orientačný. Je to náš záväzok voči vám.</p></div></li>
+        <li class="glass pillar reveal d4"><div class="pillar-icon" aria-hidden="true"><svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><div><h3 class="pillar-title">Bez dodatočných nákladov</h3><p class="pillar-text">Cenová ponuka zdarma. Žiadne skryté položky, žiadne dodatočné faktúry.</p></div></li>
+      </ul>
     </div>
   </section>
 
@@ -684,8 +667,17 @@
 </footer>
 
 <script>
-  // PROJECT DATA — bazén URL opravené (medzera → pomlčka)
   var PROJECTS = [
+    {
+      title: 'Rekonštrukcia kúpeľne',
+      sub: 'Kráľov Brod · 2026',
+      photos: [
+        { src: 'https://rajastav.sk/photos/Kralov-Brod-kupelna-2026-1.jpeg', alt: 'Rekonštrukcia kúpeľne, Kráľov Brod 2026 — pohľad 1' },
+        { src: 'https://rajastav.sk/photos/Kralov-Brod-kupelna-2026.jpeg',   alt: 'Rekonštrukcia kúpeľne, Kráľov Brod 2026 — pohľad 2' },
+        { src: 'https://rajastav.sk/photos/Kralov-Brod-kupelna-2026-2.jpeg', alt: 'Rekonštrukcia kúpeľne, Kráľov Brod 2026 — pohľad 3' },
+        { src: 'https://rajastav.sk/photos/Kralov-Brod-kupelna-2026-3.jpeg', alt: 'Rekonštrukcia kúpeľne, Kráľov Brod 2026 — pohľad 4' }
+      ]
+    },
     {
       title: 'Rodinný dom na kľúč',
       sub: 'Galanta · 2025',
@@ -714,20 +706,9 @@
         { src: 'https://rajastav.sk/photos/Trnava-vystavba-skladovej-haly-2024-1.jpeg', alt: 'Výstavba základových pätiek, Trnava 2024 — pohľad 1' },
         { src: 'https://rajastav.sk/photos/Trnava-vystavba-skladovej-haly-2024.jpeg',   alt: 'Výstavba základových pätiek, Trnava 2024 — pohľad 2' }
       ]
-    },
-    {
-      title: 'Rekonštrukcia kúpeľne',
-      sub: 'Kráľov Brod · 2026',
-      photos: [
-        { src: 'https://rajastav.sk/photos/Kralov-Brod-kupelna-2026-1.jpeg', alt: 'Rekonštrukcia kúpeľne, Kráľov Brod 2026 — pohľad 1' },
-        { src: 'https://rajastav.sk/photos/Kralov-Brod-kupelna-2026.jpeg',   alt: 'Rekonštrukcia kúpeľne, Kráľov Brod 2026 — pohľad 2' },
-        { src: 'https://rajastav.sk/photos/Kralov-Brod-kupelna-2026-2.jpeg', alt: 'Rekonštrukcia kúpeľne, Kráľov Brod 2026 — pohľad 3' },
-        { src: 'https://rajastav.sk/photos/Kralov-Brod-kupelna-2026-3.jpeg', alt: 'Rekonštrukcia kúpeľne, Kráľov Brod 2026 — pohľad 4' }
-      ]
     }
   ];
 
-  // LIGHTBOX
   var lb = document.getElementById('lightbox');
   var lbImg = document.getElementById('lbImg');
   var lbTitle = document.getElementById('lbTitle');
@@ -807,7 +788,6 @@
     lbTouchX = null;
   }, { passive: true });
 
-  // NAVBAR
   var navPill = document.getElementById('navPill');
   window.addEventListener('scroll', function() { navPill.classList.toggle('scrolled', window.scrollY > 60); }, { passive: true });
   var sections = document.querySelectorAll('section[id]');
@@ -819,14 +799,12 @@
   }, { threshold: 0.35 });
   sections.forEach(function(s) { navObs.observe(s); });
 
-  // HERO BG
   var heroBg = document.getElementById('heroBg');
   var imgSrc = 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=80';
   var pre = new Image();
   pre.onload = function() { heroBg.style.backgroundImage = 'url(' + imgSrc + ')'; heroBg.classList.add('loaded'); };
   pre.src = imgSrc;
 
-  // MOBILE MENU
   var menuBtn = document.getElementById('menuOpen');
   var menuEl  = document.getElementById('mobileMenu');
   var closeBtn = document.getElementById('menuClose');
@@ -835,12 +813,10 @@
   document.addEventListener('keydown', function(e) { if (e.key==='Escape' && menuEl.classList.contains('open')) closeMenu(); });
   function closeMenu() { menuEl.classList.remove('open'); menuBtn.setAttribute('aria-expanded','false'); document.body.style.overflow=''; menuBtn.focus(); }
 
-  // REVEAL
   var obs = new IntersectionObserver(function(entries) { entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.07, rootMargin: '0px 0px -28px 0px' });
   document.querySelectorAll('.reveal').forEach(function(el) { obs.observe(el); });
   setTimeout(function() { document.querySelectorAll('#hero .reveal').forEach(function(el) { el.classList.add('visible'); }); }, 200);
 
-  // FILE UPLOAD
   var fileInput = document.getElementById('fileInput');
   var fileList  = document.getElementById('fileList');
   var fileDrop  = document.getElementById('fileDrop');
@@ -870,7 +846,6 @@
     });
   }
 
-  // FORM
   function handleSubmit(e) {
     e.preventDefault();
     var btn = e.target.querySelector('.btn-submit'); var orig = btn.innerHTML;
